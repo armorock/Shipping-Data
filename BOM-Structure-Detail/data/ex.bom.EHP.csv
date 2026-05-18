@@ -1,0 +1,10 @@
+,Year Release,Date extracted,Job Code,Project Name,Structure Name,Job Location,Contractor,Agency,Engineer,Part Description,Product Number,Quantity,Weight,Production Part,Part Type,Part Subtype
+expected value,2026,2/3/2026,EHP,North Washington 27 in SS Interceptor Project,MH 01 STA 00+00.00,"Denver, CO",,,,1.25 IN X 14 FT JOINT MASTIC ROLL,MASJ,4,Null,Join Seal,Resale,Mastic
+explaination,"what Job Data folder was this pulled from 
+Also can check against date in bottom right",,,"This is going to come from the folder that it was stored in. This example Return to classic SharePoint
+
+Job Data 2026
+
+EHP - North Washington 27 in SS Interceptor Project
+The Job name would be what comes after the ""- ""","Multi structure example so need to pull one for each part that the structure is a part of
+Put an example",,This is a Selected Shop Sheet. I will need to think on this one,This is a Selected Shop Sheet. I will need to think on this one,This is a Selected Shop Sheet. I will need to think on this one,Example description,,,,Look at attached image for understanding,Still need to figure this out,Still need to figure this out
