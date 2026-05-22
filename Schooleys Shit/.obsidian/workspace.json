@@ -1,0 +1,226 @@
+{
+  "main": {
+    "id": "a545a8f5768135c1",
+    "type": "split",
+    "children": [
+      {
+        "id": "af016bd6c1451610",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "036efd7f96342453",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Job Codes/AAL.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "AAL"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "bc2fd82c87b74537",
+    "type": "split",
+    "children": [
+      {
+        "id": "96e21bacbb603dc3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f000f2f628790191",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "3904dff03d063d66",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "e943b5a923081915",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "da3e7c96cc323cfb",
+    "type": "split",
+    "children": [
+      {
+        "id": "83694cb04c012811",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "172f9641169c5c05",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Dashboard.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Dashboard"
+            }
+          },
+          {
+            "id": "8a3b58c19cc31306",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Dashboard.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Dashboard"
+            }
+          },
+          {
+            "id": "6014154650e15ad3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "f68630f2fad06bc2",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "46cfc1fc9cb7716f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Dashboard.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Dashboard"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "036efd7f96342453",
+  "lastOpenFiles": [
+    "CLOCK_AUDIT_MASTER_PLAN.md",
+    "MASTER CSV FILES/All Shipping Data BABY.xlsm",
+    "MASTER CSV FILES/all_bom_union.xlsx",
+    "Raw information from dispatch boards/2024 SS Shipping Schedule.xlsx",
+    "Raw information from dispatch boards/New Dispatch Board 5.02.22.xlsx",
+    "Raw information from dispatch boards/Dispatch Board 2025.xlsx",
+    "Raw information from dispatch boards/2022 SS Shipping Schedule.xlsx",
+    "Raw information from dispatch boards/2022 Boulder City Shipping Schedule.xlsx",
+    "Raw information from dispatch boards/2021 Sulphur Springs Shipping Schedule.xlsx",
+    "Raw information from dispatch boards/2023 SS Shipping Schedule.xlsx",
+    "Raw information from dispatch boards/2023 BC Shipping Schedule.xlsx",
+    "Dashboard.md",
+    "States/Florida.md",
+    "Job Codes/DTD - Prosperity Lakes 5-7.md",
+    "States/QC.md",
+    "Job Codes/CWC - Gateway Commons E. Infrastructure.md",
+    "Job Codes/CWC - Gateway Commons East.md",
+    "Job Codes/EKN - TOHO Emergency Manhole City Life Road.md",
+    "McLeod Land Services, Inc..md",
+    "Untitled.canvas",
+    "States/Alabama.md",
+    "Plant City.md",
+    "Job Codes/AWJ - Honouliuli WWTP, City & County of Honolulu, Hawaii.md",
+    "Job Codes/AXA - Sierra Cliffs, Clark County, Nevada.md",
+    "Job Codes/BKU - Browns Valley Trunk Project Napa, CA.md",
+    "Job Codes/BVH - 2021 Consolidated Sewer Rehab Phase 1 Reno, NV.md",
+    "Job Codes/BWS - Palm Springs Elan Tract No 36914 Palm Springs, CA.md",
+    "Job Codes/BWT - NCDOT Letting C204499 Guilford County Greensboro, NC.md",
+    "Job Codes/BWU - Summerland Place 1st Addition Shakopee, MN.md",
+    "Job Codes/BWV - NDSD Project 8 North Davis, UT.md",
+    "Job Codes/BVA - Wilson Creek RWWTP Plant Drain Improvements.md",
+    "Job Codes/BVC - Ryder Cup Caswell Beach Manhole Oak Island, NC.md",
+    "Florida.md",
+    "Job Codes/ELF - Metering Manhole and Sample Building.md",
+    "Job Codes/ELE - Cesar Chavez BLVD US95 to SR195.md",
+    "Job Codes/ELD - KCK Emergency Manholes.md",
+    "Job Codes/ELC - ALCOSAN Wet Weather PS.md"
+  ]
+}

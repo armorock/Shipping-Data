@@ -1,0 +1,25 @@
+---
+job_code: ELV
+---
+
+# ELV
+
+## Structure Registry
+
+### BOM Structures
+- LIFT STATION
+- SSMH-09 (STA 35+00.00)
+- SSMH-10 (STA 31+05.14)
+- SSMH-11 (STA 30+09.59)
+- SSMH-12 (STA 28+03.19)
+- SSMH-13 (STA 24+91.61) (DROP)
+- SSMH-14 (STA 23+63.06) (DROP)
+- SSMH-15 (STA 21+41.78)
+- SSMH-18 (STA 28+41.06) (DROP)
+- SSMH-19 (STA 14+99.49)
+- SSMH-20 (STA 16+27.52)
+- SSMH-21 (STA 12+57.11)
+- SSMH-22 (STA 12+43.08)
+- SSMH-34 (STA 30+60.29) (JUNCTION)
+- Selected
+

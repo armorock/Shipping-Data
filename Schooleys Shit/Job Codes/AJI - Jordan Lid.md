@@ -1,0 +1,20 @@
+---
+job_code: AJI
+customer: Minger Construction
+state: "[[Minnesota]]"
+county: "[[Scott County]]"
+city: "[[Jordan MN]]"
+zip: 55352
+year: 2017
+plant: 
+erp: 
+bom_pdf: 
+sharepoint_link: 
+---
+
+# AJI - Jordan Lid
+
+## Shipped Items
+
+| Qty | Structure Name | Part Number | Part Type | Part Subtype | ID | Height | Opening | Description |
+| --- | -------------- | ----------- | --------- | ------------ | -- | ------ | ------- | ----------- |

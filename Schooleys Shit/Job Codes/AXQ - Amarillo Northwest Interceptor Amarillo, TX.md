@@ -1,0 +1,173 @@
+---
+job_code: AXQ
+customer: SS/BC
+state: "[[Texas]]"
+county: "[[Potter County]]"
+city: "[[Amarillo TX]]"
+zip: 79101
+year: 2019
+plant: SS/BC
+erp: 
+bom_pdf: 
+sharepoint_link: 
+---
+
+# AXQ - Amarillo Northwest Interceptor Amarillo, TX
+
+## Shipped Items
+
+| Qty | Structure Name | Part Number | Part Type | Part Subtype | ID | Height | Opening | Description |
+| --- | -------------- | ----------- | --------- | ------------ | -- | ------ | ------- | ----------- |
+
+
+## Structure Registry
+
+### BOM Structures
+- 4' MH to STA 7+83.53
+- BOM Summary 2.14.19.pdf
+- BOM Summary 4.1.19.pdf
+- STA 0+17.14
+- STA 0+50.00(LINE B)
+- STA 0+74.32
+- STA 102+03.40
+- STA 107+11.86
+- STA 112+76.07
+- STA 118+40.28
+- STA 123+64.57
+- STA 127+81.33
+- STA 129+38.11
+- STA 133+65.04
+- STA 137+07.02
+- STA 139+32.07
+- STA 14+63.54(LINE B)
+- STA 14+65.82
+- STA 142+08.78
+- STA 144+47.61
+- STA 148+34.54
+- STA 152+45.04
+- STA 156+14.59
+- STA 160+40.18
+- STA 164+40.08
+- STA 167+72.35
+- STA 169+53.90
+- STA 172+23.10
+- STA 176+73.55
+- STA 178+86.20
+- STA 18+40.30(LINE B)
+- STA 180+71.56
+- STA 183+63.33
+- STA 188+67.27
+- STA 193+71.20
+- STA 197+91.13
+- STA 2+03.63
+- STA 2+65.84
+- STA 202+11.06
+- STA 204+69.17
+- STA 207+18.96
+- STA 209+51.03
+- STA 21+61.35
+- STA 21+77.82
+- STA 21+81.03(LINE B)
+- STA 212+13.46
+- STA 214+93.32
+- STA 218+03.67
+- STA 221+56.49
+- STA 225+56.10
+- STA 227+36.34
+- STA 229+44.33
+- STA 23+95.42
+- STA 233+67.41
+- STA 26+00.12(LINE B)
+- STA 27+25.79(LINE B)
+- STA 29+10.89
+- STA 3+68.03(LINE B)
+- STA 30+17.00(LINE B)
+- STA 33+21.75(LINE B)
+- STA 36+46.61
+- STA 36+47.73(LINE B)
+- STA 40+62.12(LINE B)
+- STA 42+08.79
+- STA 45+73.72(LINE B)
+- STA 49+27.80
+- STA 49+79.45(LINE B)
+- STA 50+89.74
+- STA 53+20.02(LINE B)
+- STA 53+620.02(LINE B)
+- STA 56+40.04
+- STA 58+95.76(LINE B)
+- STA 61+90.34
+- STA 64+05.39(LINE B)
+- STA 67+40.64
+- STA 69+06.03(LINE B)
+- STA 7+41.98(LINE B)
+- STA 7+63.33
+- STA 7+63.53
+- STA 7+74.33
+- STA 70+79.29(LINE B)
+- STA 71+99.93
+- STA 73+38.24
+- STA 8+32.27(LINE B)
+- STA 81+05.49
+- STA 86+62.80
+- STA 9+22.37(LINE B)
+- STA 93+96.13
+- STA 96+94.93
+
+### Dispatch Structures
+- STA 102+03.40
+- STA 107+11.86
+- STA 112+76.07
+- STA 118+40.28
+- STA 123+64.57
+- STA 127+81.33
+- STA 129+38.11
+- STA 133+65.04
+- STA 137+07.02
+- STA 139+32.07
+- STA 14+63.54
+- STA 14+65.82
+- STA 142+08.78
+- STA 144+47.61
+- STA 148+34.54
+- STA 152+45.04
+- STA 156+14.59
+- STA 160+40.18
+- STA 164+40.08
+- STA 167+72.35
+- STA 169+53.90
+- STA 172+23.10
+- STA 176+73.55
+- STA 178+86.20
+- STA 18+40.30
+- STA 180+71.56
+- STA 183+63.33
+- STA 189+98.72
+- STA 193+71.20
+- STA 197+91.13
+- STA 202+11.06
+- STA 204+69.17
+- STA 207+18.96
+- STA 209+51.03
+- STA 21+61.35
+- STA 21+77.82
+- STA 21+81.03
+- STA 212+13.46
+- STA 214+93.32
+- STA 218+03.67
+- STA 221+56.49
+- STA 225+56.10
+- STA 227+36.34
+- STA 229+44.33
+- STA 23+95.42
+- STA 233+67.41
+- STA 26+00.12
+- STA 36+47.73
+- STA 40+62.12
+- STA 45+73.72
+- STA 49+79.45
+- STA 53+20.02
+- STA 58+95.76
+- STA 64+05.39
+- STA 86+62.80
+- STA 93+96.13
+- STA 96+94.93

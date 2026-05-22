@@ -1,0 +1,29 @@
+---
+job_code: EHR
+customer: 
+state: "[[Texas]]"
+county: "[[Harris County]]"
+city: "[[Houston TX]]"
+zip: 77001
+year: 
+plant: 
+erp: 
+bom_pdf: 
+sharepoint_link: 
+---
+
+# EHR - COH Emergency Manhole
+
+## Shipped Items
+
+| Qty | Structure Name | Part Number | Part Type | Part Subtype | ID | Height | Opening | Description |
+| --- | -------------- | ----------- | --------- | ------------ | -- | ------ | ------- | ----------- |
+
+
+## Structure Registry
+
+### BOM Structures
+- 48" Riser 6'
+- Rehab 48
+- Selected
+

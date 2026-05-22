@@ -1,0 +1,27 @@
+---
+job_code: AYR
+customer: McCain Construction
+state: "[[Arizona]]"
+county: "[[Maricopa County]]"
+city: "[[Queen Creek AZ]]"
+zip: 85142
+year: 2019
+plant: BC
+erp: 
+bom_pdf: 
+sharepoint_link: 
+---
+
+# AYR - Queen Creek Assisted Living Facility Queen Creek, AZ
+
+## Shipped Items
+
+| Qty | Structure Name | Part Number | Part Type | Part Subtype | ID | Height | Opening | Description |
+| --- | -------------- | ----------- | --------- | ------------ | -- | ------ | ------- | ----------- |
+
+
+## Structure Registry
+
+### BOM Structures
+- CIP Manhole
+

@@ -1,0 +1,197 @@
+---
+job_code: BSJ
+customer: Mountain Cascade of Texas
+state: "[[Texas]]"
+county: "[[Dallas County]]"
+city: "[[Mesquite TX]]"
+zip: 75149
+year: 2021
+plant: SS
+erp: 
+bom_pdf: Buffalo Creek Parallel Interceptor Phase I-BOM Summary.pdf
+sharepoint_link: 
+---
+
+# BSJ - Buffalo Creek Parallel Interceptor Phase I Mesquite, TX
+
+## Shipped Items
+
+| Qty | Structure Name | Part Number | Part Type | Part Subtype | ID | Height | Opening | Description |
+| --- | -------------- | ----------- | --------- | ------------ | -- | ------ | ------- | ----------- |
+
+
+## Structure Registry
+
+### BOM Structures
+- Buffalo Creek Parallel Interceptor Phase I
+- STA 319+42.92
+- STA 319+76.93
+- STA 327+16.55
+- STA 332+85.71
+- STA 337+32.67
+- STA 345+42.16
+- STA 354+06.62
+- STA 362+81.54
+- STA 371+49.51
+- STA 380+44.79
+- STA 388+45.95
+- STA 389+81.21
+- STA 396+56.56
+- STA 403+65.01
+- STA 409+09.51
+- STA 417+38.01
+- STA 421+69.05
+- STA 427+74.22
+- STA 437+62.70
+- STA 447+62.55
+- STA 457+30.76
+- STA 465+65.37
+- STA 470+24.00
+- STA 476+99.43
+- STA 482+30.00
+- STA 493+49.20
+- STA 502+41.00
+- STA 507+68.03
+- STA 508+43.91
+- STA 509+12.51
+- STA 513+42.85
+- STA 519+43.45
+- STA 527+28.69
+- STA 533+26.81
+- STA 540+44.44
+- STA 545+00.00
+- STA 549+96.16
+- STA 559+36.88
+- STA 566+87.20
+- STA 574+71.35
+- STA 582+29.43
+- STA 586+03.94
+- STA 593+96.47
+- STA 601+07.65
+- STA 609+14.59
+- STA 613+80.61
+- STA 624+98.38
+- STA 631+09.58
+- STA 631+36.43
+- STA 631+49.04
+- STA 633+19.87
+- STA 638+11.77
+- STA 646+41.89
+- STA 650+12.04
+- STA 656+19.31
+- STA 661+28.04
+- STA 663+39.26
+- STA 667+35.62
+- STA 670+37.92
+- STA 671+56.67
+- STA 672+93.98
+- STA 677+85.28
+- STA 685+45.95
+- STA 686+22.33
+- STA 688+27.71
+- STA 690+31.91
+- STA 696+89.60
+- STA 706+61.26
+- STA 712+10.85
+- STA 717+30.40
+- STA 721+98.61
+- STA 725+11.65
+- STA 726+03.68
+- STA 727+79.66
+- STA 735+48.72
+- STA 740+41+26
+- STA 743+26.09
+- STA 745+81.08
+- STA 748+19.95
+- STA 751+08.15
+- STA 751+62.85
+- STA 751+69.79
+- STA 751+82.85
+- STA 753+64.59
+
+### Dispatch Structures
+- MHLC12030CAST
+- MHS12048
+- STA 319
+- STA 319+42
+- STA 319.76.93
+- STA 337+32.67
+- STA 354+06.62
+- STA 362+81.54
+- STA 371+49.51
+- STA 380+44
+- STA 388+45.95
+- STA 417+38.01
+- STA 421+69.05
+- STA 427+74.22
+- STA 437+62.70
+- STA 447+62.55
+- STA 457+30.76
+- STA 465+65.37
+- STA 470+24
+- STA 476+99.43
+- STA 482+30
+- STA 493+49
+- STA 507+68.03
+- STA 545
+- STA 549+96.16
+- STA 559+36.88
+- STA 574+71.35
+- STA 582+29.43
+- STA 586+03.94
+- STA 593+96.47
+- STA 601+07.65
+- STA 609+14.59
+- STA 613+80.61
+- STA 624+98.38
+- STA 631+09.58
+- STA 631+36.43
+- STA 631+49.04
+- STA 633+19.87
+- STA 638+11.77
+- STA 646+41.89
+- STA 656
+- STA 661
+- STA 663
+- STA 667
+- STA 671+56.67
+- STA 677
+- STA 685+45
+- STA 686
+- STA 686+22.33
+- STA 688
+- STA 690+31.91
+- STA 696+89
+- STA 706+61
+- STA 712+10
+- STA 717+30
+- STA 721+98
+- STA 721+98.61
+- STA 725+11
+- STA 726+03
+- STA 727+79
+- STA-332+85
+- STA-396+56.56
+- STA-403+65
+- STA-409+09.51
+- STA-656
+- STA-661
+- STA-663
+- STA-667
+- STA-677
+- STA-685+45
+- STA-688
+- STA-690+31.91
+- STA-696+89
+- STA-706+61
+- STA-712+10
+- STA-735+48
+- STA-751+82
+- STA-753+64.59
+- STA667+35
+- STA670+37
+- STA672+93
+- STA748+19
+- STA751+08
+- STA751+62
+- STA751+69

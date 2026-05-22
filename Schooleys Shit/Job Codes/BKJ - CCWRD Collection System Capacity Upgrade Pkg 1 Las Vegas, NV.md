@@ -1,0 +1,105 @@
+---
+job_code: BKJ
+customer: Harber Company
+state: "[[Nevada]]"
+county: "[[Clark County]]"
+city: "[[Las Vegas NV]]"
+zip: 89101
+year: 2020
+plant: BC
+erp: 
+bom_pdf: CCWRD Collection System Capacity Upgrade-Pkg 1-BOM Summary.pdf
+sharepoint_link: 
+---
+
+# BKJ - CCWRD Collection System Capacity Upgrade Pkg 1 Las Vegas, NV
+
+## Shipped Items
+
+| Qty | Structure Name | Part Number | Part Type | Part Subtype | ID | Height | Opening | Description |
+| --- | -------------- | ----------- | --------- | ------------ | -- | ------ | ------- | ----------- |
+
+
+## Structure Registry
+
+### BOM Structures
+- CCWRD Collection System Capacity Upgrade-Pkg 1
+- SSMH #14019001
+- SSMH #14019002
+- SSMH #14019003
+- SSMH #14019004
+- SSMH #14019005
+- SSMH #14019006
+- SSMH #14019007
+- SSMH #14019008
+- SSMH #14019009
+- SSMH #14019010
+- SSMH #14019011
+- SSMH #17605004
+- SSMH #17605005
+- SSMH #17605006
+- SSMH #17605007
+- SSMH #17605008
+- SSMH #17622051
+- SSMH #17622052
+- SSMH #17622053
+- SSMH #17622055
+- SSMH #17622056
+- SSMH #17622057
+- SSMH #17622058
+- SSMH #17622059
+- SSMH #17716009
+- SSMH #17720002
+- SSMH #17720003
+- SSMH #17720004
+- SSMH #17721002
+- SSMH #17721003
+- SSMH #17721004
+- SSMH #17721005
+- SSMH #17721006
+- SSMH #17721007
+- SSMH #17721008
+- SSMH #17721009
+- SSMH #17721010
+- SSMH #17721011
+- SSMH #17721012
+- SSMH #17721013
+- SSMH #17721014
+- SSMH #17727001
+- SSMH #17727002
+- SSMH #17727003
+- SSMH #17727004
+- SSMH #17727005
+- SSMH #17727006
+- SSMH #17727007
+- SSMH #17727008
+- SSMH #17727009
+- SSMH #17727010
+- SSMH #17727011
+- SSMH #17727012
+- SSMH #17727013
+- SSMH #17727014
+- SSMH #17727015
+
+### Dispatch Structures
+- 1 60"x24" Riser
+- 60x1 Riser + (3) Penta Sockets
+- 72x1 riser
+- JOB_ID 17720002
+- JOB_ID 17720004
+- JOB_ID 177210004
+- JOB_ID 17721002
+- JOB_ID 17727003
+- JOB_ID 17727006
+- JOB_ID 17727009
+- JOB_ID 17727012
+- JOB_ID 17727015
+- PI 14019001
+- PI 14019004
+- PI 14019007
+- PI 17605005
+- PI 17605008
+- PI 17622056
+- PI 17716009
+- PI 17721007
+- PI 17721014
