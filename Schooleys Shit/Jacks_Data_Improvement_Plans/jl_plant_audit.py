@@ -34,6 +34,7 @@ HEADER_FONT = Font(color="00FFFFFF", bold=True)
 RESOLUTION_COLOURS = {
     "CONFLICT":           PatternFill("solid", fgColor=RED),
     "CONSENSUS_OVERRIDE": PatternFill("solid", fgColor=ORANGE),
+    "MULTI_PLANT":        PatternFill("solid", fgColor="000070C0"),
     "MATCH":              PatternFill("solid", fgColor=GREEN),
     "SINGLE_SOURCE":      PatternFill("solid", fgColor="00DDDDDD"),
     "NO_DATA":            PatternFill("solid", fgColor=GREY),

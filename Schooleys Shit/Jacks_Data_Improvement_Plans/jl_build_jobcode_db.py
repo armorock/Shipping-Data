@@ -30,6 +30,10 @@ DISPATCH_PATH = os.path.join(MASTER, "Dispatch_Board_Master_2019-2025.csv")
 BABY_PATH     = os.path.join(MASTER, "All Shipping Data BABY.xlsm")
 BABY_SHEET    = "Master List"
 
+DATA_DIR      = os.path.join(BASE, "data")
+NOTION_PATH   = os.path.join(DATA_DIR, "notion_export.csv")
+NETSUITE_PATH = os.path.join(DATA_DIR, "netsuite_jobs.csv")
+
 PLANT_MAP = {
     "sulphur springs": "SS", "sulfur springs": "SS",
     "boulder city": "BC",    "plant city": "PC",
@@ -52,7 +56,7 @@ STATE_ABBREVS = {
     "wisconsin": "WI", "wyoming": "WY", "district of columbia": "DC",
 }
 
-CONFIDENCE = {"BOM": 0, "Dispatch": 1, "Shipping": 2, "Markdown": 3}
+CONFIDENCE = {"BOM": 0, "Dispatch": 1, "NetSuite": 1, "Shipping": 2, "Notion": 2, "Markdown": 3}
 
 
 # ---------------------------------------------------------------------------
@@ -423,22 +427,85 @@ def read_markdown():
     return data
 
 
+def load_notion_csv(path=NOTION_PATH):
+    data = {}
+    if not os.path.exists(path):
+        print(f"  Notion export not found at {path}, skipping")
+        return data
+    print("Reading Notion export...")
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            code = normalize_code(row.get("Job Code", ""))
+            if not code:
+                continue
+            raw_state = row.get("State", "").split(",")[0].strip()
+            state = to_state_abbrev(raw_state) or (raw_state.upper() if len(raw_state) == 2 else None)
+            city = row.get("City", "").strip() or None
+            county = row.get("County", "").strip() or None
+            raw_contractors = row.get("Bidding Contractors", "").strip()
+            bidding = [c.strip() for c in raw_contractors.split(",") if c.strip()] if raw_contractors else []
+            data[code] = {
+                "city": city,
+                "state": state,
+                "county": county,
+                "bidding_contractors": bidding,
+                "job_status": row.get("Job Status", "").strip() or None,
+            }
+    print(f"  {len(data):,} job codes from Notion")
+    return data
+
+
+def load_netsuite_csv(path=NETSUITE_PATH):
+    data = {}
+    if not os.path.exists(path):
+        print(f"  NetSuite export not found at {path}, skipping")
+        return data
+    print("Reading NetSuite export...")
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            code = normalize_code(row.get("Job Code", ""))
+            if not code:
+                continue
+            raw_state = safe(row.get("Shipping State", ""))
+            state = (raw_state[:2].upper() if len(raw_state) > 2
+                     else raw_state.upper()) if raw_state else None
+            data[code] = {
+                "customer":   safe(row.get("Customer", "")) or None,
+                "date":       safe(row.get("NetSuite Date", "")) or None,
+                "fulfilled":  row.get("Fulfilled", "").strip().lower() == "true",
+                "city":       safe(row.get("Shipping City", "")) or None,
+                "state":      state or None,
+                "zip":        safe(row.get("Shipping Zip", "")) or None,
+                "job_value":  safe(row.get("Job Value", "")) or None,
+            }
+    print(f"  {len(data):,} job codes from NetSuite")
+    return data
+
+
 # ---------------------------------------------------------------------------
 # Merge
 # ---------------------------------------------------------------------------
 
-def merge(bom, disp, ship, md):
+def merge(bom, disp, ship, md, notion=None, netsuite=None):
+    if notion is None:
+        notion = {}
+    if netsuite is None:
+        netsuite = {}
     print("Merging and resolving conflicts...")
     all_codes = sorted(
-        set(list(bom) + list(disp) + list(ship) + list(md))
+        set(list(bom) + list(disp) + list(ship) + list(md) + list(notion) + list(netsuite))
     )
     records = []
 
     for code in all_codes:
-        b = bom.get(code, {})
-        d = disp.get(code, {})
-        s = ship.get(code, {})
-        m = md.get(code, {})
+        b  = bom.get(code, {})
+        d  = disp.get(code, {})
+        s  = ship.get(code, {})
+        m  = md.get(code, {})
+        n  = notion.get(code, {})
+        ns = netsuite.get(code, {})
 
         rec = {"job_code": code}
 
@@ -449,57 +516,97 @@ def merge(bom, disp, ship, md):
             "Dispatch" if d.get("job_name") else None
         )
 
-        # Shipping city
+        # Shipping city — NetSuite (Tier B) and Notion (Tier C) added
         cv, cs, cr, cc = resolve([
             ("BOM",      b.get("city")),
             ("Dispatch", d.get("city")),
+            ("NetSuite", ns.get("city")),
+            ("Notion",   n.get("city")),
             ("Shipping", s.get("city")),
             ("Markdown", m.get("city")),
         ])
         rec.update(shipping_city=cv, shipping_city_source=cs,
                    shipping_city_resolution=cr, shipping_city_conflict=cc)
 
-        # Shipping state
+        # Shipping state — NetSuite (Tier B) and Notion (Tier C) added
         sv, ss, sr, sc = resolve([
             ("BOM",      b.get("state")),
             ("Dispatch", d.get("state")),
+            ("NetSuite", ns.get("state")),
+            ("Notion",   n.get("state")),
             ("Shipping", s.get("state")),
             ("Markdown", m.get("state")),
         ])
         rec.update(shipping_state=sv, shipping_state_source=ss,
                    shipping_state_resolution=sr, shipping_state_conflict=sc)
 
-        # Zip
+        # Zip — NetSuite added as Tier B source
         zv, zs, zr, zc = resolve([
             ("BOM",      b.get("zip")),
+            ("NetSuite", ns.get("zip")),
             ("Shipping", s.get("zip")),
             ("Markdown", m.get("zip")),
         ])
         rec.update(shipping_zip=zv, shipping_zip_source=zs,
                    shipping_zip_resolution=zr, shipping_zip_conflict=zc)
 
-        # County (Shipping only)
-        rec["shipping_county"]        = s.get("county")
-        rec["shipping_county_source"] = "Shipping" if s.get("county") else None
+        # County — Shipping primary, Notion as fallback
+        county_shipping = s.get("county")
+        county_notion   = n.get("county")
+        rec["shipping_county"]        = county_shipping or county_notion or None
+        rec["shipping_county_source"] = ("Shipping" if county_shipping else
+                                         "Notion" if county_notion else None)
 
-        # Customer / Contractor
-        rec["customer"]        = s.get("customer") or m.get("customer") or None
-        rec["customer_source"] = ("Shipping" if s.get("customer") else
-                                  "Markdown" if m.get("customer") else None)
+        # Notion-specific fields (informational)
+        rec["bidding_contractors_notion"] = n.get("bidding_contractors") or []
+        rec["in_notion"]                  = code in notion
+
+        # Customer — NetSuite added as Tier B source
+        cuv, cus, cur, cuc = resolve([
+            ("NetSuite", ns.get("customer")),
+            ("Shipping", s.get("customer")),
+            ("Markdown", m.get("customer")),
+        ])
+        rec.update(customer=cuv, customer_source=cus,
+                   customer_resolution=cur, customer_conflict=cuc)
+
+        # Contractor (BOM only)
         rec["contractor"]        = b.get("contractor") or None
         rec["contractor_source"] = "BOM" if b.get("contractor") else None
 
-        # Plant — BOM typically doesn't carry plant; Dispatch is highest-confidence
-        pv, ps, pr, pc = resolve([
-            ("Dispatch", d.get("plant")),
-            ("Shipping", s.get("plant")),
-            ("Markdown", m.get("plant")),
-        ])
-        rec["plant"]             = pv
-        rec["plant_source"]      = ps
-        rec["plant_alec"]        = m.get("plant")
-        rec["plant_resolution"]  = pr
-        rec["plant_conflict"]    = pc
+        # NetSuite informational fields
+        rec["in_netsuite"]         = code in netsuite
+        rec["netsuite_date"]       = ns.get("date")
+        rec["netsuite_fulfilled"]  = ns.get("fulfilled", False)
+        rec["netsuite_job_value"]  = ns.get("job_value")
+
+        # Plant — BOM typically doesn't carry plant; Dispatch is highest-confidence.
+        # Any job that has shipping rows from two plants is legitimately multi-plant
+        # (e.g. large structures from SS, smaller ones from BC or PC). Combine
+        # for the known valid split combinations rather than flagging a conflict.
+        _d_plants = set(d.get("_plant_counts", {}).keys())
+        _s_plants = set(s.get("_plant_counts", {}).keys())
+        _combined = _d_plants | _s_plants
+        _MULTI = [({"BC", "SS"}, "BC/SS"), ({"SS", "PC"}, "SS/PC")]
+        _multi = next((label for combo, label in _MULTI if _combined == combo), None)
+
+        if _multi:
+            rec["plant"]            = _multi
+            rec["plant_source"]     = "Dispatch+Shipping"
+            rec["plant_alec"]       = m.get("plant")
+            rec["plant_resolution"] = "MULTI_PLANT"
+            rec["plant_conflict"]   = None
+        else:
+            pv, ps, pr, pc = resolve([
+                ("Dispatch", d.get("plant")),
+                ("Shipping", s.get("plant")),
+                ("Markdown", m.get("plant")),
+            ])
+            rec["plant"]            = pv
+            rec["plant_source"]     = ps
+            rec["plant_alec"]       = m.get("plant")
+            rec["plant_resolution"] = pr
+            rec["plant_conflict"]   = pc
 
         # Year / date
         rec["year_released"]        = b.get("year_released") or m.get("year") or None
@@ -531,12 +638,14 @@ def merge(bom, disp, ship, md):
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    bom  = read_bom()
-    disp = read_dispatch()
-    ship = read_shipping()
-    md   = read_markdown()
+    bom     = read_bom()
+    disp    = read_dispatch()
+    ship    = read_shipping()
+    md      = read_markdown()
+    notion  = load_notion_csv()
+    netsuite = load_netsuite_csv()
 
-    records = merge(bom, disp, ship, md)
+    records = merge(bom, disp, ship, md, notion, netsuite)
 
     out = os.path.join(OUTPUT_DIR, "jobcode_db.json")
     with open(out, "w", encoding="utf-8") as f:

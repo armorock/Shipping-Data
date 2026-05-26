@@ -67,6 +67,9 @@ _DOC_LABEL_ORDER = {
     "Shop Drawing PDF":     3,
 }
 
+# Extracts contractor from PO filenames: "{JobCode} - {Contractor}_PO#{number}..."
+_PO_RE = re.compile(r'^[A-Z]{2,5}\s*[-–—]\s*(.+?)_PO#', re.IGNORECASE)
+
 
 def _classify_doc(filename):
     n = filename.lower()
@@ -148,9 +151,17 @@ def process_job(token, drive_id, year, job_code, folder_id, use_ncf=True):
         "ncf_file":             None,
         "shop_structure_count": None,
         "shop_drawing_file":    None,
+        "contractor_po_file":   None,
         "documents_found":      [],
         "parse_errors":         [],
     }
+
+    # Extract contractor from PO filename (no download needed — just the filename)
+    for file_item, _ in all_files:
+        m = _PO_RE.match(file_item["name"])
+        if m:
+            result["contractor_po_file"] = m.group(1).strip()
+            break
 
     # Parse NCF first so BOM can override location if both present
     if use_ncf:
@@ -280,6 +291,7 @@ def build_record(raw):
         "shipping_zip":         ncf.get("zipcode") or "",
 
         "contractor_bom":             contractor_bom,
+        "contractor_po_file":         raw.get("contractor_po_file") or "",
         "customer_ncf":               customer_ncf,
         "contractor_customer_match":  contractor_customer_match,
 

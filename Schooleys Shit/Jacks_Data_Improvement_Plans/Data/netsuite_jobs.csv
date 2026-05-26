@@ -1,0 +1,707 @@
+Job Code,Customer,NetSuite Date,Fulfilled,Shipping City,Shipping State,Shipping Zip,Job Value
+BHI,BHI Inc.,2025-04-28,True,Naples,UT,84079,8410.00
+BMA,Eagle Contracting,2025-10-07,True,,,,6160.00
+BVM,"Petillo, Inc.",2025-07-31,True,,,,8420.00
+CIT,"A & K Earth Movers, Inc.",2025-05-15,True,Fallon,NV,89406,9102.00
+CKQ,Capital Excavation,2025-06-04,True,Austin,TX,78767,5320.00
+COM,"Sunland Asphalt & Construction, LLC",2025-05-13,True,,,,1480.00
+CSK,"J1077 Sundt Construction, Inc : MPSA Sample",2025-08-29,True,,,,2023574.16
+CTL,J1136 Monterey Peninsula Engineering : MPSA Sample,2025-02-28,True,,,,438048.50
+CWB,Willco Underground,2025-09-30,False,,,,27340.00
+CWF,"J1074 DGP&S Construction, Inc. : MPSA Sample",2025-02-28,True,,,,176918.00
+CWK,Ripa & Associates,2025-07-02,True,,,,440.00
+CWW,JR Davis Construction Company,2025-05-06,True,,,,540.00
+CXE,"E.T. Mackenzie of Florida, INC.",2026-03-30,True,,,,180041.11
+CXI,J1198 Circle C Construction : MPSA Sample,2025-02-28,True,,,,52667.00
+CXS,"J1230 Kamminga & Roodvoets, Inc. : MPSA Sample",2025-02-28,True,,,,23693.00
+CYA,"J1116 Taylor Northwest, LLC : MPSA Sample",2025-02-28,True,,,,41722.00
+CYB,J1114 Sahuaro Contracting : MPSA Sample,2025-02-28,True,,,,545358.96
+CYC,"Wharton-Smith, Inc",2025-09-25,True,Belleville,FL,34420,42547.99
+CYK,J1233 Castelli Construction LLC : MPSA Sample,2025-02-28,True,,,,84337.00
+CYL,J1191 Doganiero Construction LLC : MPSA Sample,2025-06-30,True,,,,26866.00
+CYT,"J1187 E.T. Mackenzie of Florida, INC. : MPSA Sample",2025-02-28,True,,,,382701.00
+CYU,The Whiting-Turner Contracting Company,2025-09-26,True,Sayreville,NJ,08872,2990.00
+CYW,"J1089 Wal-Rose, Inc. : MPSA Sample",2025-02-28,True,,,,45776.00
+CYY,J1137 Teichert Construction : MPSA Sample,2025-02-28,True,,,,584656.00
+CZB,"Kiewit Infrastructure West, Co.",2025-09-05,True,Las Vegas,NV,89044,902647.22
+CZG,J1214 Honeycutt Construction Services : MPSA Sample,2025-02-28,True,,,,22431.00
+CZI,"J1140 E.T. Mackenzie of Florida, INC. : MPSA Sample",2025-02-28,True,,,,137315.00
+CZS,Don Chapin Company,2025-04-16,True,,,,180.00
+DAB,"J1091 RH Moore Company, Inc. : MPSA Sample",2025-02-28,True,,,,23515.00
+DAE,J1188 Team Ghilotti : MPSA Sample,2025-02-28,True,,,,558781.90
+DAF,J1158 Atlantic Development of Cocoa Inc. : MPSA Sample,2025-02-28,True,,,,53098.99
+DAH,J1215 A&B Construction : MPSA Sample,2025-02-28,True,,,,358348.00
+DAM,"Reytec Construction Resources, Inc.",2025-10-16,True,Houston,TX,77084,94830.00
+DAQ,J1203 Commercial Industrial Corp. : MPSA Sample,2025-02-28,True,,,,142680.00
+DAW,J1202 Honeycutt Construction Services : MPSA Sample,2025-02-28,True,,,,21236.00
+DAY,J1232 Marques General Engineering : MPSA Sample,2025-02-28,True,,,,64576.00
+DBA,Big League Construction Supply,2026-05-11,True,Orlando,FL,32824,75502.00
+DBG,"Amici Engineering Contractors, LLC",2025-05-21,True,,,,240.00
+DBL,J1167 Whitaker Construction : MPSA Sample,2025-02-28,True,,,,430041.00
+DBW,J1069 City of Lakeland : MPSA Sample,2025-02-28,True,,,,244592.40
+DCA,"J1133 Sierra Nevada Construction,Inc. : MPSA Sample",2025-02-28,True,,,,20355.00
+DCB,"J1182 W.G. Johnson and Son, Inc. : MPSA Sample",2025-02-28,True,,,,113694.00
+DCD,J1068 Monterey Peninsula Engineering : MPSA Sample,2025-02-28,True,,,,32690.00
+DCE,J1128 Doug Veerkamp General Engineering INC. : MPSA Sample,2025-02-28,True,,,,52355.00
+DCV,"J1088 Sellers and Sons, Inc. : MPSA Sample",2025-02-28,True,,,,104648.00
+DDD,"Ferreira Construction Co.,Inc.",2025-11-14,True,,,,33599.00
+DDE,DPE Construction Inc.,2025-06-13,True,,,,40560.00
+DDG,"JC Constructors, Inc.",2025-04-14,False,,,,5100.00
+DDS,J1217 NPL Construction Co dba TPL Construction : MPSA Sample,2025-02-28,True,,,,228329.68
+DDU,"J1162 Wal-Rose, Inc. : MPSA Sample",2025-02-28,True,,,,267628.50
+DEA,Doli Construction Corp,2025-06-12,True,,,,5390.00
+DED,Cypress Gulf Inc.,2025-08-07,True,,,,3835.00
+DEE,"BT Construction, Inc.",2025-03-05,True,,,,3743.00
+DEH,"White & White Contracting, LLC",2025-03-19,True,,,,11840.00
+DEJ,J1153 Hat Creek Construction : MPSA Sample,2025-02-28,True,,,,21392.00
+DEK,J1195 Bain Construction : MPSA Sample,2025-02-28,True,,,,56450.00
+DEM,"DEME Construction, LLC",2025-08-26,True,East Ellenton,FL,34222,17153.00
+DEP,"J1212 Sanco Pipelines, Inc. : MPSA Sample",2025-02-28,True,,,,
+DES,Desert Hills Construction,2025-05-14,True,,,,7806.00
+DEU,"Rusty Plumbing Co., Inc",2025-05-09,True,Plant City,FL,33566,48010.00
+DEV,"J1218 Roberson Underground Utility, LLC : MPSA Sample",2025-02-28,True,,,,104580.00
+DFB,"Toro Enterprises, INC",2025-03-24,True,Moorpark,CA,93012,11930.00
+DFF,Don Chapin Company,2025-07-23,True,,,,54602.00
+DFG,"J1122 Pace Water System, Inc. : MPSA Sample",2025-02-28,True,,,,62097.00
+DFN,J1076 HD Fowler Co. : MPSA Sample,2025-02-28,True,,,,228778.00
+DFO,Southern Development & Construction,2025-06-20,True,Kissimmee,FL,34747,288020.00
+DFP,J1178 Auburn Constructors : MPSA Sample,2025-02-28,True,,,,540.00
+DFU,"DEME Construction, LLC",2025-04-01,True,,,,20860.00
+DGB,"KTA Construction, Inc",2025-10-21,True,,,,12850.00
+DGG,Achen-Gardner Construction,2026-05-18,True,Scottsdale,AZ,85255,107408.00
+DGJ,Crescent Constructors Inc,2025-07-25,True,,,,15790.00
+DGV,Felix Civil Construction,2025-11-13,True,LAKELAND,FL,33801,116045.00
+DHA,"J1179 Jon M. Hall Company, LLC : MPSA Sample",2025-02-28,True,,,,293438.00
+DHD,J1145 The Mancini Companies : MPSA Sample,2025-02-28,True,,,,231471.00
+DHJ,"DEME Construction, LLC",2025-04-10,True,,,,4180.00
+DHO,"Wal-Rose, Inc.",2025-08-14,True,St. Cloud,FL,34771,447078.00
+DHP,"J1090 SHAW Construction, Corp : MPSA Sample",2025-02-28,True,,,,31686.00
+DHQ,LM McLamb & Son Construction,2026-01-23,True,,,,155060.00
+DHR,"RH Moore Company, Inc.",2025-04-07,True,,,,9770.00
+DHS,"E.T. Mackenzie of Florida, INC.",2025-04-01,True,Bradenton,FL,34203,2930.00
+DIB,J1161 Blue Ox Enterprises LLC : MPSA Sample,2025-02-28,True,,,,613904.99
+DII,"DEME Construction, LLC",2025-05-22,True,East Ellenton,FL,34222,20170.00
+DIK,QGS Development Inc.,2025-04-01,True,,,,8820.00
+DIL,J1072 Wilson Site & Utilities : MPSA Sample,2025-02-28,True,,,,104914.98
+DIP,Gainesville Regional Utilities,2025-11-21,True,,,,138729.00
+DIQ,J1125 Gainesville Regional Utilities : MPSA Sample,2025-02-28,True,,,,127383.00
+DIV,"J1224 Sanco Pipelines, Inc. : MPSA Sample",2025-02-28,True,,,,1140.00
+DIY,"J1181 J&K Utilities, LLC : MPSA Sample",2025-02-28,True,,,,12258.99
+DJA,"J1101 Nicholas Construction, Inc. : MPSA Sample",2025-02-28,True,,,,277348.00
+DJC,S.J.  Louis Construction,2026-01-09,True,Sulphur Springs,TX,75482,1035075.00
+DJE,Ripa & Associates,2025-10-03,True,Parrish,FL,34219,252838.00
+DJF,J1208 Ripa & Associates : MPSA Sample,2025-02-28,True,,,,446385.98
+DJG,Mountain Cascade of Texas LLC,2025-04-29,True,,,,3311.00
+DJQ,"Blue Star Utilities, LLC",2025-03-20,True,,,,10580.00
+DJW,"J1102 Hughes Brothers Construction, Inc. : MPSA Sample",2025-02-28,True,,,,102926.00
+DJX,Ripa & Associates,2025-12-01,True,Parrish,FL,34219,14980.00
+DKA,J1220 Wilson Site & Utilities : MPSA Sample,2025-02-28,True,,,,250476.00
+DKB,J1070 Wilson Site & Utilities : MPSA Sample,2025-02-28,True,,,,240429.00
+DKE,J1112 Ripa & Associates : MPSA Sample,2025-07-02,True,,,,342192.98
+DKG,"JMB Construction, Inc",2025-08-11,True,,,,105650.00
+DKH,"Ranger Pipelines, Inc.",2026-04-27,True,Elverta,CA,95626,568948.47
+DKL,Redpoint Contracting,2025-09-17,True,Glendale,AZ,85310,1236747.00
+DKO,J1132 Borderland Construction : MPSA Sample,2025-02-28,True,,,,22792.00
+DKP,J1135 Cathcart Construction Company LLC : MPSA Sample,2025-02-28,True,,,,14013.00
+DKQ,Achen-Gardner Construction,2025-03-27,True,,,,2950.00
+DKT,Quality Excavation,2025-09-19,True,St. George,UT,84770,48630.00
+DKY,"Central Site Development, LLC",2025-04-01,True,,,,3580.00
+DLB,J1144 The Briar Team : MPSA Sample,2025-02-28,True,,,,349567.00
+DLC,Achen-Gardner Construction,2025-11-03,True,Scottsdale,AZ,85255,24405.00
+DLF,"Toro Enterprises, INC",2025-08-15,True,Moorpark,CA,93012,26932.00
+DLG,"J1209 King Construction Services, Inc. : MPSA Sample",2025-02-28,True,,,,149287.00
+DLJ,"Sundt Construction, Inc",2025-12-29,True,American Fork,UT,84003,1458538.20
+DLS,"J1151 Williams Infrastructure, LLC : MPSA Sample",2025-02-28,True,,,,19659.00
+DLU,Metro Equipment Service,2025-04-08,True,,,,1380.00
+DLX,"Park Construction of North Carolina, INC.",2025-07-08,True,,,,1550.00
+DMA,"J1073 Hughes Brothers Construction, Inc. : MPSA Sample",2025-02-28,True,,,,485896.00
+DMI,Hemphill Construction Company,2025-10-27,True,,,,53254.00
+DMK,Marques General Engineering,2025-06-13,True,Brentwood,CA,94513,5900.00
+DMM,QGS Development Inc.,2025-08-26,True,Plant City,FL,33566,8693.00
+DMN,"Rusty Plumbing Co., Inc",2026-04-23,True,Plant City,FL,33566,368373.00
+DMT,J1149 Fortiline Waterworks : MPSA Sample,2025-02-28,True,,,,154077.00
+DMV,J1169 BHI Inc. : MPSA Sample,2025-02-28,True,Naples,UT,84079,101363.00
+DMW,J1183 Wilson Site & Utilities : MPSA Sample,2025-07-14,True,,,,313751.00
+DND,J1083 Ripa & Associates : MPSA Sample,2025-02-28,True,,,,77377.00
+DNE,J1092 Basile Construction Inc. : MPSA Sample,2025-02-28,True,,,,227663.00
+DNG,"CONCO WEST, INC.",2025-05-08,True,Manteca,CA,95336,510.00
+DNM,J1120 WD Site Development : MPSA Sample,2025-02-28,True,,,,190546.00
+DNO,J1146 Vogel Bros. Building Co. : MPSA Sample,2025-02-28,True,,,,18451.00
+DNQ,The Kearney Companies,2025-08-01,True,,,,11780.00
+DNR,J1141 The Briar Team : MPSA Sample,2025-07-08,True,,,,37712.00
+DNU,J1229 Teichert Construction : MPSA Sample,2025-02-28,True,,,,40345.00
+DNV,Feller Enterprises,2026-03-27,True,,,,31900.00
+DNY,"J1155 DEME Construction, LLC : MPSA Sample",2025-02-28,True,,,,159632.96
+DOA,J1147 Pate Garver LP : MPSA Sample,2025-02-28,True,,,,772732.00
+DOB,"J1130 Carmichael Development, LLC : MPSA Sample",2025-02-28,True,,,,13919.32
+DOC,Mountain Cascade of Texas LLC,2026-03-25,True,,,,936.00
+DOD,JR Davis Construction Company,2025-04-29,True,St. Cloud,FL,34772,110276.00
+DOE,T.A. Loving Company,2025-09-03,True,Goldsboro,NC,27530,908.00
+DOG,"J1196 Gregori Construction, Inc : MPSA Sample",2025-02-28,True,,,,227768.00
+DOI,Core & Main,2025-03-24,True,,,,3300.00
+DOK,"J1121 E.T. Mackenzie of Florida, INC. : MPSA Sample",2025-02-28,True,,,,82230.00
+DOO,"J1184 ARB, INC. : MPSA Sample",2025-02-28,True,,,,116120.00
+DOP,T&S Construction,2026-01-15,True,Roseville,CA,95747,40756.00
+DOT,J1221 Florida Civil LLC : MPSA Sample,2025-02-28,True,,,,89617.00
+DOU,J1103 Commercial Industrial Corp. : MPSA Sample,2025-02-28,True,,,,152629.00
+DOX,Eagle Contracting,2025-12-12,True,,,,270.00
+DPF,"Quality Enterprises USA, Inc.",2025-08-05,True,,,,22735.00
+DPG,Tand Incorporated,2025-10-16,True,Las Vegas,NV,89118,459324.68
+DPI,Ripa & Associates,2026-03-02,True,Parrish,FL,34219,35130.00
+DPL,Harbor Island Inv dba Harbor Dev Co,2025-10-31,True,,,,100570.00
+DPM,J1228 Brockman Site Development : MPSA Sample,2025-02-28,True,,,,180269.00
+DPN,A. Scott Enterprises Inc.,2025-05-29,True,Saylorsburg,PA,18353,
+DPO,J1246 T&S Construction : MPSA Sample,2025-03-19,True,,,,438031.00
+DPP,Archer-Western Construction,2026-05-21,True,Mesquite,TX,75181,105752.00
+DPR,J1171 Ferguson Enterprises LLC : MPSA Sample,2025-02-28,True,,,,122597.00
+DPT,Global Pump Solutions,2025-08-05,True,,,,63052.00
+DPW,J1231 RZ Service Group : MPSA Sample,2025-02-28,True,,,,15630.24
+DPY,"Western Municipal Construction of Texas, LLC",2025-09-18,True,Justin,TX,76247,99026.00
+DPZ,Garney Construction,2025-03-19,True,,,,7768.00
+DQC,"TLC Company, Inc.",2025-06-19,True,,,,1740.00
+DQD,SYB Construction. Inc.,2025-07-25,True,,,,49910.00
+DQF,"DEME Construction, LLC",2025-11-20,True,East Ellenton,FL,34222,160506.00
+DQG,J1117 Fortiline Waterworks : MPSA Sample,2025-02-28,True,,,,123408.96
+DQH,Gerhardt & Berry Construction Inc.,2025-04-08,True,,,,102893.00
+DQK,"J1256 Degan Construction, LLC : MPSA Sample",2025-03-10,True,,,,329689.00
+DQL,Blue Ox Enterprises LLC,2025-11-21,True,,,,31060.00
+DQM,"Lee's Pipeline, Inc.",2025-03-20,True,,,,4780.00
+DQN,Honeycutt Construction Services,2025-12-03,True,Calabash,NC,28467,2800.00
+DQP,"Sam Hill & Sons, Inc.",2025-09-30,True,Santa Paula,CA,93060,1504670.00
+DQT,J1082 TW Brown Contracting : MPSA Sample,2025-02-28,True,,,,18756.00
+DQU,Doganiero Construction LLC,2024-10-24,True,Plant City,FL,33566,69040.00
+DQW,J1131 Blue Ox Enterprises LLC : MPSA Sample,2025-02-28,True,,,,165445.00
+DQX,Cronin Construction Corp.,2025-06-24,True,,,,86028.99
+DQZ,"Steger Site Preparation, Inc : Steger Site Preparation, Inc",2025-02-28,True,,,,211508.00
+DRB,J1261 Ward and Burke Tunneling Inc. : MPSA Sample,2025-08-07,True,Georgetown,TX,78626,1502617.00
+DRC,"J1175 Frederick Derr and Company, Inc. : MPSA Sample",2025-02-28,True,,,,250142.00
+DRF,AIMS Companies,2026-03-27,True,,,,2899.00
+DRI,"J1176 Wal-Rose, Inc. : MPSA Sample",2025-07-11,True,,,,202625.00
+DRJ,"RAVA Construction, LLC.",2025-03-05,True,,,,203611.00
+DRL,C&M Road Builders,2025-10-10,True,Palmetto,FL,34221,243804.00
+DRM,B&F Contracting Inc.,2026-01-12,True,Phoenix,AZ,85033,770224.00
+DRN,"Jon M. Hall Company, LLC",2025-10-06,True,Viera,FL,32940,302409.00
+DRO,"Hollander Construction Company, Inc.",2026-03-16,True,Lakewood Ranch,FL,34202,145760.00
+DRP,J1206 WJV General Contractors : MPSA Sample,2025-02-28,True,,,,20420.00
+DRR,J1154 Blue Ox Enterprises LLC : MPSA Sample,2025-07-10,True,,,,118298.00
+DRT,C&M Road Builders,2025-06-19,True,Palmetto,FL,34221,181023.37
+DRU,Ramage Contracting,2025-09-17,True,Rockledge,FL,32955,461943.00
+DRV,"TF Contracting Services, LLC",2025-03-20,True,,,,6460.00
+DRY,"Place Services, Inc.",2026-05-01,True,Gainesville,FL,32068,20695.00
+DRZ,J1163 Carolina Civilworks Inc : MPSA Sample,2025-02-28,True,,,,73969.00
+DSA,Assured Excavating INC,2025-12-12,True,,,,231795.00
+DSB,J1225 Meyer Paving & Construction Corp. : MPSA Sample,2025-02-28,True,,,,47940.00
+DSC,"J1193 DEME Construction, LLC : MPSA Sample",2025-07-18,True,,,,156203.00
+DSD,Ferguson Enterprises LLC,2025-09-15,True,Burgaw,NC,28425,211870.00
+DSF,"Moffat Pipe, Inc.",2026-04-22,True,Clayton,NC,27520,65275.00
+DSI,J1194 Marques General Engineering : MPSA Sample,2025-02-28,True,,,,34660.95
+DSJ,Hardiman Construction Inc.,2025-03-21,True,Larkspur,CA,94939,9780.00
+DSL,J1201 GSE Construction Inc. : MPSA Sample,2025-02-28,True,,,,59200.00
+DSM,J1139 Global Pump Solutions : MPSA Sample,2025-02-28,True,,,,182260.00
+DSN,"J1264 MJC Land Development, LLC. : MPSA Sample",2025-06-25,True,,,,770080.45
+DSO,"J1099 MJC Land Development, LLC. : MPSA Sample",2025-02-28,True,,,,178568.00
+DSR,Teraflex Group LLC,2026-04-09,True,Williston,ND,58801,117909.00
+DST,"J1109 Toro Enterprises, INC : MPSA Sample",2025-03-04,True,,,,186660.00
+DTB,J1226 Romtec Companies : MPSA Sample,2025-02-28,True,,,,220030.00
+DTC,J1108 Granite Construction : MPSA Sample,2025-02-28,True,,,,47950.00
+DTD,The Kearney Companies,2026-05-05,True,Plant City,FL,33566,358210.00
+DTE,"J1079 Wal-Rose, Inc. : MPSA Sample",2025-02-28,True,,,,264057.00
+DTF,Fortiline Waterworks,2026-04-10,True,Leland,NC,28451,112560.00
+DTG,"J1180 E.T. Mackenzie of Florida, INC. : MPSA Sample",2025-02-28,True,,,,121260.00
+DTI,T.A. Loving Company,2026-04-10,True,Goldsboro,NC,27530,15897.00
+DTJ,"Ferreira Construction Co.,Inc.",2026-05-21,True,Plant City,FL,33566,121983.97
+DTK,C&M Road Builders,2025-03-01,True,,,,137810.00
+DTL,Forrest Excavating Inc.,2026-01-21,True,,,,118583.00
+DTM,"PCL Construction, Inc.",2025-03-25,True,Tempe,AZ,85284,109646.00
+DTO,"E.T. Mackenzie of Florida, INC.",2025-09-08,True,Bradenton,FL,34203,34365.00
+DTQ,J1219 Ames Construction : MPSA Sample,2025-02-28,True,,,,51365.00
+DTR,Ramage Contracting,2025-04-11,True,,,,38360.00
+DTS,J1086 The Briar Team : MPSA Sample,2025-02-28,True,,,,24035.00
+DTU,"J1177 DEME Construction, LLC : MPSA Sample",2025-02-28,True,,,,83190.00
+DTV,"J1170 Frederick Derr and Company, Inc. : MPSA Sample",2025-02-28,True,,,,92200.00
+DTW,JR Davis Construction Company,2026-04-10,True,St. Cloud,FL,34772,285540.00
+DTY,"VK Jensen Enterprises, Inc.",2025-11-20,True,,,,3010.00
+DTZ,JR Davis Construction Company,2026-05-21,True,St. Cloud,FL,34772,1279915.00
+DUA,"Jaron Mckernan Enterprises, Inc",2025-04-01,True,,,,15160.00
+DUB,Wilson Site & Utilities,2025-12-04,True,Palmetto,FL,34221,398176.00
+DUC,B&F Contracting Inc.,2025-03-26,True,,,,17186.00
+DUD,"Gorman Construction, Inc.",2025-03-21,True,Powder Springs,GA,30127,22630.00
+DUE,Osceola County BOCC,2025-03-21,True,Kissimmee,FL,34741,57060.00
+DUG,"RH Moore Company, Inc.",2025-03-21,True,,,,166495.00
+DUH,J1244 City of Roseville : DUH,2025-03-03,True,,,,13940.00
+DUI,"Hughes Brothers Construction, Inc.",2025-03-03,True,,,,265475.00
+DUJ,Southern Development & Construction,2025-12-09,True,Kissimmee,FL,34747,209773.00
+DUL,Cronin Construction Corp.,2025-08-26,True,,,,47473.00
+DUM,SYB Construction. Inc. : SYB Construction. Inc.,2025-03-02,True,Venus,TX,76084,812750.00
+DUN,Ulliman Schutte Construction,2025-12-22,True,Miamisburg,OH,45342,23199.00
+DUO,J1250 Whitaker Construction : MPSA Sample,2025-03-11,True,,,,506485.00
+DUP,WD Site Development,2026-02-17,True,Kissimmee,FL,34746,175962.00
+DUQ,"Marlon Dunn Contracting, Inc.",2025-12-05,True,Plant City,FL,33563,24546.00
+DUR,Acadia Services LLC,2025-10-15,True,,,,388854.00
+DUT,J1262 CJ Site Services : MPSA Sample,2025-03-03,True,Orlando,FL,32825,12670.00
+DUU,"J1257 Dondlinger & Sons Construction Co., Inc. : MPSA Sample",2025-03-06,True,,,,19420.00
+DUV,The Whiting-Turner Contracting Company,2025-10-14,True,Sayreville,NJ,08872,156744.00
+DUW,"Rickabaugh Pentecost Development, LLC",2025-04-03,True,Puyallup,WA,98371,18560.00
+DUX,BWA Services Inc,2025-03-12,True,Davenport,FL,33837,25411.22
+DUY,J1241 DPE Construction Inc. : DUY,2025-03-06,True,,,,150600.00
+DUZ,McGuire and Hester,2025-03-24,True,,,,8730.00
+DVA,"Construction Labor Services, Inc.",2025-03-21,True,Semmes,AL,36575,47280.00
+DVB,Best Sand & Gravel Inc.,2026-05-01,True,Burgaw,NC,28425,119835.00
+DVC,Ellison Mills Contracting,2026-05-14,True,Casa Grande,AZ,85122,273810.00
+DVD,Firethorn Inc.,2025-09-23,True,,,,134173.00
+DVE,Archer-Western Construction,2025-03-27,True,Mesquite,TX,75181,23210.00
+DVF,"Midsouth, Inc.",2026-05-19,True,Homosassa,FL,34448,36638.00
+DVG,"Price Pipeline, Inc.",2025-03-27,True,Bogart,GA,30622,15280.00
+DVH,Schilling Paradise Corp,2025-08-11,True,El Cajon,CA,92021,158060.00
+DVI,B&F Contracting Inc.,2025-03-05,True,,,,87310.00
+DVJ,"Gutierrez Canales Engineering, PC",2025-09-19,True,Yuma,AZ,85365,392350.00
+DVK,J1240 Spiess Construction Co. Inc. : DVK,2025-03-06,True,,,,129623.00
+DVL,"J1253 Jon M. Hall Company, LLC : MPSA Sample",2025-03-11,True,,,,258658.00
+DVM,JR Davis Construction Company,2025-03-12,True,,,,18619.00
+DVN,J1265 Agora Water Solutions : DVN,2025-03-20,True,Orlando,FL,32806,136160.00
+DVO,Spiess Construction Co. Inc.,2026-02-04,True,Nipomo,CA,93444,244243.00
+DVP,"MJC Land Development, LLC.",2025-03-10,True,,,,204483.00
+DVQ,Holland Enterprises,2026-04-06,True,Osprey,FL,34229,92720.00
+DVR,Assured Excavating INC,2025-12-12,True,,,,270450.00
+DVS,Hall Company Inc.,2025-03-12,True,Oviedo,FL,32766,54845.00
+DVT,Mozingo Construction,2026-01-15,True,Roseville,CA,95747,62250.00
+DVU,"JEA, Inc.",2025-03-27,True,,,,12310.00
+DVV,"Jon M. Hall Company, LLC",2026-04-23,True,Viera,FL,32940,202602.00
+DVW,JR Davis Construction Company,2025-03-12,True,,,,27680.00
+DVX,Vogel Bros. Building Co.,2026-04-21,True,Buena Ventura Lakes,FL,34743,67463.00
+DVY,Tucker Paving,2025-03-12,True,Winter Haven,FL,33881,296062.05
+DVZ,"E.T. Mackenzie of Florida, INC.",2025-03-13,True,,,,154890.00
+DWA,"Rusty Plumbing Co., Inc",2025-07-16,True,,,,93670.00
+DWB,Carolina Civilworks Inc,2026-01-23,True,,,,28520.00
+DWC,Trans Florida Development Corp,2026-03-17,True,Miami,FL,33186,308370.00
+DWD,Fortiline Waterworks,2026-04-02,True,Leland,NC,28451,106250.00
+DWE,"Hoopaugh Grading Company, LLC",2025-03-24,True,,,27241,32850.00
+DWF,Fortiline Waterworks,2025-03-20,True,,,,52650.00
+DWG,Achen-Gardner Construction,2025-03-21,True,,,,29990.00
+DWH,"E.T. Mackenzie of Florida, INC.",2025-07-02,True,,,,330823.00
+DWI,City of Rexburg,2026-03-10,True,Rexburg,ID,83440,871730.00
+DWJ,"HG Reynolds Co., Inc.",2025-03-27,True,Henderson,NC,27536,33250.00
+DWK,"MJC Land Development, LLC.",2025-03-27,True,,,,693150.00
+DWL,"Central Hauling & Excavating, Inc.",2026-02-09,True,Orlando,FL,32814,420917.00
+DWM,"Stuckey's Backhoe Service, INC",2025-04-02,True,,,,44910.00
+DWN,Southern Pipe & Supply,2025-04-02,True,Mableton,GA,30126,12180.00
+DWO,"Hughes Brothers Construction, Inc.",2025-04-02,True,,,,482490.00
+DWP,B&F Contracting Inc.,2025-12-03,True,Phoenix,AZ,85033,754980.00
+DWQ,"RH Moore Company, Inc.",2025-04-08,True,,,,165634.00
+DWR,Ripa & Associates,2025-04-08,True,,,,21380.00
+DWS,"HPS Mechanical, Inc.",2025-04-08,False,Bakersfield,CA,93307,21040.00
+DWT,AUI Inc,2025-04-14,True,Albuquerque,NM,87119,70760.00
+DWU,"TSS Civil, LLC",2026-02-06,True,Orlando,FL,32803,232000.00
+DWV,Woodruff & Sons,2026-01-05,True,Parrish,FL,34219,75706.00
+DWW,Assured Excavating INC,2025-04-14,True,,,,46347.00
+DWX,Latham Excavation Inc.,2025-04-17,True,Bend,OR,97702,25490.00
+DWY,JR Davis Construction Company,2025-04-14,True,St. Cloud,FL,34772,119040.00
+DWZ,"RH Moore Company, Inc.",2025-12-29,True,Ocean Isle Beach,NC,28469,54261.00
+DXA,"GSW Construction, Inc.",2025-04-16,True,San Francisco,CA,94105,84106.00
+DXB,Eden Site Development,2025-04-21,True,Longwood,FL,32750,70330.00
+DXC,JR Davis Construction Company,2026-01-23,True,St. Cloud,FL,34772,34660.00
+DXD,Miami Dade Sewer & Water,2025-04-30,True,Miami,FL,33177,
+DXE,Insituform Technologies LLC,2025-11-10,True,,,,142182.00
+DXF,"RLW Whitaker,  Joint Venture",2026-01-29,True,Draper,UT,84020,273310.00
+DXG,MVC Construction Co Inc,2025-09-09,True,Heber City,UT,84032,64830.00
+DXH,Q&D Construction LLC,2025-04-21,True,Sparks,NV,89431,14720.00
+DXI,Orlando Construction LLC,2025-04-21,True,Orlando,FL,32822,16707.00
+DXJ,RS&M Construction Inc.,2025-08-05,True,Rancho Cucamonga,CA,91739,28020.00
+DXK,"LaFleur Engineering, Inc.",2025-07-21,True,Orangevale,CA,95662,18960.00
+DXL,"C&A Construction, LLC",2025-04-24,True,,,,116290.00
+DXM,"E.T. Mackenzie of Florida, INC.",2025-11-18,True,Bradenton,FL,34203,133560.00
+DXN,TB Landmark Construction,2025-08-13,True,Jacksonville,FL,32226,58216.00
+DXO,"STAline Waterworks, Inc.",2025-04-29,True,,,,50070.00
+DXP,Ellison Mills Contracting,2025-04-30,True,Casa Grande,AZ,85122,70680.00
+DXQ,"State Utility Contractors, Inc",2025-05-01,True,Leland,NC,28415,21960.00
+DXR,Ferguson Waterworks,2026-03-26,True,Charlotte,NC,28226,44640.00
+DXS,"AAA Excavation, Inc.",2025-05-05,False,Willard,UT,84340,22660.00
+DXT,Landmark Services of Southwest FL. Inc,2026-05-26,True,Sarasota,FL,34243,136575.00
+DXU,JR Davis Construction Company,2025-10-07,True,St. Cloud,FL,34772,312060.00
+DXV,Pesado Construction Company,2025-05-12,True,San Antonio,TX,78222,177670.00
+DXW,"PM Construction & Rehab dba IPR South Central, LLC",2025-05-05,True,,,,18060.00
+DXX,Empire Pipe & Supply,2025-05-09,True,Birmingham,AL,35213,71770.00
+DXY,"C&A Construction, LLC",2025-05-20,True,,,,82420.00
+DXZ,Quality Excavation,2025-05-09,True,,,,30600.00
+DYA,JR Davis Construction Company,2025-05-07,True,,,,341140.00
+DYB,"Wal-Rose, Inc.",2025-05-12,True,St. Cloud,FL,34771,145990.00
+DYC,Blue Ox Enterprises LLC,2025-09-16,True,,,,307640.00
+DYD,Asta Construction Co Inc,2025-05-09,True,Rio Vista,CA,94571,19290.00
+DYE,"Sanford Contractors, Inc.",2026-02-25,True,Lemon Springs,NC,28355,329820.00
+DYF,"Timothy Rose Contracting, Inc",2025-09-04,True,Port St. Lucie,FL,34945,212243.00
+DYG,Garney Construction,2026-03-11,True,Lakeland,FL,33815,1237008.00
+DYH,"Petticoat-Schmitt Civil Contractors, Inc",2025-05-15,True,,,,27110.00
+DYI,"Dana Site Development & Paving, Inc",2025-05-15,True,,,,30190.00
+DYJ,Woodruff & Sons,2025-05-19,True,Parrish,FL,34219,18394.00
+DYK,"DEME Construction, LLC",2026-02-25,True,East Ellenton,FL,34222,208900.00
+DYL,"Brasfield & Gorrie, LLC",2026-02-17,True,Winter Park,FL,32789,73590.00
+DYM,SanPik Inc,2026-03-19,True,Merritt Island,FL,32952,168960.00
+DYN,"Summers' Enterprise , Inc.",2025-05-19,True,,,,176647.00
+DYO,North River Ranch Improvement Stewardship District,2025-09-16,True,Orlando,FL,32817,328032.00
+DYP,"Spectrum Underground,Inc​",2025-07-18,True,Sarasota,FL,34233,151100.00
+DYQ,SanPik Inc,2025-09-15,True,Merritt Island,FL,32952,147920.00
+DYR,R. Baker Inc.,2025-07-15,True,,,,187920.00
+DYS,Firethorn Inc.,2025-05-29,True,,,,111709.00
+DYT,Aspen Developers Corporation,2025-06-02,True,Reno,NV,89512,76210.00
+DYU,Teichert Construction,2025-06-13,True,,,,285924.00
+DYV,"Mountain Cascade, Inc.",2025-08-06,True,,,,46341.00
+DYW,"Aspen Earthworks, Inc.",2025-06-17,True,Reno,NV,89502,24640.00
+DYX,Terry Roberts Site Work​,2026-03-18,True,Saint Cloud,FL,34769,32750.00
+DYY,Arox Land Development​,2025-10-08,True,Sarasota,FL,34240,182230.00
+DYZ,City of Fort Smith,2025-06-10,True,,,,2440.00
+DZA,Firethorn Inc.,2025-10-08,True,,,,624670.00
+DZB,"Southeast Grading & Hauling, Inc.",2025-06-13,True,Madison,GA,30650,37210.00
+DZC,"Wal-Rose, Inc.",2025-06-13,True,St. Cloud,FL,34771,21920.00
+DZD,"Hoopaugh Grading Company, LLC",2025-10-09,True,,,27241,23310.00
+DZE,Suncore,2025-08-06,True,Washington,UT,84780,65640.00
+DZF,"E.T. Mackenzie of Florida, INC.",2025-10-01,True,Bradenton,FL,34203,105819.00
+DZG,B&F Contracting Inc.,2025-07-10,True,Phoenix,AZ,85033,61410.00
+DZH,B&F Contracting Inc.,2025-06-18,True,Phoenix,AZ,85033,66540.00
+DZI,C&M Road Builders,2025-06-11,True,Palmetto,FL,34221,74190.00
+DZJ,C&M Road Builders,2025-06-11,True,Palmetto,FL,34221,63900.00
+DZK,"Mountain West Construction, Inc.​",2025-06-18,True,Minden,NV,89423,20962.00
+DZL,Benmark Supply Co. Inc.,2026-02-17,True,Midland,TX,79702,670315.00
+DZM,Interstate Rock Products,2025-06-18,True,Hurricane,UT,84737,25410.00
+DZN,"Titan Land Development, LLC. ​",2025-07-18,True,St. Cloud,FL,34772,17000.00
+DZO,CLW Water Group​,2025-11-24,True,Dallas,TX,75244,553453.00
+DZP,Munro Contracting LLC,2025-06-20,True,Spotsylvania,VA,22553,18990.00
+DZQ,JR Davis Construction Company,2026-02-17,True,,,,346825.00
+DZR,Garney Construction,2025-12-17,True,Lakeland,FL,33815,50025.00
+DZS,Park Construction Company,2025-06-25,True,,,,158176.00
+DZT,Marques General Engineering,2025-06-24,True,Brentwood,CA,94513,467460.00
+DZU,"MJC Land Development, LLC.",2026-02-24,True,Port Saint Lucie,FL,34987,1023857.00
+DZV,Ames Construction,2026-04-09,True,West Haven,UT,84401,1137357.00
+DZW,"Prime Construction Group, Inc. ​",2025-12-22,True,Orlando,FL,25858,73560.00
+DZX,"Western Engineering Contractors, Inc.",2025-07-03,True,Loomis,CA,95650,20670.00
+DZY,"JP Excavating, Inc.",2025-07-02,True,,,,151357.00
+DZZ,Hughey Construction Services LLC,2025-07-03,True,,,,16960.00
+EAA,Assured Excavating INC,2025-07-03,True,,,,38960.00
+EAB,National Pipeline Contractors,2025-09-03,True,Henderson,NV,89011,37717.00
+EAC,Ward and Burke Tunneling Inc.,2025-07-03,True,Georgetown,TX,78626,76860.00
+EAD,"Gutierrez Canales Engineering, PC",2025-07-03,True,Yuma,AZ,85365,53650.00
+EAE,Commercial Industrial Corp.,2026-01-27,True,,,,479395.00
+EAF,"Wharton-Smith, Inc",2026-03-23,True,Belleville,FL,34420,348938.00
+EAG,"Probuild Construction, Inc.",2025-07-10,True,West Jordan,UT,84081,30830.00
+EAH,"Smith Pump Company, Inc",2025-07-10,True,Woodway,TX,76712,35235.00
+EAI,"Wal-Rose, Inc.",2026-02-12,True,St. Cloud,FL,34771,47430.00
+EAJ,"L.H. Lacy Company, Ltd.",2025-07-11,True,Dallas,TX,75354,55440.00
+EAK,Graniterock Company,2025-07-12,True,San Jose,CA,95138,50411.00
+EAL,"Weber General Engineering, Inc",2025-07-18,True,Dixon,CA,95620,23572.00
+EAM,Saraland Water and Sewer Service,2025-07-16,True,Saraland,AL,36571,22410.00
+EAN,Ferguson Waterworks,2026-03-16,True,Charlotte,NC,28226,75380.00
+EAO,"JP Excavating, Inc.",2026-04-10,True,,,,415302.00
+EAP,HT4,2025-07-15,True,Safford,AZ,85548,62190.00
+EAQ,Hadco Construction,2025-07-18,True,Lehi,UT,84043,20970.00
+EAR,"Shipps Excavating, Inc.",2025-11-21,True,Venice,FL,34292,23900.00
+EAS,School District Manatee County,2025-10-06,True,Sarasota,FL,34240,203900.00
+EAT,Cash Construction A Mas Tec Company,2025-07-17,True,Pflugerville,TX,78660,3547320.00
+EAU,"King Construction Services, Inc.",2025-07-18,False,,,,151870.00
+EAV,Hinterland Group Inc.​,2026-05-22,True,West Palm Beach,FL,33404,85295.00
+EAW,Woodruff & Sons,2025-07-21,True,Parrish,FL,34219,25540.00
+EAX,Garney Construction,2025-07-22,True,Lakeland,FL,33815,20090.00
+EAY,"DEME Construction, LLC",2026-05-12,True,East Ellenton,FL,34222,49970.00
+EAZ,Sukut Construction LLC,2026-05-19,True,Santa Ana,CA,92704,5243563.00
+EBA,Archer-Western Construction,2026-03-04,True,Mesquite,TX,75181,301120.00
+EBB,"Gibbs & Register, Inc.",2025-12-17,True,Winter Garden,FL,34787,108750.00
+EBC,"S.J. Louis Construction of Texas, Ltd",2025-12-04,True,Mansfield,TX,76063,833231.00
+EBD,B&F Contracting Inc.,2025-07-24,True,Phoenix,AZ,85033,33790.00
+EBE,"Central Site Development, LLC",2025-12-23,True,Plant City,FL,33566,131680.00
+EBF,DCS Contracting,2025-10-23,True,,,,247223.00
+EBG,"SEMA Construction, Inc.",2025-07-31,True,,,,124910.00
+EBH,Wind River Excavation​,2025-07-30,True,Woods Cross,UT,84087,74060.00
+EBI,Advanced Earthworks Inc,2025-12-03,True,Clermont,FL,34715,287983.00
+EBJ,Fortiline Waterworks,2025-08-01,True,,,,13980.00
+EBK,Q&D Construction LLC,2025-07-31,True,Sparks,NV,89431,150600.00
+EBL,Advanced Earthworks Inc,2025-07-31,True,Clermont,FL,34715,46710.00
+EBM,"Spectrum Underground,Inc​",2025-08-05,True,,,,19560.00
+EBN,FNF Construction Inc. ​FNF Construction Inc. ​,2025-10-02,True,Tempe,AZ,85281,275690.00
+EBO,Core & Main,2025-08-06,True,,,,19710.00
+EBP,Global Pump Solutions,2025-08-07,True,Princeton,TX,,164410.00
+EBQ,Integrity Site Development Inc​ Integrity Site Development Inc,2025-08-07,True,Anthony,FL,32617,161600.00
+EBR,"TLC Diversified, Inc",2026-05-15,True,Bradenton,FL,34208,13070.00
+EBS,Orlando Construction LLC,2025-08-12,True,Orlando,FL,32822,123210.00
+EBT,Ferguson Enterprises LLC,2025-08-12,True,Burgaw,NC,28425,42400.00
+EBU,"JEA, Inc.",2025-08-13,True,Jacksonville,FL,32202,17012.00
+EBV,"JEA, Inc.",2025-08-13,True,Jacksonville,FL,32202,15520.00
+EBW,Insituform Technologies LLC,2025-08-14,True,,,,14190.00
+EBX,Acadia Services LLC,2025-08-19,True,,,,46460.00
+EBY,Archer-Western Construction,2026-02-06,True,Mesquite,TX,75181,259890.00
+EBZ,"Aspen Earthworks, Inc.",2025-09-05,True,Reno,NV,89502,153770.00
+ECA,Assured Excavating INC,2026-03-07,True,,,,451744.00
+ECB,Fortiline Waterworks,2025-08-22,True,,,,139390.00
+ECC,"RH Moore Company, Inc.",2025-08-22,True,Ocean Isle Beach,NC,28469,165690.00
+ECD,Garney Construction,2025-10-03,True,Lakeland,FL,33815,74205.00
+ECE,"DEME Construction, LLC",2025-08-27,True,East Ellenton,FL,34222,40960.00
+ECG,Pat Bern Construction LLC,2025-08-28,True,Lake Havasu City,AZ,86403,70560.00
+ECH,Das-Co of Idaho,2025-08-28,True,​Nampa,ID,83687,9418.00
+ECI,"Reddico Construction Company, Inc.",2026-03-31,True,,,,2065760.00
+ECJ,"E.T. Mackenzie of Florida, INC.",2025-09-30,True,Bradenton,FL,34203,427240.00
+ECK,"Rickabaugh Pentecost Development, LLC",2026-03-05,True,Puyallup,WA,98371,34778.00
+ECL,Fortiline Waterworks,2026-05-19,True,Wilmington,NC,28401,561697.00
+ECM,Invertech Solutions LLC,2025-09-04,True,Fort Lauderdale,FL,33331,49270.00
+ECN,"Wal-Rose, Inc.",2025-09-05,True,St. Cloud,FL,34771,199746.00
+ECO,"Wal-Rose, Inc.",2026-01-20,True,St. Cloud,FL,34771,141375.00
+ECP,Hunter Contracting Company,2026-02-19,True,GILBERT,AZ,85233,176700.00
+ECQ,LJL Construction and Environmental,2025-09-09,True,,,,120330.00
+ECR,JR Davis Construction Company,2026-04-08,True,St. Cloud,FL,34772,360880.00
+ECS,"Boss Construction, Inc.",2025-09-11,True,Bellingham,WA,98226,7108.00
+ECT,Wilson Site & Utilities,2025-09-11,True,Palmetto,FL,34221,69600.00
+ECU,"Pinnacle Site Solutions, LLC",2025-09-11,True,Newberry,FL,32669,14090.00
+ECV,SYB Construction. Inc.,2025-09-11,True,Irving,TX,75039,331300.00
+ECW,Preston Pipelines Infrastructure LLC,2025-09-11,True,Milpitas,CA,95035,25693.00
+ECX,Turf Construction Company Inc,2025-09-12,True,Camarillo,CA,93012,111170.00
+ECY,"​HPS Mechanical, Inc.",2025-09-15,True,Bakersfield,CA,93307,66060.00
+ECZ,Honeycutt Construction Services,2026-03-03,True,Calabash,NC,28467,173660.00
+EDA,Brockman Site Development,2026-02-23,True,Kissimmee,FL,34746,217630.00
+EDB,"DEME Construction, LLC",2026-05-19,True,East Ellenton,FL,34222,132313.00
+EDC,"Rusty Plumbing Co., Inc",2025-09-17,True,Plant City,FL,33566,37100.00
+EDD,MO Construction,2025-09-17,True,Pensacola,FL,32534,26556.00
+EDE,MO Construction,2025-10-01,True,Pensacola,FL,32534,24422.00
+EDF,"PCL Construction, Inc.",2025-10-07,True,Fort Mohave,AZ,86462,108800.00
+EDG,Landmark Services of Southwest FL. Inc,2026-01-06,True,Sarasota,FL,34243,102110.00
+EDH,Hunter Contracting Company,2025-09-19,True,,,,49490.00
+EDI,GMZ Engineering Inc.,2025-09-22,True,Thousand Oaks,CA,​9136,232820.00
+EDJ,"BRW Contracting, Inc.",2025-09-22,True,,,,22830.00
+EDK,"DEME Construction, LLC",2025-09-22,True,East Ellenton,FL,34222,54310.00
+EDL,"TF Contracting Services, LLC",2025-10-24,True,Scottsdale,AZ,85255,179650.00
+EDM,AUI Inc,2025-10-01,True,Albuquerque,NM,87119,23120.00
+EDN,MGC Contractors,2026-04-06,True,Phoenix,AZ,85044,180678.00
+EDO,JR Davis Construction Company,2025-09-26,True,St. Cloud,FL,34772,278250.00
+EDP,Ralph Hodge Construction Company,2025-12-23,True,Wilson,NC,27894,39180.00
+EDQ,"E.T. Mackenzie of Florida, INC.",2025-09-30,True,Bradenton,FL,34203,26280.00
+EDR,Ash Excavating,2025-10-01,True,Washington,UT,84780,20220.00
+EDS,"J.B. Coxwell Contracting, Inc.",2025-10-28,True,,,,347740.00
+EDT,Trident Site Development​,2026-04-16,True,Mount Dora,FL,32756,137200.00
+EDU,L and K Contracting Co. Inc.,2025-10-02,True,Dothan,AL,36305,192944.00
+EDV,The Kearney Companies,2025-10-02,True,,,,74060.00
+EDW,"Navajo Pipelines, Inc.",2025-10-06,True,Sacramento,CA,95822,22400.00
+EDX,"Marlin Construction Company, Inc.​",2026-04-21,True,Winter Garden,FL,34787,200640.00
+EDY,"CK Contractor & Development, LLC",2025-10-08,True,West Palm Beach,FL,33407,17598.00
+EDZ,Arox Land Development​,2026-03-05,True,Parrish,FL,34219,119833.00
+EEA,Reyes Construction Inc.,2025-10-08,True,Pomona,CA,91766,13680.00
+EEB,"Gibbs & Register, Inc.",2025-10-22,True,Winter Garden,FL,34787,105280.00
+EEC,"KMS Construction of Central Florida, LLC",2025-10-10,True,Lake Helen,FL,32744,18550.00
+EED,"Gator Grading and Paving, LLC",2025-10-13,True,,,,27390.00
+EEE,Felix Construction,2025-10-14,True,,,,69740.00
+EEF,"Wharton-Smith, Inc",2025-10-15,True,Belleville,FL,34420,40570.00
+EEG,"JEA, Inc.",2025-11-03,True,Jacksonville,FL,32202,18985.00
+EEH,"Gutierrez Canales Engineering, PC",2026-05-19,True,Yuma,AZ,85365,406200.00
+EEI,"KE&G Construction, Inc.",2025-10-17,True,,,,56950.00
+EEJ,ARC Development Inc. ARC Development Inc,2025-12-05,True,Tampa,FL,33605,56560.00
+EEK,WD Site Development,2025-10-23,True,Kissimmee,FL,34746,183050.00
+EEL,Wilson Site & Utilities,2025-10-23,True,Palmetto,FL,34221,69030.00
+EEM,"Rusty Plumbing Co., Inc",2025-10-24,True,Plant City,FL,33566,21080.00
+EEN,Fox Metro Water Reclamation District,2025-12-03,True,Oswego,IL,60543,18330.00
+EEO,Landmark Services of Southwest FL. Inc,2025-10-30,True,Sarasota,FL,34243,22830.00
+EEP,"Central Site Development, LLC",2025-11-03,True,,,,103045.00
+EEQ,Garney Construction,2025-11-04,True,Lakeland,FL,33815,103554.00
+EER,"K.J. Woods Construction, Inc",2025-11-04,True,,,,17130.00
+EES,Assured Excavating INC,2025-11-05,True,,,,21580.00
+EET,Fortiline Waterworks,2025-11-05,True,Leland,NC,28451,67920.00
+EEU,"Mike Prlich and Sons, Inc",2025-11-06,True,,,,48180.00
+EEV,Target Construction Inc,2025-11-10,True,,,,13010.00
+EEW,The Briar Team,2026-05-04,True,St. Cloud,FL,34772,347140.00
+EEX,"Shipps Excavating, Inc.",2025-11-12,True,Venice,FL,34292,146700.00
+EEY,City of Sulphur Springs,2026-05-07,True,,,,320880.00
+EEZ,WJV General Contractors,2025-11-13,True,,,,22730.00
+EFA,Blue Ox Enterprises LLC,2025-11-14,True,,,,163040.00
+EFB,Andrews Construction Inc,2025-11-14,True,,,,7709.00
+EFC,Empire Pipe & Supply,2025-11-14,True,Birmingham,AL,35213,32836.00
+EFD,Bayside Community Church of Sarasota,2025-11-17,True,Bradenton,FL,34212,69780.00
+EFE,"JEA, Inc.",2025-11-18,True,Jacksonville,FL,32202,20350.00
+EFF,Monterey One Water,2025-11-18,True,,,,4070.00
+EFG,D.H. Griffin Infrastructure LLC,2026-01-08,True,,,,28650.00
+EFH,Cash Construction A Mas Tec Company,2026-03-24,True,Pflugerville,TX,78660,91720.00
+EFI,"RH Moore Company, Inc.",2025-11-20,True,Ocean Isle Beach,NC,28469,217629.00
+EFJ,SYB Construction. Inc.,2025-11-21,True,,,,210230.00
+EFK,Sausalito-Marin City Sanitary District,2025-11-25,True,Sausalito,CA,94965,6068.00
+EFL,Andrews Construction Inc,2026-01-08,True,,,,7836.00
+EFM,Borderland Construction,2026-04-06,True,,,,733580.00
+EFN,BHI Inc.,2026-02-09,True,Naples,UT,84079,1023640.00
+EFO,Arox Land Development​,2025-11-26,True,Parrish,FL,34219,17500.00
+EFP,C&M Road Builders,2025-12-01,True,Palmetto,FL,34221,83930.00
+EFQ,Loenbro LLC,2025-12-02,True,,,,611024.00
+EFR,United Brothers Development Corporation United Brothers Development Corp.,2025-12-02,True,,,,30800.00
+EFS,SanPik Inc,2025-12-03,True,Merritt Island,FL,32952,412925.00
+EFT,Blue Ox Enterprises LLC,2026-01-23,True,,,,215630.00
+EFU,Don Chapin Company,2026-03-20,True,,,,502153.00
+EFV,Southern Constructors Inc,2026-02-25,True,,,,200680.00
+EFW,Core & Main,2025-12-05,True,,,,18790.00
+EFX,"PM Construction & Rehab dba IPR South Central, LLC",2025-12-05,True,Sulphur Springs,TX,75482,108700.00
+EFY,Blue Ox Enterprises LLC,2026-03-04,True,,,,291040.00
+EFZ,Southeastern Site Development Inc.,2025-12-09,True,,,,17280.00
+EGA,"Reynolds Construction, LLC",2026-02-18,True,,,,40945.00
+EGB,"DEME Construction, LLC",2026-01-07,True,East Ellenton,FL,34222,78810.00
+EGC,Core & Main,2026-04-29,True,,,,166588.00
+EGD,Honeycutt Construction Services,2025-12-15,True,Calabash,NC,28467,332470.00
+EGE,"Timber Mountain Construction, Inc. Timber Mountain Construction, Inc",2025-12-11,True,,,,34790.00
+EGF,Arrowmark LLC,2026-02-25,True,,,,353164.00
+EGG,"Filanc Construction Company, Inc",2025-12-30,True,,,,44810.00
+EGH,W.M. Lyles Co.,2026-04-27,True,Nipomo,CA,93444,184232.00
+EGI,Wynn Site Development,2025-12-16,True,,,,37120.00
+EGJ,Core & Main,2026-04-02,True,Galena Park,TX,77547,58630.00
+EGK,Acadia Services LLC,2025-12-18,True,,,,48270.00
+EGL,Blackall Underground Construction LLC,2025-12-22,True,St. Cloud,FL,34771,42210.00
+EGM,Hunter Contracting Company,2025-12-23,True,GILBERT,AZ,85233,92747.00
+EGN,"Boss Construction, Inc.",2025-12-30,True,Bellingham,WA,98226,51832.00
+EGO,SanPik Inc,2025-12-31,True,Merritt Island,FL,32952,114030.00
+EGP,Barnett Contracting Inc.,2026-01-05,True,,,,21445.00
+EGQ,"Flippo Construction Company, Inc Flippo Construction Company, Inc.",2026-04-29,True,,,,42430.00
+EGR,Aqros LLC,2026-01-15,True,,,,21500.00
+EGS,"JEA, Inc.",2026-01-07,True,Jacksonville,FL,32202,24340.00
+EGT,"D.T. Utility Contractors, Inc.",2026-01-08,True,Fort Worth,TX,76179,26070.00
+EGU,"RH Moore Company, Inc.",2026-02-26,True,Ocean Isle Beach,NC,28469,158530.00
+EGV,Bearing Point Construction LLC,2026-01-12,True,,,,21720.00
+EGW,Premier Civil Contracting LLC,2026-01-16,True,,,,24380.00
+EGX,Woodruff & Sons,2026-03-31,True,Parrish,FL,34219,141754.00
+EGY,"State Utility Contractors, Inc",2026-03-11,True,Leland,NC,28415,50468.00
+EGZ,Ripa & Associates,2026-01-16,True,Parrish,FL,34219,109040.00
+EHA,Phillips Heavy Inc.,2026-04-14,True,,,,180900.00
+EHB,Insituform Technologies LLC,2026-01-20,True,,,,100780.00
+EHC,B&F Contracting Inc.,2026-03-06,True,Phoenix,AZ,85033,378980.00
+EHD,Florida Civil LLC,2026-01-20,True,,,,49300.00
+EHE,C&F Construction LLC,2026-01-23,True,,,,73000.00
+EHF,"Gator Grading and Paving, LLC",2026-01-23,True,,,,76780.00
+EHG,"Gator Grading and Paving, LLC",2026-01-23,True,,,,146080.00
+EHH,Phaze Concrete Inc.,2026-01-23,True,,,,113825.00
+EHI,C&M Road Builders,2026-01-26,True,Palmetto,FL,34221,153770.00
+EHJ,Preston Pipelines Infrastructure LLC,2026-01-26,True,Milpitas,CA,95035,20740.00
+EHK,"King Construction Services, Inc.",2026-01-26,True,,,,346440.00
+EHL,Firethorn Inc.,2026-02-13,True,,,,50942.00
+EHM,CCC Site Development,2026-04-06,True,,,,92240.00
+EHN,Core & Main,2026-05-15,True,Galena Park,TX,77547,32600.00
+EHO,Molina Contracting Inc,2026-01-29,True,,,,17530.00
+EHP,American West Construction,2026-01-30,True,,,,93160.00
+EHQ,Taylor Engineering,2026-01-30,True,,,,22330.00
+EHR,Boyer Inc.,2026-02-23,True,,,,18764.00
+EHS,Gainesville Regional Utilities,2026-02-03,True,,,,8800.00
+EHT,"JEA, Inc.",2026-02-03,True,Jacksonville,FL,32202,18780.00
+EHU,C&L Water Solutions,2026-02-05,True,,,,32680.00
+EHV,ARC Development Inc. ARC Development Inc,2026-02-05,True,,,,22990.00
+EHX,Buckhead Trails II CDD,2026-02-27,True,,,,807110.00
+EHY,Globestone Construction LLC,2026-02-10,True,,,,46580.00
+EHZ,"JEA, Inc.",2026-02-10,True,Jacksonville,FL,32202,49460.00
+EIA,"MJC Land Development, LLC.",2026-03-23,True,Port Saint Lucie,FL,34987,271614.00
+EIB,"PCL Construction, Inc.",2026-04-14,True,Fort Mohave,AZ,86462,72776.00
+EIC,Drewry Site Development LLC,2026-03-09,True,,FL,,81600.00
+EID,"Danus Utilities, Inc.",2026-02-13,True,,,,265070.00
+EIE,"STAline Waterworks, Inc.",2026-02-18,True,Bradenton,FL,34208,72180.00
+EIF,PMF Inc.,2026-02-18,True,,,,10960.00
+EIG,Circle H Contractors,2026-02-18,True,,,,175696.00
+EIH,Premier Civil Contracting LLC,2026-02-18,True,,,,30119.00
+EII,Autry Construction Co.,2026-02-19,True,Raleigh,NC,27603,2458420.00
+EIJ,C2474 Extreme Excavating Inc,2026-05-14,True,,,,43785.00
+EIK,Brockman Site Development,2026-02-23,True,Kissimmee,FL,34746,190150.00
+EIL,PAP LLC,2026-02-23,True,,,,22600.00
+EIM,DPE Construction Inc.,2026-03-25,True,,,,50665.00
+EIN,C&F Construction LLC,2026-02-24,True,,,,40000.00
+EIO,HD Fowler Co.,2026-02-24,True,,,,36983.00
+EIP,Gainesville Regional Utilities,2026-03-02,True,,,,18320.00
+EIQ,Hunter Contracting Company,2026-05-18,True,Mesa,AZ,85215,82570.00
+EIR,Redford Construction,2026-02-27,True,,,,102820.00
+EIS,One Stop Housing Development and Construction C One Stop Housing Development and Construction,2026-03-24,True,Bradenton,FL,34208,73400.00
+EIT,"KE&G Construction, Inc.",2026-03-03,True,Marana,AZ,85653,14908.00
+EIU,"ARB, INC.",2026-03-02,True,Modesto,CA,95351,33280.00
+EIV,Ferguson Enterprises LLC,2026-03-02,True,Burgaw,NC,28425,96960.00
+EIW,JMHC Inc,2026-04-02,True,St. Cloud,FL,34771,269095.00
+EIX,The Briar Team,2026-03-04,True,,,,243810.00
+EIY,C12665 Experts Underground Solutions,2026-03-04,True,Sugarland,TX,77479,27960.00
+EIZ,Turf Construction Company Inc,2026-03-10,True,Camarillo,CA,93012,3300.00
+EJA,Castelli Construction LLC,2026-03-13,True,,,,116695.00
+EJB,C8013 Principal Service LTD,2026-03-05,True,Cleveland,TX,77328,83770.00
+EJC,DCS Contracting,2026-03-05,True,Apache Junction,AZ,85117,116126.00
+EJD,"DEME Construction, LLC",2026-03-06,True,,,,177805.00
+EJE,Taylor Engineering,2026-03-06,True,Yuma,AZ,85365,63540.00
+EJF,Brown Construction of Northwest Florida,2026-03-06,True,,,,111950.00
+EJG,"E.T. Mackenzie of Florida, INC.",2026-03-11,True,,,,131330.00
+EJH,Pacific Engineering Projects LTD Pacific Engineering Projects Ltd,2026-03-13,True,Saipan,,,268333.00
+EJI,Assured Excavating INC,2026-03-10,True,,,,393140.00
+EJJ,Fire Line Services Inc,2026-03-10,True,Flower Mound,TX,75028,1158670.00
+EJK,Taylor Excavation,2026-05-06,True,Washington City,UT,84064,142150.00
+EJL,"B & W Utilities, Inc.",2026-03-11,True,Milton,FL,32583,462270.00
+EJM,"CCL Contracting, Inc.",2026-03-13,True,Moreno Valley,CA,92553,144002.00
+EJN,Olson Precast of Arizona,2026-05-21,True,Phoenix,AZ,85009,42810.00
+EJO,Blue Ox Enterprises LLC,2026-03-20,True,,,,791029.00
+EJP,WD Site Development,2026-03-13,True,Kissimmee,FL,34744,225000.00
+EJQ,"TLC Diversified, Inc",2026-03-19,True,Bradenton,FL,34208,195390.00
+EJR,LM McLamb & Son Construction,2026-03-18,True,,,,180659.00
+EJS,"Graber Excavating, Inc.",2026-03-17,True,Bradenton,FL,34211,57830.00
+EJT,Cathcart Construction Company Cathcart Construction Company LLC,2026-04-24,True,Palm Bay,FL,32905,67133.00
+EJU,"C&A Construction, LLC",2026-05-12,True,San Antonio,TX,78224,225030.00
+EJV,B&F Contracting Inc.,2026-03-20,True,,,,162870.00
+EJW,"PCL Construction, Inc.",2026-03-19,True,Fort Mohave,AZ,86462,198810.00
+EJX,Doganiero Construction LLC,2026-03-20,True,Plant City,FL,33566,482709.00
+EJY,"Michigan Pipe & Valve-GR, Inc.",2026-03-23,True,Portage,MI,49002,76770.00
+EJZ,Olson Precast of Arizona,2026-03-24,True,Phoenix,AZ,85009,36240.00
+EKA,AIMS Companies,2026-03-23,True,,,,79710.00
+EKB,"C5321 Canyon Springs Enterprises, Inc.",2026-03-24,True,,,,1441378.00
+EKC,Core & Main,2026-05-21,True,Galena Park,TX,77547,57903.00
+EKD,"DEME Construction, LLC",2026-03-26,True,,,,57290.00
+EKE,"Rummel Construction, Inc.",2026-05-19,True,Gilbert,AZ,85142,259635.00
+EKF,Olson Precast of Arizona,2026-03-30,True,Phoenix,AZ,85009,6560.00
+EKG,"Wharton-Smith, Inc",2026-03-27,True,Belleville,FL,34420,567793.00
+EKH,Bearing Point Construction LLC,2026-04-16,True,Bradenton,FL,34209,17760.00
+EKI,Olson Precast of Arizona,2026-03-30,True,Phoenix,AZ,85009,92270.00
+EKJ,"J.B. Coxwell Contracting, Inc.",2026-04-27,True,Jacksonville,FL,32208,748260.00
+EKK,"Step Construction, Inc.",2026-03-31,True,Maxton,NC,28364,19040.00
+EKL,Ash Creek Special Service District,2026-03-31,True,Hurricane,UT,84737,10320.00
+EKM,Olson Precast of Arizona,2026-04-02,True,Phoenix,AZ,85009,209950.00
+EKN,Cathcart Construction Company Cathcart Construction Company LLC,2026-04-02,True,Palm Bay,FL,32905,55277.00
+EKO,Toll Excavation,2026-04-03,True,Boise,ID,83706,31650.00
+EKP,Olson Precast of Arizona,2026-04-06,True,Phoenix,AZ,85009,21320.00
+EKQ,Loenbro LLC,2026-04-07,True,,,,19610.00
+EKR,"MJC Land Development, LLC.",2026-05-21,True,Port Saint Lucie,FL,34987,487509.00
+EKS,JMHC Inc,2026-04-08,True,St. Cloud,FL,34771,198405.00
+EKT,Olson Precast of Arizona,2026-04-10,True,Phoenix,AZ,85009,23640.00
+EKU,Brown Construction of Northwest Florida,2026-04-10,True,Pace,FL,32571,22680.00
+EKV,W.R. Mitchell Construction,2026-04-10,True,Saraland,AL,36571,305680.00
+EKW,Garney Construction,2026-04-14,True,Portsmouth,VA,23703,27685.00
+EKX,Core & Main,2026-04-13,True,Galena Park,TX,77547,8875.00
+EKY,Globe Contractors,2026-04-16,True,Wind Point,WI,53402,20940.00
+EKZ,B&F Contracting Inc.,2026-05-14,True,Chandler,AZ,85248,469795.00
+ELA,Garney Construction,2026-04-15,True,Portsmouth,VA,23703,126000.00
+ELB,"Kamminga & Roodvoets, Inc.",2026-04-16,True,Lakeland,FL,33811,286396.00
+ELC,"Wayne Crouse, Inc.",2026-04-17,True,Pittsburgh,PA,15233,445440.00
+ELD,"SheDigs It, LLC",2026-05-13,True,Kansas City,KS,,142774.00
+ELE,DPE Construction Inc.,2026-04-17,True,,,,112040.00
+ELF,City of Seward - NE,2026-04-20,True,Seward,NE,68434,191906.00
+ELG,"Taylor Northwest, LLC",2026-04-20,True,,,,33615.00
+ELH,Mitchell & Stark Construction,2026-04-21,True,Fort Myers,FL,33913,46550.00
+ELI,Invertech Solutions LLC,2026-04-21,True,Fort Lauderdale,FL,33331,42983.00
+ELJ,City of Fresno Wastewater Management,2026-04-22,True,Fresno,CA,93706,6746.00
+ELK,"Graber Excavating, Inc.",2026-04-23,True,Bradenton,FL,34211,37730.00
+ELM,Garney Construction,2026-05-15,True,Portsmouth,VA,23703,75490.00
+ELN,South Florida Grading Land Development,2026-04-24,True,Deltona,FL,32725,17606.00
+ELO,Palm Engineering Construction Company,2026-04-24,True,Lemon Grove,CA,91945,47990.00
+ELP,"Michigan Pipe & Valve-GR, Inc.",2026-04-24,True,Rockford,MI,49341,28990.00
+ELQ,Castelli Construction LLC,2026-04-24,True,,,,22700.00
+ELR,Space Exploration Technologies Corp.,2026-04-27,True,Brownsville,TX,78521,195226.00
+ELS,Core & Main,2026-04-29,True,Galena Park,TX,77547,69850.00
+ELT,Olson Precast of Arizona,2026-04-28,True,Phoenix,AZ,85009,427768.94
+ELU,"JEA, Inc.",2026-04-29,True,,,,22898.00
+ELV,"Jon M. Hall Company, LLC",2026-05-08,True,,,,370670.00
+ELW,Olson Precast of Arizona,2026-04-30,True,Phoenix,AZ,85009,8400.00
+ELX,"J.B. Coxwell Contracting, Inc.",2026-05-07,True,Jacksonville,FL,32208,28564.00
+ELY,SiteTrax Inc SiteTrax Inc.,2026-04-30,True,Myakka City,FL,34251,51380.00
+ELZ,Ferguson Enterprises LLC,2026-05-04,True,Burgaw,NC,28425,30720.00
+EMA,Arox Land Development​,2026-05-04,True,Parrish,FL,34219,63066.00
+EMB,Corcel Corp.,2026-05-05,True,,,,35740.00
+EMC,"TSS Civil, LLC",2026-05-06,True,Orlando,FL,32803,28620.00
+EMD,Pokrajac Corporaton Pokrajac Corporation,2026-05-06,True,Reno,NV,89506,31160.00
+EME,Mozingo Construction,2026-05-06,True,Oliverhurst,CA,95961,57040.00
+EMF,"Kamminga & Roodvoets, Inc.",2026-05-08,True,Lakeland,FL,33811,49400.00
+EMG,Alder Construction Co,2026-05-11,True,Payson,UT,84651,176905.00
+EMH,Don Chapin Company,2026-05-11,True,San Juan Bautista,CA,95045,17360.00
+EMI,Double D Pipeline,2026-05-12,True,Temecula,CA,92590,28900.00
+EMJ,C2688 Core and Main,2026-05-12,True,,,,78146.00
+EMK,AIMS Companies,2026-05-13,True,Phoenix,AZ,85034,73553.00
+EMM,"J&L Construction, LLC",2026-05-14,True,Collin,TX,75002,76330.00
+EMN,"TLC Company, Inc.",2026-05-14,True,Albuquerque,NM,87151,22160.00
+EMO,Assured Excavating INC,2026-05-15,True,St. Cloud,FL,34772,179530.00
+EMP,RW Jones Heavy Construction​,2026-05-18,True,Weatherford,TX,76088,184287.00
+EMQ,B&F Contracting Inc.,2026-05-18,True,Chandler,AZ,85248,20983.00
+EMR,Watson Construction Company LLC,2026-05-18,True,,,,66960.00
+EMS,The Kearney Companies,2026-05-18,True,Plant City,FL,33566,412566.00
+EMT,"Blackwater Construction Services, LLC",2026-05-19,True,Gainesville,FL,32608,13387.00
+EMU,Mountain Cascade of Texas LLC,2026-05-19,False,Burleson,TX,76028,219720.00
+EMV,Olson Precast of Arizona,2026-05-21,True,Phoenix,AZ,85009,10520.00
