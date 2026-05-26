@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+
+# Generated output folders (too large for GitHub)
+BOM-Structure-Detail/output/
+Extracting-BOM-SharePoint/output/
+Extracting-M-Drive/output/
