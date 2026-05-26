@@ -21,6 +21,8 @@ import os
 import re
 import sys
 import json
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 _BASE = os.path.dirname(os.path.abspath(__file__))
@@ -55,6 +57,11 @@ SP_YEAR_CONFIG = {
 }
 
 SKIP_FOLDERS = {"forms", "plugin_data", "robotinterface", "__macosx", "antiquated files"}
+
+SP_MAX_WORKERS     = 12  # SharePoint Graph API calls — I/O-bound, safe up to ~20
+MDRIVE_MAX_WORKERS =  6  # M: Drive SMB reads — lower to avoid hammering the NAS
+
+_token_lock = threading.Lock()
 
 _JOB_FOLDER_RE = re.compile(r"^([A-Ea-e][A-Za-z0-9]{2})\s*[-–—]\s*(.+)$")
 
@@ -612,32 +619,38 @@ def run_mdrive(all_records):
             print(f"  PermissionError reading {root}: {e}")
             continue
 
-        print(f"  {len(job_folders)} folders")
+        n = len(job_folders)
+        print(f"  {n} folders")
 
-        for job_path in job_folders:
+        def _mdrive_worker(job_path):
             fname = job_path.name.strip()
             m = _JOB_FOLDER_RE.match(fname)
             if not m:
-                continue
-            job_code = m.group(1).upper()
+                return None
+            jc = m.group(1).upper()
+            raw    = process_mdrive_job(job_path, jc, year)
+            record = build_record(raw)
+            return jc, record, raw
 
+        done = 0
+        with ThreadPoolExecutor(max_workers=MDRIVE_MAX_WORKERS) as pool:
+            futures = {pool.submit(_mdrive_worker, jp): jp.name for jp in job_folders}
             try:
-                raw    = process_mdrive_job(job_path, job_code, year)
-                record = build_record(raw)
-
-                docs = ",".join(raw["documents_found"]) or "none"
-                if raw["parse_errors"]:
-                    print(f"  [{year}] {job_code}  WARN  {raw['parse_errors'][0][:60]}")
-                else:
-                    print(f"  [{year}] {job_code}  [{docs}]")
-
-                all_records[job_code] = record
-
+                for fut in as_completed(futures):
+                    result = fut.result()
+                    if result is None:
+                        continue
+                    done += 1
+                    job_code, record, raw = result
+                    docs = ",".join(raw["documents_found"]) or "none"
+                    if raw["parse_errors"]:
+                        print(f"  [{year}] {done}/{n}  {job_code}  WARN  {raw['parse_errors'][0][:60]}", flush=True)
+                    else:
+                        print(f"  [{year}] {done}/{n}  {job_code}  [{docs}]", flush=True)
+                    all_records[job_code] = record
             except KeyboardInterrupt:
                 print("\nInterrupted.")
                 raise
-            except Exception as e:
-                print(f"  [{year}] {job_code}  ERROR  {type(e).__name__}: {e}")
 
         print()
 
@@ -666,29 +679,44 @@ def run_sharepoint(all_records, token):
             job_code = fm.group(1).upper() if fm else item["name"].strip().upper()
             job_folders.append((job_code, item))
 
-        print(f"  {len(job_folders)} job folders\n")
+        n = len(job_folders)
+        print(f"  {n} job folders\n")
 
-        for i, (job_code, folder_item) in enumerate(job_folders, 1):
-            token = ensure_fresh_token() or token
-            print(f"  [{year}] {i}/{len(job_folders)}  {job_code} ...", end=" ", flush=True)
+        token_box = [token]
+
+        def _sp_worker(args):
+            job_code, folder_item = args
+            with _token_lock:
+                token_box[0] = ensure_fresh_token() or token_box[0]
+                t = token_box[0]
             try:
-                raw    = process_sp_job(token, drive_id, year, job_code, folder_item["id"], use_ncf)
+                raw    = process_sp_job(t, drive_id, year, job_code, folder_item["id"], use_ncf)
                 record = build_record(raw)
+                return job_code, record, raw, None
+            except Exception as e:
+                return job_code, None, {"documents_found": [], "parse_errors": []}, e
 
-                docs = ",".join(raw["documents_found"]) or "none"
-                if raw["parse_errors"]:
-                    print(f"WARN  {raw['parse_errors'][0][:60]}", flush=True)
-                else:
-                    print(f"OK  [{docs}]", flush=True)
-
-                all_records[job_code] = record
-
+        done = 0
+        with ThreadPoolExecutor(max_workers=SP_MAX_WORKERS) as pool:
+            futures = {pool.submit(_sp_worker, item): item[0] for item in job_folders}
+            try:
+                for fut in as_completed(futures):
+                    done += 1
+                    job_code, record, raw, err = fut.result()
+                    if err:
+                        print(f"  [{year}] {done}/{n}  {job_code}  ERROR  {type(err).__name__}: {err}", flush=True)
+                    elif raw["parse_errors"]:
+                        print(f"  [{year}] {done}/{n}  {job_code}  WARN  {raw['parse_errors'][0][:60]}", flush=True)
+                    else:
+                        docs = ",".join(raw["documents_found"]) or "none"
+                        print(f"  [{year}] {done}/{n}  {job_code}  OK  [{docs}]", flush=True)
+                    if record:
+                        all_records[job_code] = record
             except KeyboardInterrupt:
                 print("\nInterrupted — saving partial results...")
                 raise
-            except Exception as e:
-                print(f"ERROR  {type(e).__name__}: {e}", flush=True)
 
+        token = token_box[0]
         print()
 
 
