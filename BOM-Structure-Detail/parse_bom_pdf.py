@@ -252,9 +252,14 @@ def _find_structure_name(text):
         stripped = line.strip()
         if not stripped:
             continue
+        if any(p.search(stripped) for p in _NON_STRUCTURE_PATTERNS):
+            continue
         for pat in _STRUCTURE_PATTERNS:
-            if pat.search(stripped):
-                return re.split(r"\s+Ship Date", stripped, flags=re.IGNORECASE)[0].strip()
+            m = pat.search(stripped)
+            if m:
+                prefix = stripped[:m.start()]
+                candidate = stripped[m.start():] if re.search(r":\s*$", prefix) else stripped
+                return re.split(r"\s+Ship Date", candidate, flags=re.IGNORECASE)[0].strip()
     return ""
 
 
@@ -605,9 +610,16 @@ def parse_shop_drawing_pdf(pdf_bytes):
                 stripped = line.strip()
                 if not stripped:
                     continue
-                if not any(p.search(stripped) for p in _NON_STRUCTURE_PATTERNS) and \
-                        any(p.search(stripped) for p in _STRUCTURE_PATTERNS):
-                    structure_name = re.split(r"\s+Ship Date", stripped, flags=re.IGNORECASE)[0].strip()
+                if any(p.search(stripped) for p in _NON_STRUCTURE_PATTERNS):
+                    continue
+                for pat in _STRUCTURE_PATTERNS:
+                    m = pat.search(stripped)
+                    if m:
+                        prefix = stripped[:m.start()]
+                        candidate = stripped[m.start():] if re.search(r":\s*$", prefix) else stripped
+                        structure_name = re.split(r"\s+Ship Date", candidate, flags=re.IGNORECASE)[0].strip()
+                        break
+                if structure_name:
                     break
 
             if not structure_name:

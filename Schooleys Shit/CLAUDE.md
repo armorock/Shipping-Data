@@ -121,9 +121,9 @@ bom_row_count, dispatch_row_count, shipping_row_count
 
 ### `jl_sharepoint_reader.py`
 
-A third script that reads raw documents directly from the 4 SharePoint year sites (2023–2026)
-using the Microsoft Graph API. Parses BOM XML/PDF, NCF/ECF docx, and Shop Drawing PDFs per job
-folder and produces `output/jobcode_db_sharepoint.json` with cross-document comparison fields:
+Reads raw documents directly from the 4 SharePoint year sites (2023–2026) using the Microsoft
+Graph API. Parses BOM XML/PDF, NCF/ECF docx, and Shop Drawing PDFs per job folder and produces
+`output/jobcode_db_sharepoint.json` with cross-document comparison fields:
 - `location_bom` vs `location_ncf` + `location_conflict`
 - `contractor_bom` vs `customer_ncf` + `contractor_customer_match`
 - `structure_count_bom` vs `structure_count_shop_drawing` + `structure_count_conflict`
@@ -133,6 +133,38 @@ Requires auth via Microsoft Graph (device-code OAuth, token cached at `~/.claude
 Infrastructure lives in `../BOM-Structure-Detail/` (graph_client.py, sharepoint_client.py,
 parse_bom_pdf.py) — the script adds that path to sys.path at startup.
 
+### `jl_mdrive_reader.py`
+
+Combines M: Drive (2016–2022, local network) and SharePoint (2023–2026, Graph API) into a single
+pass, producing `output/jobcode_db_mdrive.json`. Intended as an 8th source for `jl_build_jobcode_db.py`
+(integration not yet wired). Year priority: oldest processed first, newest year wins on collision.
+
+Same output schema as `jobcode_db_sharepoint.json`. Key differences:
+
+- M: Drive years require a `_Release` subfolder inside each job folder — jobs without one produce
+  an empty record (planned fix: fall back to scanning the full job folder)
+- NCF parsing disabled for all M: Drive years and for SharePoint 2023
+- Contractor extracted from PO filename on M: Drive (no download needed)
+- Early years (2016–2018) often have only QUOTE files — no BOM → empty location/contractor
+  (planned fix: parse quotes as fallback)
+
+Requires the same Graph auth as `jl_sharepoint_reader.py`.
+
+### `parse_bom_pdf.py` — structure name extraction fix (2026-05-26)
+
+Applied to both `BOM-Structure-Detail/parse_bom_pdf.py` and `Extracting-M-Drive/parse_bom_pdf.py`.
+
+`_find_structure_name` and `parse_shop_drawing_pdf` previously took the entire pdfplumber layout
+line as the structure name. With `layout=True`, two-column shop drawing headers merge into one line:
+
+```
+PO Box 60006               Structure:   SSMH #1
+```
+
+The fix: when the pattern match is preceded by a colon (a label), extract from the match position
+only. When the line IS the structure name (no preceding colon), take the whole line. This gives
+clean names like "SSMH #1" that match NetSuite and other systems.
+
 ### How to run
 
 ```
@@ -140,6 +172,7 @@ cd Jacks_Data_Improvement_Plans
 python jl_build_jobcode_db.py       # step 1 — builds output/jobcode_db.json
 python jl_plant_audit.py            # step 2 — builds the two Excel reports
 python jl_sharepoint_reader.py      # optional — builds output/jobcode_db_sharepoint.json
+python jl_mdrive_reader.py          # optional — builds output/jobcode_db_mdrive.json (M: Drive + SP)
 ```
 
 ### How to use the JSON in Excel (Power Query)
