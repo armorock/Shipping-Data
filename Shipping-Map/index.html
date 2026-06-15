@@ -17,29 +17,83 @@
   }
   #titlebar h1 { font-size: 18px; margin: 0; color: #BC2035; white-space: nowrap; }
   #livecount { font-size: 15px; font-weight: 600; color: #333; }
-  #notmapped { font-size: 12px; color: #888; margin-left: auto; white-space: nowrap; }
-  #map { position: absolute; top: 52px; bottom: 0; left: 0; right: 0; }
+  #notmapped { font-size: 12px; color: #888; white-space: nowrap; }
+  .tbbtn {
+    font-size: 12px; font-weight: 600; color: #BC2035; background: #fff;
+    border: 1px solid #BC2035; border-radius: 5px; padding: 5px 10px; cursor: pointer; white-space: nowrap;
+  }
+  #kpis {
+    position: absolute; top: 52px; left: 0; right: 0; height: 64px; z-index: 1090;
+    background: #f7f7f7; border-bottom: 1px solid #e2e2e2; display: flex; gap: 1px; overflow: hidden;
+  }
+  .kpi { flex: 1; background: #fff; display: flex; flex-direction: column; justify-content: center; padding: 6px 14px; min-width: 0; }
+  .kpi .val { font-size: 22px; font-weight: 700; color: #BC2035; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .kpi .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .kpi .val small { font-size: 13px; font-weight: 600; }
+  #map { position: absolute; top: 116px; bottom: 0; left: 0; right: 0; }
   #panel {
-    position: absolute; top: 64px; left: 10px; z-index: 1000; background: #fff;
+    position: absolute; top: 126px; left: 10px; z-index: 1000; background: #fff;
     border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.25); padding: 12px;
-    width: 215px; max-height: calc(100% - 90px); overflow-y: auto; font-size: 13px;
+    width: 215px; max-height: calc(100% - 200px); overflow-y: auto; font-size: 13px;
   }
   #panel h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: #888; margin: 12px 0 4px; }
   #panel h2:first-child { margin-top: 0; }
   #panel label { display: flex; align-items: center; gap: 6px; padding: 2px 0; cursor: pointer; }
   .swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid #999; flex: none; }
   #search { width: 100%; box-sizing: border-box; padding: 6px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px; }
+  select.dd-native { width: 100%; box-sizing: border-box; padding: 6px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px; background: #fff; }
+  details.dd { border: 1px solid #ccc; border-radius: 5px; background: #fff; }
+  details.dd > summary {
+    list-style: none; cursor: pointer; padding: 6px 8px; font-size: 13px; user-select: none;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  details.dd > summary::-webkit-details-marker { display: none; }
+  details.dd > summary::after { content: "\25BE"; color: #888; }
+  details.dd[open] > summary::after { content: "\25B4"; }
+  .ddbody { padding: 4px 8px 8px; border-top: 1px solid #eee; max-height: 220px; overflow-y: auto; }
   .linkrow { font-size: 12px; margin: 4px 0; }
   .linkrow a { color: #BC2035; cursor: pointer; text-decoration: underline; margin-right: 10px; }
   #legend {
-    position: absolute; bottom: 22px; right: 10px; z-index: 1000; background: #fff;
-    border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.25); padding: 10px 12px; font-size: 12px;
+    position: absolute; bottom: 64px; right: 10px; z-index: 1000; background: #fff;
+    border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.25); padding: 10px 12px; font-size: 12px; max-width: 190px;
   }
+  #legend .keyrow { display: flex; align-items: center; gap: 6px; margin-top: 3px; }
   #legend .ramp { display: flex; height: 12px; border-radius: 3px; overflow: hidden; margin: 4px 0; }
   #legend .ramp div { flex: 1; }
   #legend .ramplabels { display: flex; justify-content: space-between; color: #666; }
-  #legend .plantrow { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
-  #legend .note { color: #888; margin-top: 6px; max-width: 170px; }
+  #legend .note { color: #888; margin-top: 6px; }
+  #legend hr { border: none; border-top: 1px solid #eee; margin: 8px 0; }
+  #chorolegend { display: none; }
+  #stats {
+    position: absolute; top: 126px; right: 10px; z-index: 1000; background: #fff;
+    border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.25); padding: 12px; width: 240px; font-size: 13px;
+    max-height: calc(100% - 200px); overflow-y: auto;
+  }
+  #stats h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: #888; margin: 0 0 6px; }
+  #stats .sec { margin-bottom: 14px; }
+  #stats .sec:last-child { margin-bottom: 0; }
+  #donut { display: flex; align-items: center; gap: 10px; }
+  #donut .dlegend { font-size: 11px; line-height: 1.5; }
+  #donut .dlegend .keyrow { display: flex; align-items: center; gap: 5px; }
+  #donut .dlegend .dot { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+  table.lb { width: 100%; border-collapse: collapse; }
+  table.lb td { padding: 2px 4px; cursor: pointer; }
+  table.lb td:last-child { text-align: right; font-variant-numeric: tabular-nums; color: #333; }
+  table.lb tr:hover td { background: #fbe9ec; }
+  table.lb tr.sel td { background: #BC2035; color: #fff; font-weight: 600; }
+  .lbwrap { max-height: 260px; overflow-y: auto; }
+  #barchart svg rect { cursor: pointer; }
+  #timeline {
+    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 1000;
+    background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    padding: 8px 14px; display: flex; align-items: center; gap: 12px; font-size: 13px;
+  }
+  #playbtn {
+    width: 30px; height: 30px; border-radius: 50%; border: none; background: #BC2035; color: #fff;
+    font-size: 13px; cursor: pointer; flex: none;
+  }
+  #yearslider { width: 230px; accent-color: #BC2035; }
+  #yearlabel { font-weight: 600; color: #333; min-width: 86px; }
   .pin svg { overflow: visible; filter: drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
   .mhb-cluster {
     background: #BC2035; color: #fff; border-radius: 50%; border: 3px solid rgba(188,32,53,.35);
@@ -50,7 +104,6 @@
   .popup h3 { margin: 0 0 4px; font-size: 14px; color: #BC2035; }
   .popup table { border-collapse: collapse; margin-top: 6px; }
   .popup td { padding: 1px 8px 1px 0; vertical-align: top; }
-  .popup .comp { margin-top: 6px; border-top: 1px solid #eee; padding-top: 4px; }
   .popup .approx { color: #c00; font-style: italic; }
   .leaflet-control-attribution { font-size: 10px; }
 </style>
@@ -59,49 +112,122 @@
 <div id="titlebar">
   <h1>Armorock MHB Bases Shipped</h1>
   <span id="livecount">Loading…</span>
+  <button id="exportbtn" class="tbbtn" style="margin-left:auto">Export PNG</button>
+  <button id="statstoggle" class="tbbtn">Hide charts</button>
   <span id="notmapped"></span>
 </div>
+<div id="kpis"></div>
 <div id="map"></div>
 <div id="panel">
   <h2>Search</h2>
   <input id="search" type="text" placeholder="job code / project / customer">
   <h2>Years</h2>
-  <div class="linkrow"><a id="yr-all">all</a><a id="yr-none">none</a></div>
-  <div id="years"></div>
+  <details class="dd" id="yeardd">
+    <summary id="yearsum">Years: All</summary>
+    <div class="ddbody">
+      <div class="linkrow"><a id="yr-all">all</a><a id="yr-none">none</a></div>
+      <div id="years"></div>
+    </div>
+  </details>
+  <h2>State</h2>
+  <select id="statesel" class="dd-native"></select>
   <h2>Plant</h2>
   <div id="plants"></div>
+  <h2>Display</h2>
+  <div id="display"></div>
   <h2>Location Precision</h2>
   <div id="precs"></div>
 </div>
+<div id="stats">
+  <div class="sec">
+    <h2>Bases by year</h2>
+    <div id="barchart"></div>
+  </div>
+  <div class="sec">
+    <h2>Diameter mix</h2>
+    <div id="donut"></div>
+  </div>
+  <div class="sec">
+    <h2>Top shipping states</h2>
+    <div class="lbwrap"><div id="leaderboard"></div></div>
+  </div>
+  <div class="sec">
+    <h2>Top customers</h2>
+    <div class="lbwrap"><div id="customerboard"></div></div>
+  </div>
+</div>
 <div id="legend">
-  <b>Year shipped</b>
-  <div class="ramp" id="legendramp"></div>
-  <div class="ramplabels"><span>2014</span><span>2026</span></div>
+  <b>Pin color = location precision</b>
+  <div class="keyrow"><span class="swatch" style="background:#D32F2F"></span>Zip code (precise)</div>
+  <div class="keyrow"><span class="swatch" style="background:#F57C00"></span>City (moderate)</div>
+  <div class="keyrow"><span class="swatch" style="background:#9E9E9E"></span>State only (approximate)</div>
+  <hr>
+  <b>Pin shape = plant</b>
   <div id="legendplants"></div>
-  <div class="note">Pin shape = plant. <span style="color:#0873BB;font-weight:600;">Blue</span> pins = state-level only (approximate). Red pins = zip or city precise.</div>
+  <div id="chorolegend">
+    <hr>
+    <b>State heat = bases shipped</b>
+    <div class="ramp" id="legendramp"></div>
+    <div class="ramplabels"><span>0</span><span id="choromaxlabel"></span></div>
+  </div>
+</div>
+<div id="timeline">
+  <button id="playbtn" title="Play timeline">&#9654;</button>
+  <input id="yearslider" type="range" min="2014" max="2026" value="2026" step="1">
+  <span id="yearlabel">All years</span>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+<script src="https://unpkg.com/dom-to-image-more@3.3.0/dist/dom-to-image-more.min.js"></script>
 <script>
 const YEARS = [];
 for (let y = 2014; y <= 2026; y++) YEARS.push(y);
-const RAMP      = ['#FDE5E8','#F9C9CF','#F3AAB4','#EC8B99','#E46C7F','#DB4E66','#CE3550','#BC2035','#A21B2D','#881725','#6E121D','#540D16','#3B080E'];
-const RAMP_APPROX = ['#DBEFFE','#B6DFFC','#91CFF9','#6CBFF7','#47AFF5','#229EF2','#0A8AE0','#0873BB','#065C96','#044571','#022E4C','#011727','#000B13'];
-const yearColor       = y => RAMP      [Math.min(Math.max(y - 2014, 0), RAMP.length - 1)];
-const yearColorApprox = y => RAMP_APPROX[Math.min(Math.max(y - 2014, 0), RAMP_APPROX.length - 1)];
+
+const PREC_COLORS = { 0: '#D32F2F', 1: '#F57C00', 2: '#9E9E9E' };
+const CHORO = ['#FEF0D9', '#FDD49E', '#FDBB84', '#FC8D59', '#EF6548', '#D7301F', '#990000'];
+const DONUT_COLORS = ['#BC2035', '#F57C00', '#0873BB', '#2E7D32', '#8E24AA', '#00897B', '#C2185B', '#5D4037', '#FBC02D', '#546E7A'];
 
 const PLANT_LABELS = ['Boulder City, NV', 'Sulphur Springs, TX', 'Plant City, FL'];
+const PLANT_COLORS = ['#0873BB', '#2E7D32', '#8E24AA'];
+const PLANT_ORIGINS = [[35.978, -114.832], [33.138, -95.601], [28.014, -82.112]];
 
-function pinSvg(plantIdx, year, size) {
-  const c = yearColor(year);
-  const s = size;
-  const h = s / 2;
+const ABBR_TO_NAME = {
+  AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado',
+  CT:'Connecticut', DE:'Delaware', DC:'District of Columbia', FL:'Florida', GA:'Georgia',
+  HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky',
+  LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota',
+  MS:'Mississippi', MO:'Missouri', MT:'Montana', NE:'Nebraska', NV:'Nevada', NH:'New Hampshire',
+  NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota',
+  OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina',
+  SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia',
+  WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming',
+};
+const NAME_TO_ABBR = {};
+for (const [ab, nm] of Object.entries(ABBR_TO_NAME)) NAME_TO_ABBR[nm] = ab;
+
+const CENTROIDS = {
+  AL:[32.79,-86.83], AK:[64.07,-152.28], AZ:[34.27,-111.66], AR:[34.89,-92.44], CA:[37.18,-119.47],
+  CO:[39.00,-105.55], CT:[41.62,-72.73], DE:[38.99,-75.51], DC:[38.91,-77.01], FL:[28.63,-82.45],
+  GA:[32.64,-83.44], HI:[20.29,-156.37], ID:[44.35,-114.61], IL:[40.04,-89.20], IN:[39.89,-86.28],
+  IA:[42.07,-93.50], KS:[38.49,-98.38], KY:[37.53,-85.30], LA:[31.07,-92.00], ME:[45.37,-69.24],
+  MD:[39.06,-76.80], MA:[42.26,-71.81], MI:[44.35,-85.41], MN:[46.28,-94.31], MS:[32.74,-89.67],
+  MO:[38.35,-92.46], MT:[47.05,-109.63], NE:[41.54,-99.80], NV:[39.33,-116.63], NH:[43.68,-71.58],
+  NJ:[40.19,-74.67], NM:[34.41,-106.11], NY:[42.95,-75.53], NC:[35.56,-79.39], ND:[47.45,-100.47],
+  OH:[40.29,-82.79], OK:[35.59,-97.49], OR:[43.93,-120.56], PA:[40.88,-77.80], RI:[41.68,-71.56],
+  SC:[33.92,-80.90], SD:[44.44,-100.23], TN:[35.86,-86.35], TX:[31.48,-99.33], UT:[39.31,-111.67],
+  VT:[44.07,-72.67], VA:[37.52,-78.85], WA:[47.38,-120.45], WV:[38.64,-80.62], WI:[44.62,-89.99],
+  WY:[43.00,-107.55],
+};
+
+const GEOJSON_URL = 'https://cdn.jsdelivr.net/gh/PublicaMundi/MappingAPI@master/data/geojson/us-states.json';
+
+function pinSvg(plantIdx, color, size) {
+  const s = size, h = s / 2;
   if (plantIdx === 0) {
-    // X for Nevada (Boulder City)
     const m = s * 0.15, e = s * 0.85, t = s * 0.2;
-    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><line x1="${m}" y1="${m}" x2="${e}" y2="${e}" stroke="${c}" stroke-width="${t}" stroke-linecap="round"/><line x1="${e}" y1="${m}" x2="${m}" y2="${e}" stroke="${c}" stroke-width="${t}" stroke-linecap="round"/></svg>`;
+    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><line x1="${m}" y1="${m}" x2="${e}" y2="${e}" stroke="${color}" stroke-width="${t}" stroke-linecap="round"/><line x1="${e}" y1="${m}" x2="${m}" y2="${e}" stroke="${color}" stroke-width="${t}" stroke-linecap="round"/></svg>`;
   } else if (plantIdx === 1) {
-    // 5-point star for Texas (Sulphur Springs)
     const r1 = h * 0.9, r2 = h * 0.38;
     let d = '';
     for (let i = 0; i < 10; i++) {
@@ -110,49 +236,26 @@ function pinSvg(plantIdx, year, size) {
       d += (i === 0 ? 'M' : 'L') + (h + r * Math.cos(a)).toFixed(2) + ' ' + (h + r * Math.sin(a)).toFixed(2) + ' ';
     }
     d += 'Z';
-    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><path d="${d}" fill="${c}" stroke="#444" stroke-width="1.2"/></svg>`;
+    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><path d="${d}" fill="${color}" stroke="#444" stroke-width="1.2"/></svg>`;
   } else {
-    // Circle for Florida (Plant City)
-    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><circle cx="${h}" cy="${h}" r="${h * 0.8}" fill="${c}" stroke="#444" stroke-width="1.2"/></svg>`;
+    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><circle cx="${h}" cy="${h}" r="${h * 0.8}" fill="${color}" stroke="#444" stroke-width="1.2"/></svg>`;
   }
 }
+
 const iconCache = {};
-function makeIcon(plantIdx, year, qty, prec) {
+function makeIcon(plantIdx, qty, prec) {
   const size = Math.round(16 + 5 * Math.log2(Math.max(qty, 1)));
-  const key = plantIdx + '|' + year + '|' + size + '|' + prec;
+  const key = plantIdx + '|' + size + '|' + prec;
   if (!iconCache[key]) {
-    const approx = prec === 2;
     iconCache[key] = L.divIcon({
       className: 'pin',
-      html: pinSvgColored(plantIdx, year, size, approx),
+      html: pinSvg(plantIdx, PREC_COLORS[prec], size),
       iconSize: [size, size],
       iconAnchor: [size / 2, size / 2],
       popupAnchor: [0, -size / 2]
     });
   }
   return iconCache[key];
-}
-
-function pinSvgColored(plantIdx, year, size, approx) {
-  const origPinSvg = pinSvg;
-  const c = approx ? yearColorApprox(year) : yearColor(year);
-  const s = size, h = s / 2;
-  if (plantIdx === 0) {
-    const m = s * 0.15, e = s * 0.85, t = s * 0.2;
-    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><line x1="${m}" y1="${m}" x2="${e}" y2="${e}" stroke="${c}" stroke-width="${t}" stroke-linecap="round"/><line x1="${e}" y1="${m}" x2="${m}" y2="${e}" stroke="${c}" stroke-width="${t}" stroke-linecap="round"/></svg>`;
-  } else if (plantIdx === 1) {
-    const r1 = h * 0.9, r2 = h * 0.38;
-    let d = '';
-    for (let i = 0; i < 10; i++) {
-      const a = (i * Math.PI / 5) - Math.PI / 2;
-      const r = i % 2 === 0 ? r1 : r2;
-      d += (i === 0 ? 'M' : 'L') + (h + r * Math.cos(a)).toFixed(2) + ' ' + (h + r * Math.sin(a)).toFixed(2) + ' ';
-    }
-    d += 'Z';
-    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><path d="${d}" fill="${c}" stroke="#444" stroke-width="1.2"/></svg>`;
-  } else {
-    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><circle cx="${h}" cy="${h}" r="${h * 0.8}" fill="${c}" stroke="#444" stroke-width="1.2"/></svg>`;
-  }
 }
 
 function jitter(lat, lng, i) {
@@ -163,8 +266,10 @@ function jitter(lat, lng, i) {
 }
 
 let DATA, mhbMarkers = [];
-let mhbGroup, map;
-const state = { years: new Set(YEARS), plants: new Set([0, 1, 2]), search: '', precs: new Set([0, 1, 2]) };
+let mhbGroup, map, geoLayer = null, choroMax = 1;
+let arcLayer = null, heatLayer = null;
+let playTimer = null, playYear = 2014;
+const state = { years: new Set(YEARS), st: '', plants: new Set([0, 1, 2]), search: '', precs: new Set([0, 1, 2]), heat: false, glow: false, arcs: false, pins: true };
 
 fetch('data.json').then(r => r.json()).then(init);
 
@@ -173,7 +278,7 @@ function init(data) {
   map = L.map('map', { preferCanvas: false }).setView([38.5, -96.5], 5);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a> | Geocoding &copy; <a href="https://www.geonames.org/">GeoNames</a> (CC BY 4.0)',
-    maxZoom: 19
+    maxZoom: 19, crossOrigin: true
   }).addTo(map);
 
   mhbGroup = L.markerClusterGroup({
@@ -193,17 +298,36 @@ function init(data) {
   DATA.mhb.forEach((rec, i) => {
     const [locIdx, year, plantIdx, qty, jobIdx, prec, diams] = rec;
     const [lat, lng] = DATA.locs[locIdx];
-    const m = L.marker(jitter(lat, lng, i), { icon: makeIcon(plantIdx, year, qty, prec) });
-    m.meta = { year, plantIdx, qty, jobIdx, prec, diams: diams || [] };
+    const st = DATA.jobs[jobIdx][5] || null;
+    const m = L.marker(jitter(lat, lng, i), { icon: makeIcon(plantIdx, qty, prec) });
+    m.meta = { year, plantIdx, qty, jobIdx, prec, st, diams: diams || [] };
     m.bindPopup(() => popupHtml(m.meta));
     mhbMarkers.push(m);
   });
 
   buildPanel();
   buildLegend();
+  buildControls();
   document.getElementById('notmapped').textContent =
-    `Not mapped (no usable location): ${DATA.meta.notMappedMhb.toLocaleString()} bases`;
+    `Not mapped: ${DATA.meta.notMappedMhb.toLocaleString()} bases`;
+  arcLayer = L.layerGroup();
   map.addLayer(mhbGroup);
+
+  fetch(GEOJSON_URL)
+    .then(r => r.json())
+    .then(gj => {
+      geoLayer = L.geoJson(gj, {
+        style: () => ({ weight: 1, color: '#fff', fillColor: '#f0f0f0', fillOpacity: 0.6 }),
+        onEachFeature: (f, l) => { l.feature._abbr = NAME_TO_ABBR[f.properties.name] || f.id; }
+      });
+      geoLayer.on('click', e => { const ab = e.layer.feature._abbr; if (ab) selectState(ab); });
+      if (state.heat) applyFilters();
+    })
+    .catch(() => {
+      const cb = document.querySelector('#display input[data-disp="heat"]');
+      if (cb) { cb.disabled = true; cb.parentElement.style.opacity = .5; cb.parentElement.title = 'State map data unavailable'; }
+    });
+
   applyFilters();
 }
 
@@ -215,54 +339,318 @@ function jobMatchesSearch(jobIdx, q) {
   return !!(cust && cust.toLowerCase().includes(q));
 }
 
-function applyFilters() {
+function passBase(m) {
   const q = state.search.trim().toLowerCase();
-  const pred = m => state.years.has(m.meta.year) && state.plants.has(m.meta.plantIdx)
-    && state.precs.has(m.meta.prec) && (!q || jobMatchesSearch(m.meta.jobIdx, q));
-  const visible = mhbMarkers.filter(pred);
-  mhbGroup.clearLayers();
-  mhbGroup.addLayers(visible);
-  let total = 0;
-  visible.forEach(m => total += m.meta.qty);
-  document.getElementById('livecount').textContent = `${total.toLocaleString()} MHB bases shown`;
+  return state.plants.has(m.meta.plantIdx) && state.precs.has(m.meta.prec)
+    && (!q || jobMatchesSearch(m.meta.jobIdx, q));
 }
 
+function applyFilters() {
+  const visibleAll = mhbMarkers.filter(m => passBase(m) && state.years.has(m.meta.year));
+  const visible = state.st ? visibleAll.filter(m => m.meta.st === state.st) : visibleAll;
+
+  mhbGroup.clearLayers();
+  if (state.pins) mhbGroup.addLayers(visible);
+
+  let total = 0;
+  visible.forEach(m => total += m.meta.qty);
+  document.getElementById('livecount').textContent =
+    `${total.toLocaleString()} MHB bases shown` + (state.st ? ` in ${state.st}` : '');
+
+  const barSet = mhbMarkers.filter(m => passBase(m) && (!state.st || m.meta.st === state.st));
+  updateBar(barSet);
+  updateLeaderboard(visibleAll);
+  updateCustomerBoard(visible);
+  updateDonut(visible);
+  updateChoropleth(visible);
+  updateHeat(visible);
+  updateArcs(visible);
+  updateKPI(visible);
+}
+
+function updateKPI(visible) {
+  let bases = 0;
+  const states = new Set(), jobs = new Set(), byState = {}, byYear = {};
+  visible.forEach(m => {
+    bases += m.meta.qty;
+    if (m.meta.st) { states.add(m.meta.st); byState[m.meta.st] = (byState[m.meta.st] || 0) + m.meta.qty; }
+    jobs.add(m.meta.jobIdx);
+    byYear[m.meta.year] = (byYear[m.meta.year] || 0) + m.meta.qty;
+  });
+  let topSt = '—', topV = 0;
+  for (const [st, v] of Object.entries(byState)) if (v > topV) { topV = v; topSt = st; }
+  const maxYr = Math.max(0, ...Object.keys(byYear).map(Number));
+  let growth = '';
+  if (maxYr >= 2015) {
+    const cur = byYear[maxYr] || 0, prev = byYear[maxYr - 1] || 0;
+    if (prev > 0) {
+      const pct = Math.round((cur - prev) / prev * 100);
+      growth = `${pct >= 0 ? '+' : ''}${pct}% <small>vs ${maxYr - 1}</small>`;
+    } else growth = '—';
+  } else growth = '—';
+  const tiles = [
+    { lbl: 'MHB bases shown', val: bases.toLocaleString() },
+    { lbl: 'States served', val: states.size },
+    { lbl: 'Jobs / projects', val: jobs.size.toLocaleString() },
+    { lbl: 'Top state', val: topSt === '—' ? '—' : `${topSt} <small>${topV.toLocaleString()}</small>` },
+    { lbl: maxYr ? `${maxYr} growth` : 'Growth', val: growth },
+  ];
+  document.getElementById('kpis').innerHTML = tiles
+    .map(t => `<div class="kpi"><div class="val">${t.val}</div><div class="lbl">${t.lbl}</div></div>`).join('');
+}
+
+function updateCustomerBoard(set) {
+  const byCust = {};
+  set.forEach(m => {
+    const name = DATA.customers[DATA.jobs[m.meta.jobIdx][2]];
+    if (name) byCust[name] = (byCust[name] || 0) + m.meta.qty;
+  });
+  const rows = Object.entries(byCust).sort((a, b) => b[1] - a[1]).slice(0, 25);
+  let html = '<table class="lb"><tbody>';
+  if (!rows.length) html += '<tr><td style="color:#999;cursor:default">No data for current filters</td></tr>';
+  rows.forEach(([name, v]) => {
+    html += `<tr style="cursor:default"><td>${esc(name)}</td><td>${v.toLocaleString()}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  document.getElementById('customerboard').innerHTML = html;
+}
+
+function updateDonut(visible) {
+  const byDiam = {};
+  visible.forEach(m => (m.meta.diams || []).forEach(([d, n]) => { byDiam[d] = (byDiam[d] || 0) + n; }));
+  const rows = Object.entries(byDiam).sort((a, b) => b[1] - a[1]);
+  const ctn = document.getElementById('donut');
+  if (!rows.length) { ctn.innerHTML = '<span style="color:#999;font-size:12px">No diameter data</span>'; return; }
+  const top = rows.slice(0, 9);
+  const otherTotal = rows.slice(9).reduce((s, r) => s + r[1], 0);
+  if (otherTotal) top.push(['Other', otherTotal]);
+  const total = top.reduce((s, r) => s + r[1], 0);
+  const cx = 45, cy = 45, r = 38, w = 13;
+  let a0 = -Math.PI / 2, paths = '';
+  top.forEach(([d, n], i) => {
+    const a1 = a0 + (n / total) * 2 * Math.PI;
+    const large = a1 - a0 > Math.PI ? 1 : 0;
+    const x0 = cx + r * Math.cos(a0), y0 = cy + r * Math.sin(a0);
+    const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+    paths += `<path d="M${x0.toFixed(2)} ${y0.toFixed(2)} A${r} ${r} 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}" fill="none" stroke="${DONUT_COLORS[i % DONUT_COLORS.length]}" stroke-width="${w}"><title>${esc(d)}″: ${n.toLocaleString()} (${Math.round(n / total * 100)}%)</title></path>`;
+    a0 = a1;
+  });
+  const legend = top.map(([d, n], i) =>
+    `<div class="keyrow"><span class="dot" style="background:${DONUT_COLORS[i % DONUT_COLORS.length]}"></span>${d === 'Other' ? 'Other' : esc(d) + '″'} · ${n.toLocaleString()}</div>`).join('');
+  ctn.innerHTML = `<svg width="90" height="90">${paths}<text x="${cx}" y="${cy - 2}" text-anchor="middle" font-size="15" font-weight="700" fill="#333">${total.toLocaleString()}</text><text x="${cx}" y="${cy + 12}" text-anchor="middle" font-size="8" fill="#888">bases</text></svg><div class="dlegend">${legend}</div>`;
+}
+
+function updateHeat(visible) {
+  if (!state.glow) {
+    if (heatLayer && map.hasLayer(heatLayer)) map.removeLayer(heatLayer);
+    return;
+  }
+  const pts = visible.map(m => { const ll = m.getLatLng(); return [ll.lat, ll.lng, m.meta.qty]; });
+  const maxQ = Math.max(1, ...visible.map(m => m.meta.qty));
+  if (!heatLayer) heatLayer = L.heatLayer(pts, { radius: 28, blur: 20, max: maxQ, minOpacity: 0.35 });
+  else heatLayer.setOptions({ max: maxQ }).setLatLngs(pts);
+  if (!map.hasLayer(heatLayer)) heatLayer.addTo(map);
+}
+
+function arcPoints(a, b) {
+  const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2;
+  const dx = b[0] - a[0], dy = b[1] - a[1];
+  const cx = mx - dy * 0.18, cy = my + dx * 0.18;
+  const pts = [];
+  for (let t = 0; t <= 1.0001; t += 0.05) {
+    const u = 1 - t;
+    pts.push([u * u * a[0] + 2 * u * t * cx + t * t * b[0], u * u * a[1] + 2 * u * t * cy + t * t * b[1]]);
+  }
+  return pts;
+}
+
+function updateArcs(visible) {
+  if (!arcLayer) return;
+  arcLayer.clearLayers();
+  if (!state.arcs) { if (map.hasLayer(arcLayer)) map.removeLayer(arcLayer); return; }
+  const agg = {};
+  visible.forEach(m => {
+    const ll = m.getLatLng();
+    const key = m.meta.plantIdx + '|' + ll.lat.toFixed(3) + '|' + ll.lng.toFixed(3);
+    if (!agg[key]) agg[key] = { p: m.meta.plantIdx, dest: [ll.lat, ll.lng], qty: 0 };
+    agg[key].qty += m.meta.qty;
+  });
+  Object.values(agg).forEach(a => {
+    const weight = Math.min(5, 0.6 + Math.log2(a.qty + 1) * 0.7);
+    L.polyline(arcPoints(PLANT_ORIGINS[a.p], a.dest), {
+      color: PLANT_COLORS[a.p], weight, opacity: 0.45, interactive: false
+    }).addTo(arcLayer);
+  });
+  PLANT_ORIGINS.forEach((o, i) => {
+    if (state.plants.has(i)) L.circleMarker(o, {
+      radius: 6, color: '#fff', weight: 2, fillColor: PLANT_COLORS[i], fillOpacity: 1
+    }).bindTooltip(PLANT_LABELS[i]).addTo(arcLayer);
+  });
+  if (!map.hasLayer(arcLayer)) arcLayer.addTo(map);
+}
+
+function updateBar(set) {
+  const byYear = {};
+  YEARS.forEach(y => byYear[y] = 0);
+  set.forEach(m => { if (byYear[m.meta.year] !== undefined) byYear[m.meta.year] += m.meta.qty; });
+  const max = Math.max(1, ...Object.values(byYear));
+  const ctn = document.getElementById('barchart');
+  const w = ctn.clientWidth || 230, h = 130, base = 16, top = 6;
+  const bw = (w - 6) / YEARS.length;
+  let svg = `<svg width="${w}" height="${h}">`;
+  YEARS.forEach((y, i) => {
+    const v = byYear[y];
+    const bh = (h - base - top) * (v / max);
+    const x = 3 + i * bw, y0 = h - base - bh;
+    const sel = state.years.has(y);
+    svg += `<rect data-by="${y}" x="${x.toFixed(1)}" y="${y0.toFixed(1)}" width="${(bw - 2).toFixed(1)}" height="${bh.toFixed(1)}" rx="1" fill="${sel ? '#BC2035' : '#dcdcdc'}"><title>${y}: ${v.toLocaleString()} bases</title></rect>`;
+    svg += `<text x="${(x + bw / 2 - 1).toFixed(1)}" y="${h - 4}" font-size="8" text-anchor="middle" fill="#888">'${String(y).slice(2)}</text>`;
+  });
+  svg += '</svg>';
+  ctn.innerHTML = svg;
+  ctn.querySelectorAll('rect').forEach(r => r.addEventListener('click', () => {
+    const y = +r.dataset.by;
+    state.years.has(y) ? state.years.delete(y) : state.years.add(y);
+    syncYearUI();
+    applyFilters();
+  }));
+}
+
+function updateLeaderboard(set) {
+  const byState = {};
+  set.forEach(m => { if (m.meta.st) byState[m.meta.st] = (byState[m.meta.st] || 0) + m.meta.qty; });
+  const rows = Object.entries(byState).sort((a, b) => b[1] - a[1]);
+  let html = '<table class="lb"><tbody>';
+  if (!rows.length) html += '<tr><td colspan="2" style="color:#999;cursor:default">No data for current filters</td></tr>';
+  rows.forEach(([st, v]) => {
+    const sel = state.st === st;
+    html += `<tr data-st="${st}" class="${sel ? 'sel' : ''}"><td>${st} &mdash; ${ABBR_TO_NAME[st] || ''}</td><td>${v.toLocaleString()}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  const ctn = document.getElementById('leaderboard');
+  ctn.innerHTML = html;
+  ctn.querySelectorAll('tr[data-st]').forEach(tr => tr.addEventListener('click', () => {
+    const st = tr.dataset.st;
+    selectState(state.st === st ? '' : st);
+  }));
+}
+
+function choroColor(c) {
+  if (c <= 0) return '#f0f0f0';
+  const t = c / choroMax;
+  const i = Math.min(CHORO.length - 1, Math.max(0, Math.floor(t * CHORO.length - 1e-9)));
+  return CHORO[i];
+}
+
+function updateChoropleth(visible) {
+  const cl = document.getElementById('chorolegend');
+  if (!geoLayer || !state.heat) {
+    if (geoLayer && map.hasLayer(geoLayer)) map.removeLayer(geoLayer);
+    cl.style.display = 'none';
+    return;
+  }
+  const tot = {};
+  visible.forEach(m => { if (m.meta.st) tot[m.meta.st] = (tot[m.meta.st] || 0) + m.meta.qty; });
+  choroMax = Math.max(1, ...Object.values(tot));
+  geoLayer.eachLayer(l => {
+    const c = tot[l.feature._abbr] || 0;
+    l.setStyle({ weight: 1, color: '#fff', fillColor: choroColor(c), fillOpacity: c > 0 ? 0.78 : 0.18 });
+    const nm = l.feature.properties.name;
+    l.unbindTooltip().bindTooltip(`${nm}: ${c.toLocaleString()} bases`, { sticky: true });
+  });
+  if (!map.hasLayer(geoLayer)) geoLayer.addTo(map);
+  geoLayer.bringToBack();
+  cl.style.display = 'block';
+  document.getElementById('choromaxlabel').textContent = choroMax.toLocaleString();
+}
+
+function selectState(st) {
+  state.st = st || '';
+  document.getElementById('statesel').value = state.st;
+  applyFilters();
+  if (state.st) {
+    let layer = null;
+    if (geoLayer) geoLayer.eachLayer(l => { if (l.feature._abbr === state.st) layer = l; });
+    if (layer) map.fitBounds(layer.getBounds(), { padding: [40, 40] });
+    else if (CENTROIDS[state.st]) map.setView(CENTROIDS[state.st], 6);
+  } else {
+    map.setView([38.5, -96.5], 5);
+  }
+}
+
+function syncYearUI() {
+  document.querySelectorAll('#years input').forEach(i => i.checked = state.years.has(+i.dataset.year));
+  const n = state.years.size, tot = YEARS.length;
+  const sum = n === tot ? 'All' : n === 0 ? 'None' : n === 1 ? [...state.years][0] : `${n} years`;
+  document.getElementById('yearsum').textContent = 'Years: ' + sum;
+}
+
+function setThrough(y) {
+  state.years = new Set(YEARS.filter(Y => Y <= y));
+  syncYearUI();
+  document.getElementById('yearslider').value = y;
+  document.getElementById('yearlabel').textContent = y >= 2026 ? 'All years' : `2014–${y}`;
+  applyFilters();
+}
 
 function buildPanel() {
   const yearsDiv = document.getElementById('years');
   YEARS.forEach(y => {
     const label = document.createElement('label');
-    label.innerHTML = `<input type="checkbox" checked data-year="${y}"><span class="swatch" style="background:${yearColor(y)}"></span>${y}`;
+    label.innerHTML = `<input type="checkbox" checked data-year="${y}">${y}`;
     label.querySelector('input').addEventListener('change', e => {
       e.target.checked ? state.years.add(y) : state.years.delete(y);
+      syncYearUI();
+      document.getElementById('yearlabel').textContent = 'Custom';
       applyFilters();
     });
     yearsDiv.appendChild(label);
   });
-  document.getElementById('yr-all').addEventListener('click', () => {
-    YEARS.forEach(y => state.years.add(y));
-    yearsDiv.querySelectorAll('input').forEach(i => i.checked = true);
-    applyFilters();
-  });
+  document.getElementById('yr-all').addEventListener('click', () => { setThrough(2026); });
   document.getElementById('yr-none').addEventListener('click', () => {
-    state.years.clear();
-    yearsDiv.querySelectorAll('input').forEach(i => i.checked = false);
+    state.years.clear(); syncYearUI();
+    document.getElementById('yearlabel').textContent = 'None';
     applyFilters();
   });
+
+  const present = [...new Set(mhbMarkers.map(m => m.meta.st).filter(Boolean))].sort();
+  const sel = document.getElementById('statesel');
+  sel.innerHTML = '<option value="">All states</option>' +
+    present.map(st => `<option value="${st}">${st} — ${ABBR_TO_NAME[st] || st}</option>`).join('');
+  sel.addEventListener('change', e => selectState(e.target.value));
+
   const plantsDiv = document.getElementById('plants');
   PLANT_LABELS.forEach((name, i) => {
     const label = document.createElement('label');
-    label.innerHTML = `<input type="checkbox" checked data-plant="${i}">${pinSvg(i, 2026, 16)}${name}`;
+    label.innerHTML = `<input type="checkbox" checked data-plant="${i}">${pinSvg(i, '#555', 16)}${name}`;
     label.querySelector('input').addEventListener('change', e => {
       e.target.checked ? state.plants.add(i) : state.plants.delete(i);
       applyFilters();
     });
     plantsDiv.appendChild(label);
   });
+
+  const displayDiv = document.getElementById('display');
+  const disp = [
+    { key: 'heat', label: 'State heat (choropleth)', on: false },
+    { key: 'glow', label: 'Heatmap glow', on: false },
+    { key: 'arcs', label: 'Plant → destination arcs', on: false },
+    { key: 'pins', label: 'Show pins', on: true },
+  ];
+  disp.forEach(({ key, label, on }) => {
+    const lbl = document.createElement('label');
+    lbl.innerHTML = `<input type="checkbox" data-disp="${key}" ${on ? 'checked' : ''}>${label}`;
+    lbl.querySelector('input').addEventListener('change', e => {
+      state[key] = e.target.checked;
+      applyFilters();
+    });
+    displayDiv.appendChild(lbl);
+  });
+
   const PREC_LABELS = [
-    { key: 0, label: 'Zip code (precise)', color: yearColor(2020) },
-    { key: 1, label: 'City (moderate)', color: yearColor(2020) },
-    { key: 2, label: 'State only (approx)', color: yearColorApprox(2020) },
+    { key: 0, label: 'Zip code (precise)', color: PREC_COLORS[0] },
+    { key: 1, label: 'City (moderate)', color: PREC_COLORS[1] },
+    { key: 2, label: 'State only (approx)', color: PREC_COLORS[2] },
   ];
   const precsDiv = document.getElementById('precs');
   PREC_LABELS.forEach(({ key, label, color }) => {
@@ -282,18 +670,62 @@ function buildPanel() {
   });
 }
 
+function buildControls() {
+  const slider = document.getElementById('yearslider');
+  const playbtn = document.getElementById('playbtn');
+  slider.addEventListener('input', () => { stopPlay(); setThrough(+slider.value); });
+  playbtn.addEventListener('click', () => {
+    if (playTimer) { stopPlay(); return; }
+    playbtn.innerHTML = '&#10073;&#10073;';
+    playYear = 2014;
+    setThrough(playYear);
+    playTimer = setInterval(() => {
+      playYear++;
+      if (playYear > 2026) { stopPlay(); setThrough(2026); return; }
+      setThrough(playYear);
+    }, 750);
+  });
+
+  document.getElementById('statstoggle').addEventListener('click', e => {
+    const s = document.getElementById('stats');
+    const hidden = s.style.display === 'none';
+    s.style.display = hidden ? 'block' : 'none';
+    e.target.textContent = hidden ? 'Hide charts' : 'Show charts';
+    if (hidden) applyFilters();
+  });
+
+  const exportbtn = document.getElementById('exportbtn');
+  exportbtn.addEventListener('click', () => {
+    if (typeof domtoimage === 'undefined') { alert('Export library failed to load.'); return; }
+    const node = document.getElementById('map');
+    const orig = exportbtn.textContent;
+    exportbtn.textContent = 'Rendering…';
+    exportbtn.disabled = true;
+    domtoimage.toPng(node, { bgcolor: '#fff', width: node.clientWidth, height: node.clientHeight })
+      .then(url => {
+        const a = document.createElement('a');
+        a.download = 'armorock-shipping-map.png';
+        a.href = url;
+        a.click();
+      })
+      .catch(() => alert('Export failed — the map tiles may have blocked the capture. Use a manual screenshot instead.'))
+      .finally(() => { exportbtn.textContent = orig; exportbtn.disabled = false; });
+  });
+}
+
+function stopPlay() {
+  if (playTimer) { clearInterval(playTimer); playTimer = null; }
+  document.getElementById('playbtn').innerHTML = '&#9654;';
+}
+
 function buildLegend() {
   const ramp = document.getElementById('legendramp');
-  YEARS.forEach(y => {
-    const d = document.createElement('div');
-    d.style.background = yearColor(y);
-    ramp.appendChild(d);
-  });
+  CHORO.forEach(c => { const d = document.createElement('div'); d.style.background = c; ramp.appendChild(d); });
   const lp = document.getElementById('legendplants');
   PLANT_LABELS.forEach((name, i) => {
     const row = document.createElement('div');
-    row.className = 'plantrow';
-    row.innerHTML = `${pinSvg(i, 2026, 16)}<span>${name}</span>`;
+    row.className = 'keyrow';
+    row.innerHTML = `${pinSvg(i, '#555', 16)}<span>${name}</span>`;
     lp.appendChild(row);
   });
 }

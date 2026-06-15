@@ -1,6 +1,14 @@
 # Shipping-Map
 
-Interactive Leaflet map of Armorock **MHB bases shipped** (2014–2026) for the sales team. Cluster badges sum bases in the ground. Filters: year (color ramp + checkboxes), plant (shaped pins: NV = ✕, TX = ★, FL = ●), location precision (zip / city / state), and a job/project/customer search box. **Blue pins** = state-level approximate locations; **red pins** = zip or city precise.
+Interactive Leaflet dashboard of Armorock **MHB bases shipped** (2014–2026) for the sales team. Cluster badges sum bases in the ground.
+
+**Pin color = location precision:** red = zip (precise), orange = city (moderate), gray = state-level (approximate). **Pin shape = plant:** NV = ✕, TX = ★, FL = ●.
+
+**Filters** (left panel): job/project/customer search, year (dropdown of checkboxes), single-state dropdown, plant, location precision. **Display toggles:** state-heat choropleth, heatmap glow, plant → destination arcs, show/hide pins.
+
+**Presentation graphics:** KPI header tiles (total bases, states served, jobs, top state, latest-year growth), a by-year bar chart (click a bar to toggle that year), a diameter-mix donut, top-states and top-customers leaderboards (click a state row to isolate it), and an animated year timeline (play button + scrubber, cumulative 2014→2026). **Export PNG** button downloads the current map view for slide decks.
+
+All charts/filters are computed client-side from `data.json`; the build pipeline is unchanged. Beyond Leaflet/Carto, the page loads three more CDN libraries at runtime: a US-states GeoJSON (jsDelivr) for the choropleth (degrades gracefully if unavailable), `leaflet.heat` (heatmap glow), and `dom-to-image-more` (PNG export).
 
 Live site: [armorock.github.io/ax-fieldatlas-7q3x](https://armorock.github.io/ax-fieldatlas-7q3x/) (public repo with obscure name + noindex; org plan does not support private Pages)
 
