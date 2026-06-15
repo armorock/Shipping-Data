@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Armorock Structures Map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+<style>
+  html, body { margin: 0; height: 100%; font-family: "Segoe UI", Arial, sans-serif; }
+  #titlebar {
+    position: absolute; top: 0; left: 0; right: 0; height: 52px; z-index: 1100;
+    background: #fff; border-bottom: 3px solid #BC2035; display: flex;
+    align-items: center; gap: 18px; padding: 0 16px; box-shadow: 0 1px 4px rgba(0,0,0,.15);
+  }
+  #titlebar h1 { font-size: 18px; margin: 0; color: #BC2035; white-space: nowrap; }
+  #livecount { font-size: 15px; font-weight: 600; color: #333; }
+  #notmapped { font-size: 12px; color: #888; margin-left: auto; white-space: nowrap; }
+  #map { position: absolute; top: 52px; bottom: 0; left: 0; right: 0; }
+  #panel {
+    position: absolute; top: 64px; left: 10px; z-index: 1000; background: #fff;
+    border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.25); padding: 12px;
+    width: 215px; max-height: calc(100% - 90px); overflow-y: auto; font-size: 13px;
+  }
+  #panel h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: #888; margin: 12px 0 4px; }
+  #panel h2:first-child { margin-top: 0; }
+  #panel label { display: flex; align-items: center; gap: 6px; padding: 2px 0; cursor: pointer; }
+  .swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid #999; flex: none; }
+  #search { width: 100%; box-sizing: border-box; padding: 6px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px; }
+  .linkrow { font-size: 12px; margin: 4px 0; }
+  .linkrow a { color: #BC2035; cursor: pointer; text-decoration: underline; margin-right: 10px; }
+  #legend {
+    position: absolute; bottom: 22px; right: 10px; z-index: 1000; background: #fff;
+    border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.25); padding: 10px 12px; font-size: 12px;
+  }
+  #legend .ramp { display: flex; height: 12px; border-radius: 3px; overflow: hidden; margin: 4px 0; }
+  #legend .ramp div { flex: 1; }
+  #legend .ramplabels { display: flex; justify-content: space-between; color: #666; }
+  #legend .plantrow { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+  #legend .note { color: #888; margin-top: 6px; max-width: 170px; }
+  .pin svg { overflow: visible; filter: drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
+  .mhb-cluster {
+    background: #BC2035; color: #fff; border-radius: 50%; border: 3px solid rgba(188,32,53,.35);
+    background-clip: padding-box; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px;
+  }
+  .popup { font-size: 13px; max-width: 260px; }
+  .popup h3 { margin: 0 0 4px; font-size: 14px; color: #BC2035; }
+  .popup table { border-collapse: collapse; margin-top: 6px; }
+  .popup td { padding: 1px 8px 1px 0; vertical-align: top; }
+  .popup .comp { margin-top: 6px; border-top: 1px solid #eee; padding-top: 4px; }
+  .popup .approx { color: #c00; font-style: italic; }
+  .leaflet-control-attribution { font-size: 10px; }
+</style>
+</head>
+<body>
+<div id="titlebar">
+  <h1>Armorock MHB Bases Shipped</h1>
+  <span id="livecount">Loading…</span>
+  <span id="notmapped"></span>
+</div>
+<div id="map"></div>
+<div id="panel">
+  <h2>Search</h2>
+  <input id="search" type="text" placeholder="job code / project / customer">
+  <h2>Years</h2>
+  <div class="linkrow"><a id="yr-all">all</a><a id="yr-none">none</a></div>
+  <div id="years"></div>
+  <h2>Plant</h2>
+  <div id="plants"></div>
+  <h2>Location Precision</h2>
+  <div id="precs"></div>
+</div>
+<div id="legend">
+  <b>Year shipped</b>
+  <div class="ramp" id="legendramp"></div>
+  <div class="ramplabels"><span>2014</span><span>2026</span></div>
+  <div id="legendplants"></div>
+  <div class="note">Pin shape = plant. <span style="color:#0873BB;font-weight:600;">Blue</span> pins = state-level only (approximate). Red pins = zip or city precise.</div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script>
+const YEARS = [];
+for (let y = 2014; y <= 2026; y++) YEARS.push(y);
+const RAMP      = ['#FDE5E8','#F9C9CF','#F3AAB4','#EC8B99','#E46C7F','#DB4E66','#CE3550','#BC2035','#A21B2D','#881725','#6E121D','#540D16','#3B080E'];
+const RAMP_APPROX = ['#DBEFFE','#B6DFFC','#91CFF9','#6CBFF7','#47AFF5','#229EF2','#0A8AE0','#0873BB','#065C96','#044571','#022E4C','#011727','#000B13'];
+const yearColor       = y => RAMP      [Math.min(Math.max(y - 2014, 0), RAMP.length - 1)];
+const yearColorApprox = y => RAMP_APPROX[Math.min(Math.max(y - 2014, 0), RAMP_APPROX.length - 1)];
+
+const PLANT_LABELS = ['Boulder City, NV', 'Sulphur Springs, TX', 'Plant City, FL'];
+
+function pinSvg(plantIdx, year, size) {
+  const c = yearColor(year);
+  const s = size;
+  const h = s / 2;
+  if (plantIdx === 0) {
+    // X for Nevada (Boulder City)
+    const m = s * 0.15, e = s * 0.85, t = s * 0.2;
+    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><line x1="${m}" y1="${m}" x2="${e}" y2="${e}" stroke="${c}" stroke-width="${t}" stroke-linecap="round"/><line x1="${e}" y1="${m}" x2="${m}" y2="${e}" stroke="${c}" stroke-width="${t}" stroke-linecap="round"/></svg>`;
+  } else if (plantIdx === 1) {
+    // 5-point star for Texas (Sulphur Springs)
+    const r1 = h * 0.9, r2 = h * 0.38;
+    let d = '';
+    for (let i = 0; i < 10; i++) {
+      const a = (i * Math.PI / 5) - Math.PI / 2;
+      const r = i % 2 === 0 ? r1 : r2;
+      d += (i === 0 ? 'M' : 'L') + (h + r * Math.cos(a)).toFixed(2) + ' ' + (h + r * Math.sin(a)).toFixed(2) + ' ';
+    }
+    d += 'Z';
+    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><path d="${d}" fill="${c}" stroke="#444" stroke-width="1.2"/></svg>`;
+  } else {
+    // Circle for Florida (Plant City)
+    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><circle cx="${h}" cy="${h}" r="${h * 0.8}" fill="${c}" stroke="#444" stroke-width="1.2"/></svg>`;
+  }
+}
+const iconCache = {};
+function makeIcon(plantIdx, year, qty, prec) {
+  const size = Math.round(16 + 5 * Math.log2(Math.max(qty, 1)));
+  const key = plantIdx + '|' + year + '|' + size + '|' + prec;
+  if (!iconCache[key]) {
+    const approx = prec === 2;
+    iconCache[key] = L.divIcon({
+      className: 'pin',
+      html: pinSvgColored(plantIdx, year, size, approx),
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
+      popupAnchor: [0, -size / 2]
+    });
+  }
+  return iconCache[key];
+}
+
+function pinSvgColored(plantIdx, year, size, approx) {
+  const origPinSvg = pinSvg;
+  const c = approx ? yearColorApprox(year) : yearColor(year);
+  const s = size, h = s / 2;
+  if (plantIdx === 0) {
+    const m = s * 0.15, e = s * 0.85, t = s * 0.2;
+    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><line x1="${m}" y1="${m}" x2="${e}" y2="${e}" stroke="${c}" stroke-width="${t}" stroke-linecap="round"/><line x1="${e}" y1="${m}" x2="${m}" y2="${e}" stroke="${c}" stroke-width="${t}" stroke-linecap="round"/></svg>`;
+  } else if (plantIdx === 1) {
+    const r1 = h * 0.9, r2 = h * 0.38;
+    let d = '';
+    for (let i = 0; i < 10; i++) {
+      const a = (i * Math.PI / 5) - Math.PI / 2;
+      const r = i % 2 === 0 ? r1 : r2;
+      d += (i === 0 ? 'M' : 'L') + (h + r * Math.cos(a)).toFixed(2) + ' ' + (h + r * Math.sin(a)).toFixed(2) + ' ';
+    }
+    d += 'Z';
+    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><path d="${d}" fill="${c}" stroke="#444" stroke-width="1.2"/></svg>`;
+  } else {
+    return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><circle cx="${h}" cy="${h}" r="${h * 0.8}" fill="${c}" stroke="#444" stroke-width="1.2"/></svg>`;
+  }
+}
+
+function jitter(lat, lng, i) {
+  const h = (i * 2654435761) % 4294967296;
+  const dx = ((h % 1000) / 1000 - 0.5) * 0.004;
+  const dy = (((h >> 10) % 1000) / 1000 - 0.5) * 0.004;
+  return [lat + dx, lng + dy];
+}
+
+let DATA, mhbMarkers = [];
+let mhbGroup, map;
+const state = { years: new Set(YEARS), plants: new Set([0, 1, 2]), search: '', precs: new Set([0, 1, 2]) };
+
+fetch('data.json').then(r => r.json()).then(init);
+
+function init(data) {
+  DATA = data;
+  map = L.map('map', { preferCanvas: false }).setView([38.5, -96.5], 5);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a> | Geocoding &copy; <a href="https://www.geonames.org/">GeoNames</a> (CC BY 4.0)',
+    maxZoom: 19
+  }).addTo(map);
+
+  mhbGroup = L.markerClusterGroup({
+    chunkedLoading: true, chunkInterval: 50, spiderfyOnMaxZoom: true,
+    disableClusteringAtZoom: 15, maxClusterRadius: 50,
+    iconCreateFunction: cluster => {
+      let total = 0;
+      cluster.getAllChildMarkers().forEach(m => total += m.meta.qty);
+      const d = total < 100 ? 36 : total < 1000 ? 44 : 54;
+      return L.divIcon({
+        html: `<div class="mhb-cluster" style="width:${d}px;height:${d}px">${total.toLocaleString()}</div>`,
+        className: '', iconSize: [d, d]
+      });
+    }
+  });
+
+  DATA.mhb.forEach((rec, i) => {
+    const [locIdx, year, plantIdx, qty, jobIdx, prec, diams] = rec;
+    const [lat, lng] = DATA.locs[locIdx];
+    const m = L.marker(jitter(lat, lng, i), { icon: makeIcon(plantIdx, year, qty, prec) });
+    m.meta = { year, plantIdx, qty, jobIdx, prec, diams: diams || [] };
+    m.bindPopup(() => popupHtml(m.meta));
+    mhbMarkers.push(m);
+  });
+
+  buildPanel();
+  buildLegend();
+  document.getElementById('notmapped').textContent =
+    `Not mapped (no usable location): ${DATA.meta.notMappedMhb.toLocaleString()} bases`;
+  map.addLayer(mhbGroup);
+  applyFilters();
+}
+
+function jobMatchesSearch(jobIdx, q) {
+  const j = DATA.jobs[jobIdx];
+  if (j[0] && j[0].toLowerCase().includes(q)) return true;
+  if (j[1] && j[1].toLowerCase().includes(q)) return true;
+  const cust = DATA.customers[j[2]];
+  return !!(cust && cust.toLowerCase().includes(q));
+}
+
+function applyFilters() {
+  const q = state.search.trim().toLowerCase();
+  const pred = m => state.years.has(m.meta.year) && state.plants.has(m.meta.plantIdx)
+    && state.precs.has(m.meta.prec) && (!q || jobMatchesSearch(m.meta.jobIdx, q));
+  const visible = mhbMarkers.filter(pred);
+  mhbGroup.clearLayers();
+  mhbGroup.addLayers(visible);
+  let total = 0;
+  visible.forEach(m => total += m.meta.qty);
+  document.getElementById('livecount').textContent = `${total.toLocaleString()} MHB bases shown`;
+}
+
+
+function buildPanel() {
+  const yearsDiv = document.getElementById('years');
+  YEARS.forEach(y => {
+    const label = document.createElement('label');
+    label.innerHTML = `<input type="checkbox" checked data-year="${y}"><span class="swatch" style="background:${yearColor(y)}"></span>${y}`;
+    label.querySelector('input').addEventListener('change', e => {
+      e.target.checked ? state.years.add(y) : state.years.delete(y);
+      applyFilters();
+    });
+    yearsDiv.appendChild(label);
+  });
+  document.getElementById('yr-all').addEventListener('click', () => {
+    YEARS.forEach(y => state.years.add(y));
+    yearsDiv.querySelectorAll('input').forEach(i => i.checked = true);
+    applyFilters();
+  });
+  document.getElementById('yr-none').addEventListener('click', () => {
+    state.years.clear();
+    yearsDiv.querySelectorAll('input').forEach(i => i.checked = false);
+    applyFilters();
+  });
+  const plantsDiv = document.getElementById('plants');
+  PLANT_LABELS.forEach((name, i) => {
+    const label = document.createElement('label');
+    label.innerHTML = `<input type="checkbox" checked data-plant="${i}">${pinSvg(i, 2026, 16)}${name}`;
+    label.querySelector('input').addEventListener('change', e => {
+      e.target.checked ? state.plants.add(i) : state.plants.delete(i);
+      applyFilters();
+    });
+    plantsDiv.appendChild(label);
+  });
+  const PREC_LABELS = [
+    { key: 0, label: 'Zip code (precise)', color: yearColor(2020) },
+    { key: 1, label: 'City (moderate)', color: yearColor(2020) },
+    { key: 2, label: 'State only (approx)', color: yearColorApprox(2020) },
+  ];
+  const precsDiv = document.getElementById('precs');
+  PREC_LABELS.forEach(({ key, label, color }) => {
+    const lbl = document.createElement('label');
+    lbl.innerHTML = `<input type="checkbox" checked data-prec="${key}"><span class="swatch" style="background:${color}"></span>${label}`;
+    lbl.querySelector('input').addEventListener('change', e => {
+      e.target.checked ? state.precs.add(key) : state.precs.delete(key);
+      applyFilters();
+    });
+    precsDiv.appendChild(lbl);
+  });
+
+  let debounce;
+  document.getElementById('search').addEventListener('input', e => {
+    clearTimeout(debounce);
+    debounce = setTimeout(() => { state.search = e.target.value; applyFilters(); }, 250);
+  });
+}
+
+function buildLegend() {
+  const ramp = document.getElementById('legendramp');
+  YEARS.forEach(y => {
+    const d = document.createElement('div');
+    d.style.background = yearColor(y);
+    ramp.appendChild(d);
+  });
+  const lp = document.getElementById('legendplants');
+  PLANT_LABELS.forEach((name, i) => {
+    const row = document.createElement('div');
+    row.className = 'plantrow';
+    row.innerHTML = `${pinSvg(i, 2026, 16)}<span>${name}</span>`;
+    lp.appendChild(row);
+  });
+}
+
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function popupHtml(meta) {
+  const j = DATA.jobs[meta.jobIdx];
+  const [code, project, custIdx, contractor, city, st, zip, , yrs] = j;
+  const cust = DATA.customers[custIdx];
+  let h = '<div class="popup">';
+  h += `<h3>${code ? 'Job ' + esc(code) : 'Legacy shipment'}</h3>`;
+  h += '<table>';
+  h += `<tr><td>Bases shipped</td><td>${meta.qty}</td></tr>`;
+  if (meta.diams && meta.diams.length) {
+    const diamStr = meta.diams.map(([d, n]) => `${n}× ${esc(d)}&Prime;`).join(', ');
+    h += `<tr><td>Diameters</td><td>${diamStr}</td></tr>`;
+  }
+  if (project) h += `<tr><td>Project</td><td>${esc(project)}</td></tr>`;
+  if (cust) h += `<tr><td>Customer</td><td>${esc(cust)}</td></tr>`;
+  if (contractor) h += `<tr><td>Contractor</td><td>${esc(contractor)}</td></tr>`;
+  h += `<tr><td>Plant</td><td>${PLANT_LABELS[meta.plantIdx]}</td></tr>`;
+  h += `<tr><td>Shipped</td><td>${meta.year}${yrs && yrs[0] !== yrs[1] ? ` (job: ${yrs[0]}–${yrs[1]})` : ''}</td></tr>`;
+  const loc = [city, st].filter(Boolean).join(', ') + (zip ? ' ' + zip : '');
+  if (loc.trim()) h += `<tr><td>Location</td><td>${esc(loc)}</td></tr>`;
+  h += '</table>';
+  if (meta.prec === 2) h += '<div class="approx">Approximate location (state-level)</div>';
+  h += '</div>';
+  return h;
+}
+</script>
+</body>
+</html>
