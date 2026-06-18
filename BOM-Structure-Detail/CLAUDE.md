@@ -60,10 +60,10 @@ accounting records — the full accounting data lives elsewhere and is not in th
 
 | Year | SITE_PATH | DRIVE_NAME | Output |
 |---|---|---|---|
-| 2026 | `/sites/JobData2026` | `Job Data 2026` | `output/all_bom_2026.csv` |
-| 2025 | `/sites/jobdata2025` | `Job Data 2025` | `output/all_bom_2025.csv` |
-| 2024 | `/sites/jobdata2024` | `Job Data 2024` | `output/all_bom_2024.csv` |
-| 2023 | `/sites/jobdata2023` | `Job Data 2023` | `output/all_bom_2023.csv` |
+| 2026 | `/sites/JobData2026` | `Job Data 2026` | `output/bom_manhole_map.csv` |
+| 2025 | `/sites/jobdata2025` | `Job Data 2025` | `output/bom_manhole_map_2025.csv` |
+| 2024 | `/sites/jobdata2024` | `Job Data 2024` | `output/bom_manhole_map_2024.csv` |
+| 2023 | `/sites/jobdata2023` | `Job Data 2023` | `output/bom_manhole_map_2023.csv` |
 
 Auth: `~/.claude/msgraph_config.json` (`tenant_id`, `client_id`, optional `client_secret`),
 device-code flow, token cached at `~/.claude/msgraph_token.json`.
@@ -164,10 +164,10 @@ extraction and should be investigated.
 
 | File | Rows | Jobs | Invalid job codes | Notes |
 |---|---|---|---|---|
-| `all_bom_2026.csv` | 18,365 | 151 | None | |
-| `all_bom_2025.csv` | 81,392 | 214 | None | Re-run needed — ~171 folders missed due to 401s before proactive refresh fix |
-| `all_bom_2024.csv` | 64,168 | 213 | None | Re-run needed to verify completeness |
-| `all_bom_2023.csv` | 64,572 | 253 | None | |
+| `bom_manhole_map.csv` | 18,365 | 151 | None | (2026) |
+| `bom_manhole_map_2025.csv` | 81,392 | 214 | None | Re-run needed — ~171 folders missed due to 401s before proactive refresh fix |
+| `bom_manhole_map_2024.csv` | 64,168 | 213 | None | Re-run needed to verify completeness |
+| `bom_manhole_map_2023.csv` | 64,572 | 253 | None | |
 | `skipped_structures.csv` | — | — | — | Overwritten on each run; lists structure names that matched no pattern |
 | `errors.csv` | — | — | — | Overwritten on each run; NCF errors, BOM parse errors, folder-level errors |
 | `unclassified_files.csv` | — | — | — | Overwritten on each run; files not matched by document_types.csv (noise extensions excluded) |

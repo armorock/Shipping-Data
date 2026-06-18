@@ -45,3 +45,24 @@ truth. Replaces the deprecated `NSAW All Shipping Data1.2.xlsx` mashup. See `REA
 
 ~93,137 shipped pieces (base 20,987 / rehab 3,304 / non-base 68,750 / unknown 96), 3,137 job codes,
 609 jobs needing location review, 188 jobs released-but-not-shipped.
+
+## Pending work (as of 2026-06-15)
+
+### County review — partially complete
+
+`output/review/04_county.xlsx` has 154 conflict rows; 7 confirmed, 147 remaining.
+
+- **DIO** — "FREEDOM" is a town not a county; needs actual county lookup (likely Outagamie County WI).
+- **BLL** — DESCHUTES (jobcode/registry) vs MARION OR (149 ERP lines); needs manual project-location lookup.
+- **19 bucket codes** (BV, BX, BZ, CA–CN, MH, ST) — catch-all ERP codes mixing multiple projects; county unresolvable without sub-job attribution; flagged with notes.
+- When shipping map uses county data, note that **147 of 154 county conflicts are unconfirmed** — those jobs will have lower-confidence county assignments.
+
+### jl_mdrive_reader.py extractor improvements (M: drive required)
+
+M: drive was not accessible on 2026-06-15. Deferred to next session with M: drive access:
+
+- Extract `NCF county` field from New Customer Forms
+- Preserve folder project name (currently overwritten by parsed name)
+- Cross-validate job code from folder name vs BOM job code
+
+Plan notes: `C:\Users\JohnLeitzke\.claude\plans\c-users-johnleitzke-claude-plans-read-my-enumerated-knuth.md`

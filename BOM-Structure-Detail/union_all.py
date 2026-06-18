@@ -39,7 +39,8 @@ def main():
 
     dfs = []
     for year in years:
-        path = os.path.join(OUTPUT_DIR, f"all_bom_{year}.csv")
+        suffix = "" if year == "2026" else f"_{year}"
+        path = os.path.join(OUTPUT_DIR, f"bom_manhole_map{suffix}.csv")
         if not os.path.exists(path):
             print(f"  {year}: not found — skipping ({path})")
             continue

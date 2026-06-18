@@ -544,7 +544,8 @@ def process_job(token, drive_id, drive_year, job_code, folder_id, use_ncf=True):
 def run_year(token, year):
     cfg = YEAR_CONFIG[year]
     use_ncf = year != "2023"
-    output_path = os.path.join(OUTPUT_DIR, f"all_bom_{year}.csv")
+    suffix = "" if year == "2026" else f"_{year}"
+    output_path = os.path.join(OUTPUT_DIR, f"bom_manhole_map{suffix}.csv")
 
     print(f"\n{'='*60}")
     print(f"Year: {year}  site={cfg['site_path']}  drive={cfg['drive_name']}")

@@ -4,7 +4,7 @@ REPO = r"C:\Users\JohnLeitzke\Code\Shipping-Data"
 SCHOOLEY = os.path.join(REPO, "Schooleys Shit")
 MASTER_CSV = os.path.join(SCHOOLEY, "MASTER CSV FILES")
 
-BOM_UNION_XLSX = os.path.join(MASTER_CSV, "all_bom_union.xlsx")
+BOM_UNION_XLSX = os.path.join(REPO, "Extracting-M-Drive", "output", "all_bom_union.xlsx")
 BOM_UNION_SHEET = "BOM 2016-2026"
 BOM_RESALE_SHEET = "Resale"
 
