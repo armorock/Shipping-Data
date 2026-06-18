@@ -6,7 +6,7 @@ Interactive Leaflet dashboard of Armorock **MHB bases shipped** (2014–2026) fo
 
 **Filters** (left panel): job/project/customer search, year (dropdown of checkboxes), single-state dropdown, plant, location precision. **Display toggles:** state-heat choropleth, heatmap glow, plant → destination arcs, show/hide pins.
 
-**Presentation graphics:** KPI header tiles (total bases, states served, jobs, top state, latest-year growth), a by-year bar chart (click a bar to toggle that year), a diameter-mix donut, top-states and top-customers leaderboards (click a state row to isolate it), and an animated year timeline (play button + scrubber, cumulative 2014→2026). **Export PNG** button downloads the current map view for slide decks.
+**Presentation graphics:** KPI header tiles (total bases, states served, jobs, top state, YTD growth vs prior year), a by-year bar chart (click a bar to toggle that year), a diameter-mix donut, top-states and top-customers leaderboards (click a state row to isolate it), and an animated year timeline (play button + scrubber, cumulative 2014→2026). **Export PNG** button downloads the current map view for slide decks.
 
 All charts/filters are computed client-side from `data.json`; the build pipeline is unchanged. Beyond Leaflet/Carto, the page loads three more CDN libraries at runtime: a US-states GeoJSON (jsDelivr) for the choropleth (degrades gracefully if unavailable), `leaflet.heat` (heatmap glow), and `dom-to-image-more` (PNG export).
 
@@ -31,7 +31,7 @@ python -m http.server 8741 -d output   # local preview at http://localhost:8741
 `output/` is the deployable site (also a standalone git repo pushed to `armorock/ax-fieldatlas-7q3x`):
 
 - `index.html` — single-file Leaflet app (copied from the authored source at the project root)
-- `data.json` — compact build: `locs` (deduped lat/lng), `jobs`, `customers`, `mhb` records `[locIdx, year, plantIdx, qty, jobIdx, prec, [[diam, count], ...]]`
+- `data.json` — compact build: `locs` (deduped lat/lng), `jobs`, `customers`, `mhb` records `[locIdx, year, month, plantIdx, qty, jobIdx, prec, [[diam, count], ...]]`
 - `robots.txt`
 
 ## Data rules

@@ -92,6 +92,12 @@ def clean_year(v):
     return None
 
 
+def clean_month(v):
+    if isinstance(v, (datetime, date)):
+        return v.month
+    return None
+
+
 def norm_job_code(v):
     if v is None:
         return None
@@ -143,7 +149,9 @@ def read_rows():
         if qty == 0:
             stats["qty_zero_excluded"] += 1
             continue
-        year = clean_year(raw[header["Date Shipped"]])
+        raw_date = raw[header["Date Shipped"]]
+        year = clean_year(raw_date)
+        month = clean_month(raw_date)
         if year is None:
             stats["bad_date_excluded"] += 1
             continue
@@ -157,6 +165,7 @@ def read_rows():
             "customer": (raw[header["Invoiced Custumer"]] or "").strip() if isinstance(raw[header["Invoiced Custumer"]], str) else None,
             "job_code": norm_job_code(raw[header["Job Code"]]),
             "year": year,
+            "month": month,
             "structure_name": raw[header["Structure Name"]].strip() if isinstance(raw[header["Structure Name"]], str) and raw[header["Structure Name"]].strip().lower() not in ("", "none") else None,
             "part_number": str(raw[header["Part Number"]]).strip() if raw[header["Part Number"]] else None,
             "part_type": raw[header["part_type"]],
@@ -294,18 +303,19 @@ def main():
         if r["loc_idx"] is None:
             mhb_unmapped += 1
             continue
-        key = (r["loc_idx"], r["year"], r["plant_idx"], r["job_idx"], r["prec"])
+        key = (r["loc_idx"], r["year"], r["month"], r["plant_idx"], r["job_idx"], r["prec"])
         mhb_agg[key]["qty"] += 1
         if r["diameter"]:
             mhb_agg[key]["diams"][r["diameter"]] += 1
     mhb = [
-        [loc, y, p, v["qty"], j, prec, [[d, n] for d, n in sorted(v["diams"].items(), key=lambda x: -x[1])]]
-        for (loc, y, p, j, prec), v in mhb_agg.items()
+        [loc, y, mo, p, v["qty"], j, prec, [[d, n] for d, n in sorted(v["diams"].items(), key=lambda x: -x[1])]]
+        for (loc, y, mo, p, j, prec), v in mhb_agg.items()
     ]
 
     data = {
         "meta": {
-            "generated": "2026-06-11",
+            "generated": date.today().isoformat(),
+            "currentMonth": date.today().month,
             "notMappedMhb": mhb_unmapped,
             "notMappedRows": prec_counts["unmapped"],
             "badDates": stats["bad_date_excluded"],
@@ -330,7 +340,7 @@ def main():
     print(f"rows kept: {stats['rows_kept']} | qty=0 excluded: {stats['qty_zero_excluded']} | bad dates: {stats['bad_date_excluded']} | bad plant: {stats['bad_plant_excluded']}")
     print(f"enrichment fills from jobcode_db: {dict(filled)}")
     mhb_by_year = Counter()
-    for loc, y, p, qty, j, prec, diams in mhb:
+    for loc, y, mo, p, qty, j, prec, diams in mhb:
         mhb_by_year[y] += qty
     ok = True
     for y in sorted(MHB_BASELINE):

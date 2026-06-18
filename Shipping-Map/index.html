@@ -296,11 +296,11 @@ function init(data) {
   });
 
   DATA.mhb.forEach((rec, i) => {
-    const [locIdx, year, plantIdx, qty, jobIdx, prec, diams] = rec;
+    const [locIdx, year, month, plantIdx, qty, jobIdx, prec, diams] = rec;
     const [lat, lng] = DATA.locs[locIdx];
     const st = DATA.jobs[jobIdx][5] || null;
     const m = L.marker(jitter(lat, lng, i), { icon: makeIcon(plantIdx, qty, prec) });
-    m.meta = { year, plantIdx, qty, jobIdx, prec, st, diams: diams || [] };
+    m.meta = { year, month, plantIdx, qty, jobIdx, prec, st, diams: diams || [] };
     m.bindPopup(() => popupHtml(m.meta));
     mhbMarkers.push(m);
   });
@@ -382,10 +382,15 @@ function updateKPI(visible) {
   const maxYr = Math.max(0, ...Object.keys(byYear).map(Number));
   let growth = '';
   if (maxYr >= 2015) {
-    const cur = byYear[maxYr] || 0, prev = byYear[maxYr - 1] || 0;
-    if (prev > 0) {
-      const pct = Math.round((cur - prev) / prev * 100);
-      growth = `${pct >= 0 ? '+' : ''}${pct}% <small>vs ${maxYr - 1}</small>`;
+    const cur = byYear[maxYr] || 0;
+    const cutoff = DATA.meta.currentMonth;
+    let ytdPrev = 0;
+    visible.forEach(m => {
+      if (m.meta.year === maxYr - 1 && m.meta.month <= cutoff) ytdPrev += m.meta.qty;
+    });
+    if (ytdPrev > 0) {
+      const pct = Math.round((cur - ytdPrev) / ytdPrev * 100);
+      growth = `${pct >= 0 ? '+' : ''}${pct}% <small>YTD vs ${maxYr - 1}</small>`;
     } else growth = '—';
   } else growth = '—';
   const tiles = [
@@ -393,7 +398,7 @@ function updateKPI(visible) {
     { lbl: 'States served', val: states.size },
     { lbl: 'Jobs / projects', val: jobs.size.toLocaleString() },
     { lbl: 'Top state', val: topSt === '—' ? '—' : `${topSt} <small>${topV.toLocaleString()}</small>` },
-    { lbl: maxYr ? `${maxYr} growth` : 'Growth', val: growth },
+    { lbl: maxYr ? `${maxYr} YTD growth` : 'Growth', val: growth },
   ];
   document.getElementById('kpis').innerHTML = tiles
     .map(t => `<div class="kpi"><div class="val">${t.val}</div><div class="lbl">${t.lbl}</div></div>`).join('');
