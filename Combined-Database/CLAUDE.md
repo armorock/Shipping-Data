@@ -43,19 +43,17 @@ truth. Replaces the deprecated `NSAW All Shipping Data1.2.xlsx` mashup. See `REA
 
 ## Current scale (2026-Q2 run)
 
-~93,137 shipped pieces (base 20,987 / rehab 3,304 / non-base 68,750 / unknown 96), 3,137 job codes,
-609 jobs needing location review, 188 jobs released-but-not-shipped.
+~93,137 shipped pieces (base 20,987 / rehab 3,304 / non-base 68,750 / unknown 96), 3,169 job codes,
+705 jobs needing location review.
 
 ## Pending work (as of 2026-06-15)
 
-### County review — partially complete
+### County review — complete (2026-06-22)
 
-`output/review/04_county.xlsx` has 154 conflict rows; 7 confirmed, 147 remaining.
-
-- **DIO** — "FREEDOM" is a town not a county; needs actual county lookup (likely Outagamie County WI).
-- **BLL** — DESCHUTES (jobcode/registry) vs MARION OR (149 ERP lines); needs manual project-location lookup.
-- **19 bucket codes** (BV, BX, BZ, CA–CN, MH, ST) — catch-all ERP codes mixing multiple projects; county unresolvable without sub-job attribution; flagged with notes.
-- When shipping map uses county data, note that **147 of 154 county conflicts are unconfirmed** — those jobs will have lower-confidence county assignments.
+`output/review/04_county.xlsx` had 154 rows; all resolved:
+- **130 rows confirmed** — all valid job codes have a confirmed county value
+- **24 rows deleted** — QB parse errors (2-char codes, 4-char ANCP, post-E start codes like MH/ST/STA); these had ERP-only data with no real project behind them
+- Key corrections: BCQ→GREENVILLE SC, BFR→DAVIS UT, BHK/BIU/BLB→BRUNSWICK NC, BWN→ANDERSON SC, BVZ/BXD/CAS/CDL→MANATEE FL, BPP→CHARLES MD, CDB→DENTON TX, CDF→CHESTER SC, CXH→BRUNSWICK NC, BWV→WEBER UT, CKD→SNOHOMISH WA
 
 ### jl_mdrive_reader.py extractor improvements (M: drive required)
 

@@ -22,7 +22,7 @@ Neither workstream touches the other's files.
 
 | Source | File | Rows | Job Codes | Date Range |
 |---|---|---|---|---|
-| BOM 2016–2026 | `MASTER CSV FILES/all_bom_union.xlsx` → sheet `BOM 2016-2026` | 216,005 | 2,104 | 2016–2026 |
+| BOM 2016–2026 | `MASTER CSV FILES/all_bom_union.xlsx` → sheet `BOM 2016-2026` | 462,552 | 2,304 | 2016–2026 |
 | Dispatch Board | `MASTER CSV FILES/Dispatch_Board_Master_2019-2025.csv` | 27,353 | 1,924 | 2019–2025 |
 | ERP Shipping | `MASTER CSV FILES/All Shipping Data BABY.xlsm` → sheet `Master List` | 93,653 | 2,492 | 2014–2026 |
 | Job Code markdown files | `Job Codes/*.md` | ~3,000 files | ~3,000 | — |
@@ -110,14 +110,14 @@ in_bom, in_dispatch, in_shipping, in_markdown
 bom_row_count, dispatch_row_count, shipping_row_count
 ```
 
-### Results from last run (2026-05-26)
+### Results from last run (2026-06-22)
 
-3,028 total records. Plant resolution breakdown:
-- MATCH: 1,978
-- SINGLE_SOURCE: 263
-- CONFLICT: 191
+3,071 total records. Plant resolution breakdown:
+- MATCH: 1,743
+- SINGLE_SOURCE: 249
+- CONFLICT: 37
 - CONSENSUS_OVERRIDE: 0
-- NO_DATA: 596
+- NO_DATA: 639
 
 ### `jl_sharepoint_reader.py`
 
