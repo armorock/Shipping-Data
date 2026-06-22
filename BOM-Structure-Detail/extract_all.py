@@ -505,7 +505,7 @@ def process_job(token, drive_id, drive_year, job_code, folder_id, use_ncf=True):
 
             for skipped in bom.get("skipped_structures", []):
                 print(f'  [{job_code}] [SKIP structure] "{skipped}" in {fname} — no pattern matched')
-                _write_skipped(job_code, fname, skipped, year)
+                _write_skipped(job_code, fname, skipped, drive_year)
 
             # If job_code still unresolved, try BOM header when structures are present
             if not job_code_resolved and bom.get("structures"):

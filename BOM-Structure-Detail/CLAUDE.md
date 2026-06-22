@@ -94,7 +94,7 @@ also expired), the script will print the device-code prompt and wait.
 | `sharepoint_client.py` | `get_site`, `get_drive`, `list_children`, `download_file` |
 | `parse_bom_pdf.py` | All BOM/NCF/Shop Drawing parsers; subprocess-safe PDF wrappers |
 | `extract_all.py` | Main extractor — all years, no filtering |
-| `union_all.py` | Combines per-year CSVs into `output/all_bom_2023_2026.xlsm`; frozen header, auto-filter, column widths |
+| `union_all.py` | Combines per-year CSVs into `output/all_bom_2023_2026.xlsx`; frozen header, auto-filter, column widths |
 | `extract_bom_2026.py` | Single-year 2026 extractor (legacy; prefer `extract_all.py`) |
 | `extract_bom_2025.py` | Single-year 2025 extractor (legacy; prefer `extract_all.py`) |
 | `extract_bom_2024.py` | Single-year 2024 extractor (legacy; prefer `extract_all.py`) |
@@ -160,14 +160,14 @@ extraction and should be investigated.
 - **Revision proliferation:** Jobs with many dated revisions (e.g. DAU with 4,515 rows, DEE with 2,787 rows) have inflated row counts because every revision is included by design.  Use `Source File` to group or deduplicate by release date in post-processing.
 - **Summary-only jobs:** A small number of 2023 jobs have only Summary PDFs (no XML or ByStructure) — they predate the XML export workflow.
 
-## Output File Status (last full run: 2026-05-15)
+## Output File Status (last full run: 2026-06-22)
 
 | File | Rows | Jobs | Invalid job codes | Notes |
 |---|---|---|---|---|
-| `bom_manhole_map.csv` | 18,365 | 151 | None | (2026) |
-| `bom_manhole_map_2025.csv` | 81,392 | 214 | None | Re-run needed — ~171 folders missed due to 401s before proactive refresh fix |
-| `bom_manhole_map_2024.csv` | 64,168 | 213 | None | Re-run needed to verify completeness |
-| `bom_manhole_map_2023.csv` | 64,572 | 253 | None | |
+| `bom_manhole_map.csv` | 23,124 | 194 | None | (2026) |
+| `bom_manhole_map_2025.csv` | 52,688 | — | None | Re-run needed — network dropped mid-run (DNS failure), 169 folder errors |
+| `bom_manhole_map_2024.csv` | 61,336 | — | None | Re-run needed — network dropped mid-run (DNS failure), 163 folder errors |
+| `bom_manhole_map_2023.csv` | 75,568 | 253 | None | Good — up from 64,572 (added missed folders) |
 | `skipped_structures.csv` | — | — | — | Overwritten on each run; lists structure names that matched no pattern |
 | `errors.csv` | — | — | — | Overwritten on each run; NCF errors, BOM parse errors, folder-level errors |
 | `unclassified_files.csv` | — | — | — | Overwritten on each run; files not matched by document_types.csv (noise extensions excluded) |
