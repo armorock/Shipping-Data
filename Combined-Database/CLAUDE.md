@@ -22,6 +22,7 @@ truth. Replaces the deprecated `NSAW All Shipping Data1.2.xlsx` mashup. See `REA
   Also produces: `04_county.xlsx` (county CONFLICT/GAP rows) and `07_location_matrix.xlsx` (all jobs, all sources, includes AGREE rows + `street_address` column for geocodable addresses).
 - `apply_corrections.py` — reads filled review xlsx -> resolutions -> rebuilds registry/ledger/reports.
 - `run_quarter.py` — orchestrator. `snapshot_and_diff.py` — per-quarter snapshot + change report.
+- `nsaw_export_bases.py` — standalone NSAW data prep; filters `pieces_ledger.csv` to BASE parts with valid A–E 3-letter job codes, converts all part numbers to Gen4 canonical names, outputs `output/bases_by_job_code.csv`. Re-run before each NSAW.
 
 ## Decisions / gotchas
 
@@ -54,6 +55,10 @@ truth. Replaces the deprecated `NSAW All Shipping Data1.2.xlsx` mashup. See `REA
 - **130 rows confirmed** — all valid job codes have a confirmed county value
 - **24 rows deleted** — QB parse errors (2-char codes, 4-char ANCP, post-E start codes like MH/ST/STA); these had ERP-only data with no real project behind them
 - Key corrections: BCQ→GREENVILLE SC, BFR→DAVIS UT, BHK/BIU/BLB→BRUNSWICK NC, BWN→ANDERSON SC, BVZ/BXD/CAS/CDL→MANATEE FL, BPP→CHARLES MD, CDB→DENTON TX, CDF→CHESTER SC, CXH→BRUNSWICK NC, BWV→WEBER UT, CKD→SNOHOMISH WA
+
+### ERP job code cleanup — next step
+
+348 BASE rows in `pieces_ledger.csv` have invalid job codes (2-letter, 4-letter, or starting past E). All originate from ERP sources (`erp_qb`: 325, `erp_ns`: 12, `erp_fb`: 11) — Dispatch is already clean. The NSAW export filters these at output time. To remove them permanently: correct the job codes in BABY.xlsm and re-run the pipeline.
 
 ### jl_mdrive_reader.py extractor improvements (M: drive required)
 
