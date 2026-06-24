@@ -134,8 +134,8 @@ def to_gen4_name(raw):
 ledger = pd.read_csv(LEDGER)
 bases  = ledger[ledger["part_type"] == "BASE"].copy()
 
-# Keep only standard 3-letter A–E job codes (exclude 2-letter, 4-letter, past-E, numeric, internal)
-valid_jc = bases["job_code"].astype(str).str.match(r'^[A-Ea-e][A-Za-z]{2}$')
+# Keep standard 3-letter A–E job codes, plus blank/null (pre-2018 jobs with no job code assigned)
+valid_jc = bases["job_code"].isna() | bases["job_code"].astype(str).str.match(r'^[A-Ea-e][A-Za-z]{2}$')
 bases = bases[valid_jc].copy()
 
 bases["item_name"] = bases["part_number"].apply(to_gen4_name)

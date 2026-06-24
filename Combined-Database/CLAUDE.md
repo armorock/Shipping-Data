@@ -22,7 +22,7 @@ truth. Replaces the deprecated `NSAW All Shipping Data1.2.xlsx` mashup. See `REA
   Also produces: `04_county.xlsx` (county CONFLICT/GAP rows) and `07_location_matrix.xlsx` (all jobs, all sources, includes AGREE rows + `street_address` column for geocodable addresses).
 - `apply_corrections.py` — reads filled review xlsx -> resolutions -> rebuilds registry/ledger/reports.
 - `run_quarter.py` — orchestrator. `snapshot_and_diff.py` — per-quarter snapshot + change report.
-- `nsaw_export_bases.py` — standalone NSAW data prep; filters `pieces_ledger.csv` to BASE parts with valid A–E 3-letter job codes, converts all part numbers to Gen4 canonical names, outputs `output/bases_by_job_code.csv`. Re-run before each NSAW.
+- `nsaw_export_bases.py` — standalone NSAW data prep; filters `pieces_ledger.csv` to BASE parts with valid A–E 3-letter job codes (plus null job codes for pre-2018 rows), converts all part numbers to Gen4 canonical names, outputs `output/bases_by_job_code.csv`. Re-run before each NSAW.
 
 ## Decisions / gotchas
 
