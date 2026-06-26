@@ -14,8 +14,16 @@ truth. Replaces the deprecated `NSAW All Shipping Data1.2.xlsx` mashup. See `REA
 - `resolutions.py` — durable confirmed decisions in `data/resolutions.csv` (load/upsert).
 - `build_registry.py` — Layer 1 (`project_registry.csv`). A CONFLICT whose winner is backed by the
   top-trust source is auto-resolved (`RESOLVED`); only city/state CONFLICT/GAP set `needs_review`.
+- `parse_part_name.py` — parses any-generation Armorock part number into 15 attribute fields
+  (`part_type`, `subcategory`, `generation`, `diameter`, `height`, `opening_diameter`, `troughing`,
+  `wall_variant`, `section_suffix`, `lid_suffix`, `box_length`, `box_suffix`, `es`, `de`, `de_count`).
+  Also exports `build_gen4_name(attrs)` to reassemble a canonical Gen4 name from those attributes.
+  Implements the `/item-name-detail-interpreter` + `/part-name-builder` skills in Python.
 - `build_pieces_ledger.py` — Layer 2 (`pieces_ledger.csv`). ERP dedup = max-count-per-system per
   (job, part, date). Overlap rule from `sources.SHIPPED_OVERLAP`. Emits reconciliation + quoted_not_shipped.
+  Now also writes `gen4_name` (Column E) and 15 `pn_*` attribute columns for every piece.
+  Pre-2018 location fallback: captures `Shipping City / Shippings State / ZipCode` from BABY inline
+  and uses them when the registry lookup returns None (covers all 14,863 null-job-code pre-2018 pieces).
 - `build_reports.py` — rehab/nonbase report, provenance, structure completeness roadmap, review lists.
   Review list columns: `job_code | field | status | current_winner | winner_sources | project_name | [field extras] | src_bom_union | src_dispatch | src_erp_qb | src_erp_fb | src_erp_ns | src_jobcode_db | src_registry | all_observed_values | Confirmed Value | Notes`.
   City extras: `raw_bom | zip_county | county_flag`. Zip extras: `geo_city | geo_state | confirmed_city | confirmed_state | zip_ok` (GeoNames from `Shipping-Map/data/US.txt`).
@@ -52,6 +60,7 @@ truth. Replaces the deprecated `NSAW All Shipping Data1.2.xlsx` mashup. See `REA
 ### County review — complete (2026-06-22)
 
 `output/review/04_county.xlsx` had 154 rows; all resolved:
+
 - **130 rows confirmed** — all valid job codes have a confirmed county value
 - **24 rows deleted** — QB parse errors (2-char codes, 4-char ANCP, post-E start codes like MH/ST/STA); these had ERP-only data with no real project behind them
 - Key corrections: BCQ→GREENVILLE SC, BFR→DAVIS UT, BHK/BIU/BLB→BRUNSWICK NC, BWN→ANDERSON SC, BVZ/BXD/CAS/CDL→MANATEE FL, BPP→CHARLES MD, CDB→DENTON TX, CDF→CHESTER SC, CXH→BRUNSWICK NC, BWV→WEBER UT, CKD→SNOHOMISH WA

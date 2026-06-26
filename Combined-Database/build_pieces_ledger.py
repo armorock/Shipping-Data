@@ -5,8 +5,9 @@ from collections import Counter, defaultdict
 import openpyxl
 
 import sources
-from common import (norm_job_code, norm_part_number, year_from_date, structure_class,
-                    part_type_from_pn, is_blank)
+from common import (norm_job_code, norm_part_number, norm_city, norm_state, norm_zip,
+                    year_from_date, structure_class, part_type_from_pn, is_blank)
+from parse_part_name import parse_part_name, build_gen4_name
 
 csv.field_size_limit(10_000_000)
 
@@ -75,6 +76,9 @@ def read_erp_groups():
                                  if not is_blank(row[h["Structure Name"]]) else None),
                 "plant": (str(row[h["Plant"]]).strip().upper() if not is_blank(row[h["Plant"]]) else None),
                 "year": year_from_date(row[h["Date Shipped"]]),
+                "city":  norm_city(str(row[h["Shipping City"]]) if not is_blank(row[h["Shipping City"]]) else None),
+                "state": norm_state(str(row[h["Shippings State"]]) if not is_blank(row[h["Shippings State"]]) else None),
+                "zip":   norm_zip(row[h["ZipCode"]]) if not is_blank(row[h["ZipCode"]]) else None,
             }
     wb.close()
     return groups, meta
@@ -93,6 +97,7 @@ def dedup_erp_pieces(groups, meta):
                 "structure_class": structure_class(m["part_type"], pn),
                 "ship_date": date, "year": m["year"], "plant": m["plant"],
                 "piece_id": f"erp:{jc}:{pn}:{date}:{s}",
+                "erp_city": m["city"], "erp_state": m["state"], "erp_zip": m["zip"],
             })
     return pieces
 
@@ -211,16 +216,28 @@ def build():
     loc = load_registry_loc()
     for p in ledger:
         c, s, z = loc.get(p["job_code"], (None, None, None))
-        p["city"], p["state"], p["zip"] = c, s, z
+        p["city"]  = c or p.pop("erp_city",  None)
+        p["state"] = s or p.pop("erp_state", None)
+        p["zip"]   = z or p.pop("erp_zip",   None)
 
-    fields = ["piece_id", "job_code", "structure_id", "part_number", "part_type",
-              "structure_class", "ship_date", "year", "plant", "source", "city", "state", "zip"]
+    _PN_KEYS = ["part_type", "subcategory", "generation", "diameter", "height",
+               "opening_diameter", "troughing", "wall_variant", "section_suffix",
+               "lid_suffix", "box_length", "box_suffix", "es", "de", "de_count"]
+    PN_ATTRS = [f"pn_{k}" for k in _PN_KEYS]
+    fields = ["piece_id", "job_code", "structure_id", "part_number", "gen4_name", "part_type",
+              "structure_class", "ship_date", "year", "plant", "source", "city", "state", "zip",
+              *PN_ATTRS]
     path = os.path.join(sources.OUTPUT_DIR, "pieces_ledger.csv")
     with open(path, "w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fields)
         w.writeheader()
         for p in ledger:
-            w.writerow({k: p.get(k) for k in fields})
+            row = {k: p.get(k) for k in fields}
+            attrs = parse_part_name(p.get("part_number"))
+            for col, key in zip(PN_ATTRS, _PN_KEYS):
+                row[col] = attrs.get(key, '')
+            row["gen4_name"] = build_gen4_name(attrs)
+            w.writerow(row)
 
     assert len({p["piece_id"] for p in ledger}) == len(ledger), "duplicate piece_id!"
     cls = Counter(p["structure_class"] for p in ledger)
