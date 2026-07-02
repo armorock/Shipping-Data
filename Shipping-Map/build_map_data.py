@@ -223,6 +223,15 @@ class Geocoder:
         valid = self.city_to_states.get(city.upper(), set())
         return bool(valid) and state not in valid
 
+    def auto_correct_state(self, city, state, zip5=None):
+        valid = self.city_to_states.get(city.upper(), set())
+        if len(valid) != 1 or state in valid:
+            return None
+        new_state = next(iter(valid))
+        if zip5 and self.zip_state.get(zip5) == state:
+            return None  # zip confirms the listed state; don't override
+        return new_state
+
     def lookup(self, city, state, zip5):
         if zip5 and zip5 in self.zip_ll:
             return self.zip_ll[zip5] + (0,)
@@ -261,6 +270,7 @@ def main():
     loc_index = {}
     prec_counts = Counter()
     anomalies = []
+    n_corrected = 0
     for r in rows:
         result = geo.lookup(r["city"], r["state"], r["zip"])
         if result is None:
@@ -270,16 +280,25 @@ def main():
             continue
         lat, lng, prec = round(result[0], 4), round(result[1], 4), result[2]
         if prec != 3 and geo._is_suspect(r["city"], r["state"]):
-            prec = 3
-            anomalies.append({
-                "job_code":     r.get("job_code") or "",
-                "city":         r["city"] or "",
-                "listed_state": r["state"] or "",
-                "valid_states": "|".join(sorted(geo.city_to_states.get((r["city"] or "").upper(), set()))),
-                "zip":          r["zip"] or "",
-                "year":         str(r["year"]),
-                "part_type":    r.get("part_type") or "",
-            })
+            corrected_to = geo.auto_correct_state(r["city"], r["state"], r["zip"])
+            if corrected_to:
+                r["original_state"] = r["state"]
+                r["state"] = corrected_to
+                result2 = geo.lookup(r["city"], corrected_to, r["zip"])
+                if result2:
+                    lat, lng, prec = round(result2[0], 4), round(result2[1], 4), result2[2]
+                n_corrected += 1
+            else:
+                prec = 3
+                anomalies.append({
+                    "job_code":     r.get("job_code") or "",
+                    "city":         r["city"] or "",
+                    "listed_state": r["state"] or "",
+                    "valid_states": "|".join(sorted(geo.city_to_states.get((r["city"] or "").upper(), set()))),
+                    "zip":          r["zip"] or "",
+                    "year":         str(r["year"]),
+                    "part_type":    r.get("part_type") or "",
+                })
         key = (lat, lng)
         if key not in loc_index:
             loc_index[key] = len(locs)
@@ -314,6 +333,7 @@ def main():
             first["zip"],
             [[p, n] for p, n in comp.most_common(15)],
             [min(years), max(years)],
+            first.get("original_state"),
         ])
         job_index[key] = len(jobs) - 1
         for r in grp:
@@ -386,8 +406,10 @@ def main():
         ok = False
     print(f"baseline check: {'PASS' if ok else 'FAIL'}")
     print(f"geocode precision: zip={prec_counts[0]} city={prec_counts[1]} state-centroid={prec_counts[2]} suspect={prec_counts[3]} unmapped={prec_counts['unmapped']}")
+    if n_corrected:
+        print(f"auto-corrected states: {n_corrected}")
     if anomalies:
-        print(f"WARN: {len(anomalies)} suspect city/state rows -> {anom_path}")
+        print(f"WARN: {len(anomalies)} suspect city/state rows (unresolvable) -> {anom_path}")
     print(f"fuzzy city matches ({len(geo.fuzzy_log)}):")
     for line in geo.fuzzy_log:
         print(line)

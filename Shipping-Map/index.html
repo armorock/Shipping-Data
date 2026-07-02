@@ -292,7 +292,7 @@ let DATA, mhbMarkers = [];
 let mhbGroup, map, geoLayer = null, choroMax = 1;
 let arcLayer = null, heatLayer = null;
 let playTimer = null, playYear = 2014;
-const state = { years: new Set(YEARS), st: '', plants: new Set([0, 1, 2]), search: '', precs: new Set([0, 1, 2, 3]), heat: false, glow: false, arcs: false, pins: true };
+const state = { years: new Set(YEARS), st: '', plants: new Set([0, 1, 2]), search: '', precs: new Set([0, 1, 2]), heat: false, glow: false, arcs: false, pins: true };
 
 fetch('data.json').then(r => r.json()).then(init);
 
@@ -684,7 +684,7 @@ function buildPanel() {
   const precsDiv = document.getElementById('precs');
   PREC_LABELS.forEach(({ key, label, color }) => {
     const lbl = document.createElement('label');
-    lbl.innerHTML = `<input type="checkbox" checked data-prec="${key}"><span class="swatch" style="background:${color}"></span>${label}`;
+    lbl.innerHTML = `<input type="checkbox" ${key !== 3 ? 'checked' : ''} data-prec="${key}"><span class="swatch" style="background:${color}"></span>${label}`;
     lbl.querySelector('input').addEventListener('change', e => {
       e.target.checked ? state.precs.add(key) : state.precs.delete(key);
       applyFilters();
@@ -803,7 +803,7 @@ function esc(s) {
 
 function popupHtml(meta) {
   const j = DATA.jobs[meta.jobIdx];
-  const [code, project, custIdx, contractor, city, st, zip, , yrs] = j;
+  const [code, project, custIdx, contractor, city, st, zip, , yrs, origState] = j;
   const cust = DATA.customers[custIdx];
   let h = '<div class="popup">';
   h += `<h3>${code ? 'Job ' + esc(code) : 'Legacy shipment'}</h3>`;
@@ -823,6 +823,7 @@ function popupHtml(meta) {
   h += '</table>';
   if (meta.prec === 2) h += '<div class="approx">Approximate location (state-level)</div>';
   if (meta.prec === 3) h += '<div class="approx" style="color:#7B1FA2">&#9888; Suspect location — city not found in listed state</div>';
+  if (origState) h += `<div class="approx" style="color:#2E7D32">State corrected: listed as ${esc(origState)}, placed as ${esc(st)}</div>`;
   h += '</div>';
   return h;
 }
