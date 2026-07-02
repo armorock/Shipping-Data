@@ -106,6 +106,21 @@
   .popup td { padding: 1px 8px 1px 0; vertical-align: top; }
   .popup .approx { color: #c00; font-style: italic; }
   .leaflet-control-attribution { font-size: 10px; }
+  /* Stats panel collapse */
+  #stats-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  #stats-hdr > span { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: #888; white-space: nowrap; }
+  #stats-collapse-btn { background: none; border: none; cursor: pointer; font-size: 14px; color: #aaa; padding: 0 2px; line-height: 1; flex: none; }
+  #stats-collapse-btn:hover { color: #333; }
+  #stats.stats-collapsed { width: 28px; overflow: hidden; padding: 6px 4px; cursor: default; }
+  #stats.stats-collapsed .sec { display: none; }
+  #stats.stats-collapsed #stats-hdr > span { display: none; }
+  #stats.stats-collapsed #stats-collapse-btn { font-size: 18px; color: #BC2035; }
+  /* Legend collapse */
+  #legend-hdr { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; margin-bottom: 6px; }
+  #legend-hdr b { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: #666; font-weight: 700; }
+  #legend-hdr .legend-arrow { font-size: 10px; color: #aaa; margin-left: 8px; flex: none; }
+  #legend.legend-collapsed #legend-body { display: none; }
+  #legend.legend-collapsed { padding: 7px 12px; }
 </style>
 </head>
 <body>
@@ -139,6 +154,10 @@
   <div id="precs"></div>
 </div>
 <div id="stats">
+  <div id="stats-hdr">
+    <span>Charts &amp; Stats</span>
+    <button id="stats-collapse-btn" title="Minimize charts">&#9664;</button>
+  </div>
   <div class="sec">
     <h2>Bases by year</h2>
     <div id="barchart"></div>
@@ -157,18 +176,22 @@
   </div>
 </div>
 <div id="legend">
-  <b>Pin color = location precision</b>
-  <div class="keyrow"><span class="swatch" style="background:#D32F2F"></span>Zip code (precise)</div>
-  <div class="keyrow"><span class="swatch" style="background:#F57C00"></span>City (moderate)</div>
-  <div class="keyrow"><span class="swatch" style="background:#9E9E9E"></span>State only (approximate)</div>
-  <hr>
-  <b>Pin shape = plant</b>
-  <div id="legendplants"></div>
-  <div id="chorolegend">
+  <div id="legend-hdr"><b>Legend</b><span class="legend-arrow">&#9650;</span></div>
+  <div id="legend-body">
+    <b>Pin color = location precision</b>
+    <div class="keyrow"><span class="swatch" style="background:#D32F2F"></span>Zip code (precise)</div>
+    <div class="keyrow"><span class="swatch" style="background:#F57C00"></span>City (moderate)</div>
+    <div class="keyrow"><span class="swatch" style="background:#9E9E9E"></span>State only (approximate)</div>
+    <div class="keyrow"><span class="swatch" style="background:#7B1FA2"></span>Suspect city/state</div>
     <hr>
-    <b>State heat = bases shipped</b>
-    <div class="ramp" id="legendramp"></div>
-    <div class="ramplabels"><span>0</span><span id="choromaxlabel"></span></div>
+    <b>Pin shape = plant</b>
+    <div id="legendplants"></div>
+    <div id="chorolegend">
+      <hr>
+      <b>State heat = bases shipped</b>
+      <div class="ramp" id="legendramp"></div>
+      <div class="ramplabels"><span>0</span><span id="choromaxlabel"></span></div>
+    </div>
   </div>
 </div>
 <div id="timeline">
@@ -184,7 +207,7 @@
 const YEARS = [];
 for (let y = 2014; y <= 2026; y++) YEARS.push(y);
 
-const PREC_COLORS = { 0: '#D32F2F', 1: '#F57C00', 2: '#9E9E9E' };
+const PREC_COLORS = { 0: '#D32F2F', 1: '#F57C00', 2: '#9E9E9E', 3: '#7B1FA2' };
 const CHORO = ['#FEF0D9', '#FDD49E', '#FDBB84', '#FC8D59', '#EF6548', '#D7301F', '#990000'];
 const DONUT_COLORS = ['#BC2035', '#F57C00', '#0873BB', '#2E7D32', '#8E24AA', '#00897B', '#C2185B', '#5D4037', '#FBC02D', '#546E7A'];
 
@@ -269,7 +292,7 @@ let DATA, mhbMarkers = [];
 let mhbGroup, map, geoLayer = null, choroMax = 1;
 let arcLayer = null, heatLayer = null;
 let playTimer = null, playYear = 2014;
-const state = { years: new Set(YEARS), st: '', plants: new Set([0, 1, 2]), search: '', precs: new Set([0, 1, 2]), heat: false, glow: false, arcs: false, pins: true };
+const state = { years: new Set(YEARS), st: '', plants: new Set([0, 1, 2]), search: '', precs: new Set([0, 1, 2, 3]), heat: false, glow: false, arcs: false, pins: true };
 
 fetch('data.json').then(r => r.json()).then(init);
 
@@ -656,6 +679,7 @@ function buildPanel() {
     { key: 0, label: 'Zip code (precise)', color: PREC_COLORS[0] },
     { key: 1, label: 'City (moderate)', color: PREC_COLORS[1] },
     { key: 2, label: 'State only (approx)', color: PREC_COLORS[2] },
+    { key: 3, label: 'Suspect city/state', color: PREC_COLORS[3] },
   ];
   const precsDiv = document.getElementById('precs');
   PREC_LABELS.forEach(({ key, label, color }) => {
@@ -691,12 +715,50 @@ function buildControls() {
     }, 750);
   });
 
-  document.getElementById('statstoggle').addEventListener('click', e => {
+  function setStatsVisible(show) {
     const s = document.getElementById('stats');
-    const hidden = s.style.display === 'none';
-    s.style.display = hidden ? 'block' : 'none';
-    e.target.textContent = hidden ? 'Hide charts' : 'Show charts';
-    if (hidden) applyFilters();
+    const colBtn = document.getElementById('stats-collapse-btn');
+    const tbBtn  = document.getElementById('statstoggle');
+    if (show) {
+      s.classList.remove('stats-collapsed');
+      colBtn.innerHTML = '&#9664;';
+      colBtn.title = 'Minimize charts';
+      tbBtn.textContent = 'Hide charts';
+      localStorage.setItem('armorock_stats_hidden', '0');
+      applyFilters();
+    } else {
+      s.classList.add('stats-collapsed');
+      colBtn.innerHTML = '&#9654;';
+      colBtn.title = 'Show charts';
+      tbBtn.textContent = 'Show charts';
+      localStorage.setItem('armorock_stats_hidden', '1');
+    }
+  }
+  if (localStorage.getItem('armorock_stats_hidden') === '1') setStatsVisible(false);
+
+  document.getElementById('stats-collapse-btn').addEventListener('click', () => {
+    setStatsVisible(document.getElementById('stats').classList.contains('stats-collapsed'));
+  });
+  document.getElementById('statstoggle').addEventListener('click', () => {
+    setStatsVisible(document.getElementById('stats').classList.contains('stats-collapsed'));
+  });
+
+  function setLegendVisible(show) {
+    const leg = document.getElementById('legend');
+    const arrow = leg.querySelector('.legend-arrow');
+    if (show) {
+      leg.classList.remove('legend-collapsed');
+      if (arrow) arrow.innerHTML = '&#9650;';
+      localStorage.setItem('armorock_legend_hidden', '0');
+    } else {
+      leg.classList.add('legend-collapsed');
+      if (arrow) arrow.innerHTML = '&#9660;';
+      localStorage.setItem('armorock_legend_hidden', '1');
+    }
+  }
+  if (localStorage.getItem('armorock_legend_hidden') === '1') setLegendVisible(false);
+  document.getElementById('legend-hdr').addEventListener('click', () => {
+    setLegendVisible(document.getElementById('legend').classList.contains('legend-collapsed'));
   });
 
   const exportbtn = document.getElementById('exportbtn');
@@ -760,6 +822,7 @@ function popupHtml(meta) {
   if (loc.trim()) h += `<tr><td>Location</td><td>${esc(loc)}</td></tr>`;
   h += '</table>';
   if (meta.prec === 2) h += '<div class="approx">Approximate location (state-level)</div>';
+  if (meta.prec === 3) h += '<div class="approx" style="color:#7B1FA2">&#9888; Suspect location — city not found in listed state</div>';
   h += '</div>';
   return h;
 }
