@@ -54,7 +54,7 @@ STATE_CENTROIDS = {
 MHB_BASELINE = {
     2014: 255, 2015: 383, 2016: 767, 2017: 1176, 2018: 1353, 2019: 1431,
     2020: 1427, 2021: 1764, 2022: 1387, 2023: 1603, 2024: 2145, 2025: 2123,
-    2026: 745,
+    2026: 1025,
 }
 
 CITY_PREFIX_EXPANSIONS = [("ST ", "SAINT "), ("FT ", "FORT "), ("MT ", "MOUNT ")]
@@ -107,7 +107,9 @@ def norm_job_code(v):
 
 def load_geonames():
     zip_ll = {}
+    zip_state = {}
     city_points = defaultdict(list)
+    city_to_states = defaultdict(set)
     with open(GEONAMES_PATH, encoding="utf-8") as f:
         for row in csv.reader(f, delimiter="\t"):
             zip5, place, state = row[1], row[2], row[4]
@@ -118,7 +120,9 @@ def load_geonames():
             if state not in STATE_CENTROIDS:
                 continue
             zip_ll[zip5] = (lat, lng)
+            zip_state[zip5] = state
             city_points[(place.upper(), state)].append((lat, lng))
+            city_to_states[place.upper()].add(state)
     city_ll = {
         k: (sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts))
         for k, pts in city_points.items()
@@ -126,7 +130,7 @@ def load_geonames():
     city_names_by_state = defaultdict(list)
     for city, state in city_ll:
         city_names_by_state[state].append(city)
-    return zip_ll, city_ll, city_names_by_state
+    return zip_ll, zip_state, city_ll, city_names_by_state, city_to_states
 
 
 def load_jobdb():
@@ -204,12 +208,20 @@ def enrich(rows, jobdb):
 
 
 class Geocoder:
-    def __init__(self, zip_ll, city_ll, city_names_by_state):
+    def __init__(self, zip_ll, zip_state, city_ll, city_names_by_state, city_to_states):
         self.zip_ll = zip_ll
+        self.zip_state = zip_state
         self.city_ll = city_ll
         self.city_names_by_state = city_names_by_state
+        self.city_to_states = city_to_states
         self.fuzzy_cache = {}
         self.fuzzy_log = []
+
+    def _is_suspect(self, city, state):
+        if not city or not state:
+            return False
+        valid = self.city_to_states.get(city.upper(), set())
+        return bool(valid) and state not in valid
 
     def lookup(self, city, state, zip5):
         if zip5 and zip5 in self.zip_ll:
@@ -239,8 +251,8 @@ class Geocoder:
 
 def main():
     os.makedirs("output", exist_ok=True)
-    zip_ll, city_ll, city_names_by_state = load_geonames()
-    geo = Geocoder(zip_ll, city_ll, city_names_by_state)
+    zip_ll, zip_state, city_ll, city_names_by_state, city_to_states = load_geonames()
+    geo = Geocoder(zip_ll, zip_state, city_ll, city_names_by_state, city_to_states)
     jobdb = load_jobdb()
     rows, stats = read_rows()
     filled = enrich(rows, jobdb)
@@ -248,6 +260,7 @@ def main():
     locs = []
     loc_index = {}
     prec_counts = Counter()
+    anomalies = []
     for r in rows:
         result = geo.lookup(r["city"], r["state"], r["zip"])
         if result is None:
@@ -256,6 +269,17 @@ def main():
             prec_counts["unmapped"] += 1
             continue
         lat, lng, prec = round(result[0], 4), round(result[1], 4), result[2]
+        if prec != 3 and geo._is_suspect(r["city"], r["state"]):
+            prec = 3
+            anomalies.append({
+                "job_code":     r.get("job_code") or "",
+                "city":         r["city"] or "",
+                "listed_state": r["state"] or "",
+                "valid_states": "|".join(sorted(geo.city_to_states.get((r["city"] or "").upper(), set()))),
+                "zip":          r["zip"] or "",
+                "year":         str(r["year"]),
+                "part_type":    r.get("part_type") or "",
+            })
         key = (lat, lng)
         if key not in loc_index:
             loc_index[key] = len(locs)
@@ -336,6 +360,13 @@ def main():
     with open(os.path.join("output", "robots.txt"), "w") as f:
         f.write("User-agent: *\nDisallow: /\n")
 
+    anom_path = os.path.join("output", "geo_anomalies.csv")
+    if anomalies:
+        with open(anom_path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=["job_code", "city", "listed_state", "valid_states", "zip", "year", "part_type"])
+            writer.writeheader()
+            writer.writerows(anomalies)
+
     print("=== VERIFICATION ===")
     print(f"rows kept: {stats['rows_kept']} | qty=0 excluded: {stats['qty_zero_excluded']} | bad dates: {stats['bad_date_excluded']} | bad plant: {stats['bad_plant_excluded']}")
     print(f"enrichment fills from jobcode_db: {dict(filled)}")
@@ -354,7 +385,9 @@ def main():
     if total_mapped + mhb_unmapped != sum(MHB_BASELINE.values()):
         ok = False
     print(f"baseline check: {'PASS' if ok else 'FAIL'}")
-    print(f"geocode precision: zip={prec_counts[0]} city={prec_counts[1]} state-centroid={prec_counts[2]} unmapped={prec_counts['unmapped']}")
+    print(f"geocode precision: zip={prec_counts[0]} city={prec_counts[1]} state-centroid={prec_counts[2]} suspect={prec_counts[3]} unmapped={prec_counts['unmapped']}")
+    if anomalies:
+        print(f"WARN: {len(anomalies)} suspect city/state rows -> {anom_path}")
     print(f"fuzzy city matches ({len(geo.fuzzy_log)}):")
     for line in geo.fuzzy_log:
         print(line)
