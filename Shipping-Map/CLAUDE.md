@@ -27,6 +27,13 @@ mhb: [locIdx, year, month, plantIdx, qty, jobIdx, prec, [[diam, count], ...]]
 
 ## Key data rules
 
+- **Only 8 diameters are real**: 48/60/72/84/96/120/144/192. `clean_diameter()` in
+  `build_map_data.py` allowlists to this set; anything else (mostly Q-custom engineered job
+  codes whose leading digits don't encode a real diameter) buckets into `"?"` (unknown) in
+  `mhb[7]` rather than being dropped or shown as a bogus size. The frontend always counts `"?"`
+  entries regardless of the diameter filter selection (same treatment as markers with no
+  diameter data at all) so per-size filtering can't silently undercount a marker that mixes
+  valid and unknown-diameter pieces.
 - Rows with Quantity = 0 or blank are excluded
 - Valid plants: "Boulder City", "Sulphur Springs", "Plant City"
 - Geocoding precision levels:
