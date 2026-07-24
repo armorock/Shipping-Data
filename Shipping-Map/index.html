@@ -338,7 +338,7 @@ function init(data) {
   });
 
   const diamSet = new Set();
-  mhbMarkers.forEach(m => m.meta.diams.forEach(([d]) => diamSet.add(d)));
+  mhbMarkers.forEach(m => m.meta.diams.forEach(([d]) => { if (d !== '?') diamSet.add(d); }));
   ALL_DIAMS = [...diamSet].sort((a, b) => (+a) - (+b));
   state.diams = new Set(ALL_DIAMS);
 
@@ -380,7 +380,7 @@ function diamMatchQty(m) {
   const diams = m.meta.diams;
   if (!diams || !diams.length) return m.meta.qty;
   let sum = 0;
-  diams.forEach(([d, n]) => { if (state.diams.has(d)) sum += n; });
+  diams.forEach(([d, n]) => { if (d === '?' || state.diams.has(d)) sum += n; });
   return sum;
 }
 
@@ -470,7 +470,7 @@ function updateCustomerBoard(set) {
 function updateDonut(visible) {
   const byDiam = {};
   visible.forEach(m => (m.meta.diams || []).forEach(([d, n]) => {
-    if (state.diams.has(d)) byDiam[d] = (byDiam[d] || 0) + n;
+    if (d === '?' || state.diams.has(d)) byDiam[d] = (byDiam[d] || 0) + n;
   }));
   const rows = Object.entries(byDiam).sort((a, b) => b[1] - a[1]);
   const ctn = document.getElementById('donut');
@@ -486,11 +486,11 @@ function updateDonut(visible) {
     const large = a1 - a0 > Math.PI ? 1 : 0;
     const x0 = cx + r * Math.cos(a0), y0 = cy + r * Math.sin(a0);
     const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
-    paths += `<path d="M${x0.toFixed(2)} ${y0.toFixed(2)} A${r} ${r} 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}" fill="none" stroke="${DONUT_COLORS[i % DONUT_COLORS.length]}" stroke-width="${w}"><title>${esc(d)}″: ${n.toLocaleString()} (${Math.round(n / total * 100)}%)</title></path>`;
+    paths += `<path d="M${x0.toFixed(2)} ${y0.toFixed(2)} A${r} ${r} 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}" fill="none" stroke="${DONUT_COLORS[i % DONUT_COLORS.length]}" stroke-width="${w}"><title>${d === 'Other' ? 'Other' : diamLabel(d)}: ${n.toLocaleString()} (${Math.round(n / total * 100)}%)</title></path>`;
     a0 = a1;
   });
   const legend = top.map(([d, n], i) =>
-    `<div class="keyrow"><span class="dot" style="background:${DONUT_COLORS[i % DONUT_COLORS.length]}"></span>${d === 'Other' ? 'Other' : esc(d) + '″'} · ${n.toLocaleString()}</div>`).join('');
+    `<div class="keyrow"><span class="dot" style="background:${DONUT_COLORS[i % DONUT_COLORS.length]}"></span>${d === 'Other' ? 'Other' : diamLabel(d)} · ${n.toLocaleString()}</div>`).join('');
   ctn.innerHTML = `<svg width="90" height="90">${paths}<text x="${cx}" y="${cy - 2}" text-anchor="middle" font-size="15" font-weight="700" fill="#333">${total.toLocaleString()}</text><text x="${cx}" y="${cy + 12}" text-anchor="middle" font-size="8" fill="#888">bases</text></svg><div class="dlegend">${legend}</div>`;
 }
 
@@ -857,6 +857,10 @@ function buildLegend() {
   });
 }
 
+function diamLabel(d) {
+  return d === '?' ? 'Unknown' : esc(d) + '″';
+}
+
 function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
@@ -870,7 +874,7 @@ function popupHtml(meta) {
   h += '<table>';
   h += `<tr><td>Bases shipped</td><td>${meta.qty}</td></tr>`;
   if (meta.diams && meta.diams.length) {
-    const diamStr = meta.diams.map(([d, n]) => `${n}× ${esc(d)}&Prime;`).join(', ');
+    const diamStr = meta.diams.map(([d, n]) => `${n}× ${diamLabel(d)}`).join(', ');
     h += `<tr><td>Diameters</td><td>${diamStr}</td></tr>`;
   }
   if (project) h += `<tr><td>Project</td><td>${esc(project)}</td></tr>`;

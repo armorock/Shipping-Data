@@ -51,6 +51,24 @@ STATE_CENTROIDS = {
     "WV": (38.64, -80.62), "WI": (44.62, -89.99), "WY": (43.00, -107.55),
 }
 
+VALID_MHB_DIAMETERS = {48, 60, 72, 84, 96, 120, 144, 192}
+
+
+def clean_diameter(v):
+    """Only the 8 standard MHB barrel sizes are real; everything else (mostly Q-custom
+    job codes whose leading digits don't encode a real diameter) is bad source data."""
+    if v is None:
+        return None
+    s = str(v).strip()
+    if not s or s.lower() == "none":
+        return None
+    try:
+        n = int(float(s))
+    except ValueError:
+        return None
+    return str(n) if n in VALID_MHB_DIAMETERS else None
+
+
 MHB_BASELINE = {
     2014: 255, 2015: 383, 2016: 767, 2017: 1176, 2018: 1353, 2019: 1431,
     2020: 1427, 2021: 1764, 2022: 1387, 2023: 1603, 2024: 2145, 2025: 2123,
@@ -173,7 +191,7 @@ def read_rows():
             "structure_name": raw[header["Structure Name"]].strip() if isinstance(raw[header["Structure Name"]], str) and raw[header["Structure Name"]].strip().lower() not in ("", "none") else None,
             "part_number": str(raw[header["Part Number"]]).strip() if raw[header["Part Number"]] else None,
             "part_type": raw[header["part_type"]],
-            "diameter": str(diameter).strip() if diameter and str(diameter).strip().lower() != "none" else None,
+            "diameter": clean_diameter(diameter),
             "city": norm_city(raw[header["Shipping City"]]),
             "state": norm_state(raw[header["Shippings State"]]),
             "zip": norm_zip(raw[header["ZipCode"]]),
@@ -349,8 +367,9 @@ def main():
             continue
         key = (r["loc_idx"], r["year"], r["month"], r["plant_idx"], r["job_idx"], r["prec"])
         mhb_agg[key]["qty"] += 1
-        if r["diameter"]:
-            mhb_agg[key]["diams"][r["diameter"]] += 1
+        # "?" = source diameter missing or invalid (not one of VALID_MHB_DIAMETERS) -- still
+        # counted so every piece is represented and per-size filtering can't silently undercount.
+        mhb_agg[key]["diams"][r["diameter"] or "?"] += 1
     mhb = [
         [loc, y, mo, p, v["qty"], j, prec, [[d, n] for d, n in sorted(v["diams"].items(), key=lambda x: -x[1])]]
         for (loc, y, mo, p, j, prec), v in mhb_agg.items()
