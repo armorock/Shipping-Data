@@ -148,6 +148,14 @@
   <select id="statesel" class="dd-native"></select>
   <h2>Plant</h2>
   <div id="plants"></div>
+  <h2>Diameter</h2>
+  <details class="dd" id="diamdd">
+    <summary id="diamsum">Diameter: All</summary>
+    <div class="ddbody">
+      <div class="linkrow"><a id="diam-all">all</a><a id="diam-none">none</a><a id="diam-96plus">96&Prime;+</a></div>
+      <div id="diams"></div>
+    </div>
+  </details>
   <h2>Display</h2>
   <div id="display"></div>
   <h2>Location Precision</h2>
@@ -292,7 +300,8 @@ let DATA, mhbMarkers = [];
 let mhbGroup, map, geoLayer = null, choroMax = 1;
 let arcLayer = null, heatLayer = null;
 let playTimer = null, playYear = 2014;
-const state = { years: new Set(YEARS), st: '', plants: new Set([0, 1, 2]), search: '', precs: new Set([0, 1, 2]), heat: false, glow: false, arcs: false, pins: true };
+let ALL_DIAMS = [];
+const state = { years: new Set(YEARS), st: '', plants: new Set([0, 1, 2]), search: '', precs: new Set([0, 1, 2]), diams: new Set(), heat: false, glow: false, arcs: false, pins: true };
 
 fetch('data.json').then(r => r.json()).then(init);
 
@@ -309,7 +318,7 @@ function init(data) {
     disableClusteringAtZoom: 15, maxClusterRadius: 50,
     iconCreateFunction: cluster => {
       let total = 0;
-      cluster.getAllChildMarkers().forEach(m => total += m.meta.qty);
+      cluster.getAllChildMarkers().forEach(m => total += diamMatchQty(m));
       const d = total < 100 ? 36 : total < 1000 ? 44 : 54;
       return L.divIcon({
         html: `<div class="mhb-cluster" style="width:${d}px;height:${d}px">${total.toLocaleString()}</div>`,
@@ -327,6 +336,11 @@ function init(data) {
     m.bindPopup(() => popupHtml(m.meta));
     mhbMarkers.push(m);
   });
+
+  const diamSet = new Set();
+  mhbMarkers.forEach(m => m.meta.diams.forEach(([d]) => diamSet.add(d)));
+  ALL_DIAMS = [...diamSet].sort((a, b) => (+a) - (+b));
+  state.diams = new Set(ALL_DIAMS);
 
   buildPanel();
   buildLegend();
@@ -362,9 +376,18 @@ function jobMatchesSearch(jobIdx, q) {
   return !!(cust && cust.toLowerCase().includes(q));
 }
 
+function diamMatchQty(m) {
+  const diams = m.meta.diams;
+  if (!diams || !diams.length) return m.meta.qty;
+  let sum = 0;
+  diams.forEach(([d, n]) => { if (state.diams.has(d)) sum += n; });
+  return sum;
+}
+
 function passBase(m) {
   const q = state.search.trim().toLowerCase();
   return state.plants.has(m.meta.plantIdx) && state.precs.has(m.meta.prec)
+    && diamMatchQty(m) > 0
     && (!q || jobMatchesSearch(m.meta.jobIdx, q));
 }
 
@@ -376,7 +399,7 @@ function applyFilters() {
   if (state.pins) mhbGroup.addLayers(visible);
 
   let total = 0;
-  visible.forEach(m => total += m.meta.qty);
+  visible.forEach(m => total += diamMatchQty(m));
   document.getElementById('livecount').textContent =
     `${total.toLocaleString()} MHB bases shown` + (state.st ? ` in ${state.st}` : '');
 
@@ -395,10 +418,11 @@ function updateKPI(visible) {
   let bases = 0;
   const states = new Set(), jobs = new Set(), byState = {}, byYear = {};
   visible.forEach(m => {
-    bases += m.meta.qty;
-    if (m.meta.st) { states.add(m.meta.st); byState[m.meta.st] = (byState[m.meta.st] || 0) + m.meta.qty; }
+    const q = diamMatchQty(m);
+    bases += q;
+    if (m.meta.st) { states.add(m.meta.st); byState[m.meta.st] = (byState[m.meta.st] || 0) + q; }
     jobs.add(m.meta.jobIdx);
-    byYear[m.meta.year] = (byYear[m.meta.year] || 0) + m.meta.qty;
+    byYear[m.meta.year] = (byYear[m.meta.year] || 0) + q;
   });
   let topSt = '—', topV = 0;
   for (const [st, v] of Object.entries(byState)) if (v > topV) { topV = v; topSt = st; }
@@ -409,7 +433,7 @@ function updateKPI(visible) {
     const cutoff = DATA.meta.currentMonth;
     let ytdPrev = 0;
     visible.forEach(m => {
-      if (m.meta.year === maxYr - 1 && m.meta.month <= cutoff) ytdPrev += m.meta.qty;
+      if (m.meta.year === maxYr - 1 && m.meta.month <= cutoff) ytdPrev += diamMatchQty(m);
     });
     if (ytdPrev > 0) {
       const pct = Math.round((cur - ytdPrev) / ytdPrev * 100);
@@ -431,7 +455,7 @@ function updateCustomerBoard(set) {
   const byCust = {};
   set.forEach(m => {
     const name = DATA.customers[DATA.jobs[m.meta.jobIdx][2]];
-    if (name) byCust[name] = (byCust[name] || 0) + m.meta.qty;
+    if (name) byCust[name] = (byCust[name] || 0) + diamMatchQty(m);
   });
   const rows = Object.entries(byCust).sort((a, b) => b[1] - a[1]).slice(0, 25);
   let html = '<table class="lb"><tbody>';
@@ -445,7 +469,9 @@ function updateCustomerBoard(set) {
 
 function updateDonut(visible) {
   const byDiam = {};
-  visible.forEach(m => (m.meta.diams || []).forEach(([d, n]) => { byDiam[d] = (byDiam[d] || 0) + n; }));
+  visible.forEach(m => (m.meta.diams || []).forEach(([d, n]) => {
+    if (state.diams.has(d)) byDiam[d] = (byDiam[d] || 0) + n;
+  }));
   const rows = Object.entries(byDiam).sort((a, b) => b[1] - a[1]);
   const ctn = document.getElementById('donut');
   if (!rows.length) { ctn.innerHTML = '<span style="color:#999;font-size:12px">No diameter data</span>'; return; }
@@ -473,8 +499,8 @@ function updateHeat(visible) {
     if (heatLayer && map.hasLayer(heatLayer)) map.removeLayer(heatLayer);
     return;
   }
-  const pts = visible.map(m => { const ll = m.getLatLng(); return [ll.lat, ll.lng, m.meta.qty]; });
-  const maxQ = Math.max(1, ...visible.map(m => m.meta.qty));
+  const pts = visible.map(m => { const ll = m.getLatLng(); return [ll.lat, ll.lng, diamMatchQty(m)]; });
+  const maxQ = Math.max(1, ...visible.map(m => diamMatchQty(m)));
   if (!heatLayer) heatLayer = L.heatLayer(pts, { radius: 28, blur: 20, max: maxQ, minOpacity: 0.35 });
   else heatLayer.setOptions({ max: maxQ }).setLatLngs(pts);
   if (!map.hasLayer(heatLayer)) heatLayer.addTo(map);
@@ -501,7 +527,7 @@ function updateArcs(visible) {
     const ll = m.getLatLng();
     const key = m.meta.plantIdx + '|' + ll.lat.toFixed(3) + '|' + ll.lng.toFixed(3);
     if (!agg[key]) agg[key] = { p: m.meta.plantIdx, dest: [ll.lat, ll.lng], qty: 0 };
-    agg[key].qty += m.meta.qty;
+    agg[key].qty += diamMatchQty(m);
   });
   Object.values(agg).forEach(a => {
     const weight = Math.min(5, 0.6 + Math.log2(a.qty + 1) * 0.7);
@@ -520,7 +546,7 @@ function updateArcs(visible) {
 function updateBar(set) {
   const byYear = {};
   YEARS.forEach(y => byYear[y] = 0);
-  set.forEach(m => { if (byYear[m.meta.year] !== undefined) byYear[m.meta.year] += m.meta.qty; });
+  set.forEach(m => { if (byYear[m.meta.year] !== undefined) byYear[m.meta.year] += diamMatchQty(m); });
   const max = Math.max(1, ...Object.values(byYear));
   const ctn = document.getElementById('barchart');
   const w = ctn.clientWidth || 230, h = 130, base = 16, top = 6;
@@ -546,7 +572,7 @@ function updateBar(set) {
 
 function updateLeaderboard(set) {
   const byState = {};
-  set.forEach(m => { if (m.meta.st) byState[m.meta.st] = (byState[m.meta.st] || 0) + m.meta.qty; });
+  set.forEach(m => { if (m.meta.st) byState[m.meta.st] = (byState[m.meta.st] || 0) + diamMatchQty(m); });
   const rows = Object.entries(byState).sort((a, b) => b[1] - a[1]);
   let html = '<table class="lb"><tbody>';
   if (!rows.length) html += '<tr><td colspan="2" style="color:#999;cursor:default">No data for current filters</td></tr>';
@@ -578,7 +604,7 @@ function updateChoropleth(visible) {
     return;
   }
   const tot = {};
-  visible.forEach(m => { if (m.meta.st) tot[m.meta.st] = (tot[m.meta.st] || 0) + m.meta.qty; });
+  visible.forEach(m => { if (m.meta.st) tot[m.meta.st] = (tot[m.meta.st] || 0) + diamMatchQty(m); });
   choroMax = Math.max(1, ...Object.values(tot));
   geoLayer.eachLayer(l => {
     const c = tot[l.feature._abbr] || 0;
@@ -604,6 +630,13 @@ function selectState(st) {
   } else {
     map.setView([38.5, -96.5], 5);
   }
+}
+
+function syncDiamUI() {
+  document.querySelectorAll('#diams input').forEach(i => i.checked = state.diams.has(i.dataset.diam));
+  const n = state.diams.size, tot = ALL_DIAMS.length;
+  const sum = n === tot ? 'All' : n === 0 ? 'None' : n === 1 ? `${[...state.diams][0]}″` : `${n} sizes`;
+  document.getElementById('diamsum').textContent = 'Diameter: ' + sum;
 }
 
 function syncYearUI() {
@@ -656,6 +689,33 @@ function buildPanel() {
       applyFilters();
     });
     plantsDiv.appendChild(label);
+  });
+
+  const diamsDiv = document.getElementById('diams');
+  ALL_DIAMS.forEach(d => {
+    const label = document.createElement('label');
+    label.innerHTML = `<input type="checkbox" checked data-diam="${d}">${esc(d)}&Prime;`;
+    label.querySelector('input').addEventListener('change', e => {
+      e.target.checked ? state.diams.add(d) : state.diams.delete(d);
+      syncDiamUI();
+      applyFilters();
+    });
+    diamsDiv.appendChild(label);
+  });
+  document.getElementById('diam-all').addEventListener('click', () => {
+    state.diams = new Set(ALL_DIAMS);
+    syncDiamUI();
+    applyFilters();
+  });
+  document.getElementById('diam-none').addEventListener('click', () => {
+    state.diams.clear();
+    syncDiamUI();
+    applyFilters();
+  });
+  document.getElementById('diam-96plus').addEventListener('click', () => {
+    state.diams = new Set(ALL_DIAMS.filter(d => (+d) >= 96));
+    syncDiamUI();
+    applyFilters();
   });
 
   const displayDiv = document.getElementById('display');

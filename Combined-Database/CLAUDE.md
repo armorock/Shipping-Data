@@ -24,6 +24,12 @@ truth. Replaces the deprecated `NSAW All Shipping Data1.2.xlsx` mashup. See `REA
   Now also writes `gen4_name` (Column E) and 15 `pn_*` attribute columns for every piece.
   Pre-2018 location fallback: captures `Shipping City / Shippings State / ZipCode` from BABY inline
   and uses them when the registry lookup returns None (covers all 14,863 null-job-code pre-2018 pieces).
+  **Netsuite is NOT read from BABY.xlsm** (see gotcha below) — `read_erp_groups()` skips `ERP=Netsuite`
+  rows entirely, and `read_netsuite_raw()` rebuilds NetSuite piece counts directly from the raw
+  `AppxShipped*.xls` + `OSLocationData*.xls` exports in `data/` (same join as
+  `Shipping-Map/ingest_netsuite.py`: joined on `Shipment Item Transaction`, quantity from OS's
+  `Quantity Fufilled`). Both functions' groups/meta are merged in `build()` before the cross-system
+  max-dedup runs, so a NetSuite/Fishbowl overlap during the 2025 handover still resolves correctly.
 - `build_reports.py` — rehab/nonbase report, provenance, structure completeness roadmap, review lists.
   Review list columns: `job_code | field | status | current_winner | winner_sources | project_name | [field extras] | src_bom_union | src_dispatch | src_erp_qb | src_erp_fb | src_erp_ns | src_jobcode_db | src_registry | all_observed_values | Confirmed Value | Notes`.
   City extras: `raw_bom | zip_county | county_flag`. Zip extras: `geo_city | geo_state | confirmed_city | confirmed_state | zip_ok` (GeoNames from `Shipping-Map/data/US.txt`).
@@ -44,16 +50,27 @@ truth. Replaces the deprecated `NSAW All Shipping Data1.2.xlsx` mashup. See `REA
   number are empty/junk and excluded.
 - **ERP systems barely overlap** (only 253 of 45k (job,part,date) groups span >1 system), so cross-ERP
   duplication is small; the real overlap is Dispatch vs ERP (handled by `SHIPPED_OVERLAP`).
+- **BABY.xlsm's `ERP=Netsuite` rows are triplicated** by an unidentified upstream import process (no
+  script in this repo writes them; BABY's Netsuite rows carry none of NetSuite's own IDs, so the
+  duplication can't be traced from the data alone). Confirmed by joining the raw
+  `AppxShipped*.xls`/`OSLocationData*.xls` exports directly: 95.9% of matched (job,part,date) groups
+  had BABY row-count = exactly 3x the real quantity. Fixed 2026-07-24 by bypassing BABY for Netsuite
+  entirely — see `read_netsuite_raw()` above. QuickBooks and Fishbowl rows in BABY are unaffected
+  (their group-size distributions are natural, not multiples of a fixed number).
 - **Dispatch is incomplete** for 2019–2025 (esp. 2019–2021); ERP is the count of record. Default
   `SHIPPED_OVERLAP="union"`.
 - `entity_field_resolution` plant/year conflicts are expected (multi-plant jobs, multi-year jobs) and
   do NOT drive `needs_review`.
 - Re-running is idempotent given unchanged sources; `data/resolutions.csv` carries decisions forward.
 
-## Current scale (2026-Q2 run)
+## Current scale (2026-Q3 run, post Netsuite-tripling fix 2026-07-24)
 
-~93,137 shipped pieces (base 20,987 / rehab 3,304 / non-base 68,750 / unknown 96), 3,169 job codes,
-705 jobs needing location review.
+79,699 shipped pieces (base 16,337 / rehab 2,771 / non-base 60,495 / unknown 96), 2,784 job codes with
+shipments. Registry (`project_registry.csv`, includes quoted/unshipped jobs from BOM/Dispatch too):
+3,169 job codes, 707 needing location review.
+(Previously reported as ~93,137 shipped pieces before the Netsuite triplication fix removed ~13,438
+duplicate pieces — see gotcha above. The registry/review-count barely moved, since job-level location
+resolution doesn't depend on piece counts.)
 
 ## Pending work (as of 2026-06-15)
 

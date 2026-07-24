@@ -1,5 +1,7 @@
 import csv
+import glob
 import os
+import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
 
 import openpyxl
@@ -10,6 +12,50 @@ from common import (norm_job_code, norm_part_number, norm_city, norm_state, norm
 from parse_part_name import parse_part_name, build_gen4_name
 
 csv.field_size_limit(10_000_000)
+
+_XLS_SS_NS = "urn:schemas-microsoft-com:office:spreadsheet"
+
+
+def _xls_tag(local):
+    return f"{{{_XLS_SS_NS}}}{local}"
+
+
+def _xls_attr(el, local):
+    v = el.get(_xls_tag(local))
+    return v if v is not None else el.get(local)
+
+
+def _find_latest(pattern):
+    files = glob.glob(pattern)
+    return max(files, key=os.path.getmtime) if files else None
+
+
+def _parse_spreadsheetml(path):
+    """Parse a NetSuite SpreadsheetML (.xls-named XML) export into a list of dict rows."""
+    tree = ET.parse(path)
+    root = tree.getroot()
+    ws = root.find(f".//{_xls_tag('Worksheet')}")
+    table = ws.find(f".//{_xls_tag('Table')}")
+    header = None
+    rows = []
+    for row_el in table.findall(_xls_tag("Row")):
+        cells = []
+        col = 0
+        for cell_el in row_el.findall(_xls_tag("Cell")):
+            idx_s = _xls_attr(cell_el, "Index")
+            if idx_s:
+                target = int(idx_s) - 1
+                while len(cells) < target:
+                    cells.append("")
+                col = target
+            data_el = cell_el.find(_xls_tag("Data"))
+            cells.append(data_el.text if data_el is not None and data_el.text else "")
+            col += 1
+        if header is None:
+            header = [c.strip() for c in cells]
+            continue
+        rows.append({h: (cells[i] if i < len(cells) else "") for i, h in enumerate(header)})
+    return rows
 
 
 def _date_key(v):
@@ -45,7 +91,12 @@ def read_dispatch_pieces():
 
 def read_erp_groups():
     """Group ERP rows by (job, part, date); dedup across QB/FB/NS by taking the MAX
-    per-system count (same piece migrated across accounting systems is not 2 pieces)."""
+    per-system count (same piece migrated across accounting systems is not 2 pieces).
+
+    Netsuite rows are excluded here -- BABY.xlsm's ERP=Netsuite rows are triplicated by an
+    unidentified upstream import bug (confirmed: 95.9% of matched groups are exactly 3x the
+    real quantity). NetSuite is instead read directly from the raw AppxShipped/OSLocationData
+    exports via read_netsuite_raw()."""
     wb = openpyxl.load_workbook(sources.BABY_XLSM, read_only=True, data_only=True)
     ws = wb[sources.BABY_SHEET]
     it = ws.iter_rows(values_only=True)
@@ -54,7 +105,7 @@ def read_erp_groups():
     meta = {}
     for row in it:
         erp = sources.ERP_LABELS.get(str(row[h["ERP"]]).strip()) if row[h["ERP"]] else None
-        if not erp:
+        if not erp or erp == "erp_ns":
             continue
         qty = row[h["Quantity"]]
         if qty == 0:
@@ -81,6 +132,64 @@ def read_erp_groups():
                 "zip":   norm_zip(row[h["ZipCode"]]) if not is_blank(row[h["ZipCode"]]) else None,
             }
     wb.close()
+    return groups, meta
+
+
+def read_netsuite_raw():
+    """Group NetSuite rows by (job, part, date) straight from the raw AppxShipped +
+    OSLocationData exports (same join as Shipping-Map/ingest_netsuite.py), bypassing
+    BABY.xlsm's triplicated Netsuite rows entirely."""
+    appx_path = (_find_latest(os.path.join(sources.DATA_DIR, "AppxShippedProduct*.xls"))
+                 or _find_latest(os.path.join(sources.DATA_DIR, "AppxShipped*.xls")))
+    os_path = _find_latest(os.path.join(sources.DATA_DIR, "OSLocationData*.xls"))
+    groups = defaultdict(lambda: defaultdict(int))
+    meta = {}
+    if not appx_path or not os_path:
+        print("  WARN: no AppxShipped/OSLocationData files found -> Netsuite pieces will be 0")
+        return groups, meta
+
+    appx_rows = _parse_spreadsheetml(appx_path)
+    os_rows = _parse_spreadsheetml(os_path)
+    os_by_sit = {}
+    for r in os_rows:
+        sit = (r.get("Shipment Item Transaction") or "").strip()
+        if sit:
+            os_by_sit[sit] = r
+
+    no_match = 0
+    for r in appx_rows:
+        sit = (r.get("Shipment Item Transaction") or "").strip()
+        os_r = os_by_sit.get(sit)
+        if os_r is None:
+            no_match += 1
+            continue
+        pn = norm_part_number(r.get("Item"))
+        if not pn:
+            continue
+        qty_s = (os_r.get("Quantity Fufilled") or "").strip()
+        try:
+            q = int(float(qty_s)) if qty_s else 1
+        except ValueError:
+            q = 1
+        if q == 0:
+            continue
+        jc = norm_job_code(r.get("Job Code"))
+        date = (r.get("Date") or "").strip()[:10]
+        key = (jc, pn, date)
+        groups[key]["erp_ns"] += q
+        if key not in meta:
+            pt = (r.get("Product Type") or "").strip().upper() or part_type_from_pn(pn)
+            meta[key] = {
+                "part_type": pt,
+                "structure_id": (r.get("Structure Type") or "").strip() or None,
+                "plant": (r.get("Location") or "").strip().upper() or None,
+                "year": year_from_date(date),
+                "city":  norm_city(os_r.get("City")),
+                "state": norm_state(os_r.get("State")),
+                "zip":   norm_zip(os_r.get("Zip Code")),
+            }
+    print(f"  Netsuite raw: {os.path.basename(appx_path)} + {os.path.basename(os_path)} "
+          f"-> {len(appx_rows)} lines, {no_match} unmatched (no OS location row)")
     return groups, meta
 
 
@@ -193,6 +302,11 @@ def build():
     sources.ensure_dirs()
     dispatch = read_dispatch_pieces()
     groups, meta = read_erp_groups()
+    ns_groups, ns_meta = read_netsuite_raw()
+    for key, systems in ns_groups.items():
+        for system, q in systems.items():
+            groups[key][system] += q
+        meta.setdefault(key, ns_meta[key])
     erp = dedup_erp_pieces(groups, meta)
     erp_raw = sum(sum(s.values()) for s in groups.values())
     print(f"dispatch pieces: {len(dispatch)} | erp pieces raw: {erp_raw} -> deduped: {len(erp)}")
